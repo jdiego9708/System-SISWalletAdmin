@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaPresentacion.Formularios.FormsPrincipales;
+using System;
 using System.Windows.Forms;
 
 namespace SISWalletAdmin
@@ -16,7 +17,11 @@ namespace SISWalletAdmin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form());
+            Application.Run(new FrmPrincipal
+            {
+                WindowState = FormWindowState.Normal,
+                StartPosition = FormStartPosition.CenterScreen
+            });
         }
     }
 }
