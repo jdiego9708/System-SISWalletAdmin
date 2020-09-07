@@ -47,6 +47,21 @@
                 return;
             }
 
+            int id_zona = 0;
+            DataTable dtCobros = 
+                NCobros.BuscarCobros("ID COBRO", id_cobro.ToString(), "", out string rpta);
+            if (dtCobros != null)
+            {
+                Cobros co = new Cobros(dtCobros.Rows[0]);
+                id_zona = co.Id_zona;
+            }
+
+            if (id_zona == 0)
+            {
+                Mensajes.MensajeInformacion("Compruebe la zona del cobro", "Entendido");
+                return;
+            }
+
             if (!int.TryParse(this.listaProductos.SelectedValue.ToString(), out int id_producto))
             {
                 Mensajes.MensajeInformacion("Compruebe el producto seleccionado", "Entendido");
@@ -71,6 +86,7 @@
                 id_producto,
                 valor_interes,
                 this.listaFrecuencia.Text,
+                id_zona,
             };
 
             this.OnBtnContinuarClick.Invoke(objs, e);

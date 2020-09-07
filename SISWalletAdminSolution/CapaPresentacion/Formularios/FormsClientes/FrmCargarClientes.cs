@@ -98,6 +98,7 @@
             decimal valor_interes = (decimal)objs[2];
             string frecuencia = (string)objs[3];
             int id_turno = 0;
+            int id_zona = (int)objs[4];
 
             int contador = 1;
 
@@ -167,6 +168,7 @@
 
                 if (result)
                 {
+                    contador += 1;
                     decimal total_venta = (valor_venta * valor_interes) + valor_venta;
                     decimal total_x_cuota = total_venta / cuotas_totales;
 
@@ -175,8 +177,8 @@
                     "Celular, Email, Tipo_usuario, Estado_usuario) " +
                     "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}'); " +
                     "SET @Id_usuario = SCOPE_IDENTITY(); " +
-                    "INSERT INTO Direccion_clientes (Id_usuario, Direccion, Estado_direccion) " +
-                    "VALUES (@Id_usuario, '{9}', '{10}'); " +
+                    "INSERT INTO Direccion_clientes (Id_usuario, Id_zona, Direccion, Estado_direccion) " +
+                    "VALUES (@Id_usuario, {9},'{10}', '{11}'); " +
                     "SET @Id_direccion = SCOPE_IDENTITY(); ",
                     DateTime.Now.ToString("yyyy-MM-dd"),
                     alias,
@@ -187,6 +189,7 @@
                     email,
                     this.Tipo_usuario,
                     "ACTIVO",
+                    id_zona,
                     direccion,
                     "ACTIVO"
                     ));
@@ -212,8 +215,8 @@
                         "ACTIVO",
                         "NUEVA"));
 
-                    consultaCompleta.Append(string.Format("INSERT INTO Agendamiento_cobros (Id_venta, Fecha_cobro, Hora_cobro, Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
-                        "VALUES (@Id_venta, '{0}', '{1}', {2}, {3}, {4}, '{5}', '{6}', " +
+                    consultaCompleta.Append(string.Format("INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Fecha_cobro, Hora_cobro, Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
+                        "VALUES (@Id_venta, 0, '{0}', '{1}', {2}, {3}, {4}, '{5}', '{6}', " +
                         "'{7}'); ",
                         DateTime.Now.ToString("yyyy-MM-dd"),
                         DateTime.Now.ToString("HH:mm"),
@@ -225,7 +228,6 @@
                         "ACTIVO"));
                 }
             }
-
             consulta = Convert.ToString(consultaCompleta);
             return result;
 
