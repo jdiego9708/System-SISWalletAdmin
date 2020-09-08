@@ -99,6 +99,7 @@
             string frecuencia = (string)objs[3];
             int id_turno = 0;
             int id_zona = (int)objs[4];
+            int id_cobrador = (int)objs[5];
 
             int contador = 1;
 
@@ -215,6 +216,10 @@
                         "ACTIVO",
                         "NUEVA"));
 
+                    consultaCompleta.Append(string.Format("INSERT INTO Usuarios_ventas (Id_usuario, Id_venta) " +
+                        "VALUES ({0}, @Id_venta); ",
+                        id_cobrador));
+
                     consultaCompleta.Append(string.Format("INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Fecha_cobro, Hora_cobro, Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
                         "VALUES (@Id_venta, 0, '{0}', '{1}', {2}, {3}, {4}, '{5}', '{6}', " +
                         "'{7}'); ",
@@ -225,7 +230,7 @@
                         saldo_restante.ToString().Replace(",", "."),
                         frecuencia,
                         "",
-                        "ACTIVO"));
+                        "PENDIENTE"));
                 }
             }
             consulta = Convert.ToString(consultaCompleta);

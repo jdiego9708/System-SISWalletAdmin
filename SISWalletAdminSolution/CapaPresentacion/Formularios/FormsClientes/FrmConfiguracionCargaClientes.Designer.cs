@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConfiguracionCargaClientes));
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.listaCobro = new System.Windows.Forms.ComboBox();
             this.gb2 = new System.Windows.Forms.GroupBox();
             this.listaProductos = new System.Windows.Forms.ComboBox();
             this.gb4 = new System.Windows.Forms.GroupBox();
@@ -37,11 +38,13 @@
             this.gb5 = new System.Windows.Forms.GroupBox();
             this.listaFrecuencia = new System.Windows.Forms.ComboBox();
             this.btnIniciarImportacion = new System.Windows.Forms.Button();
-            this.listaCobro = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listaCobradores = new System.Windows.Forms.ComboBox();
             this.gb1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.gb4.SuspendLayout();
             this.gb5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb1
@@ -53,6 +56,22 @@
             this.gb1.TabIndex = 21;
             this.gb1.TabStop = false;
             this.gb1.Text = "Seleccione un cobro";
+            // 
+            // listaCobro
+            // 
+            this.listaCobro.BackColor = System.Drawing.Color.White;
+            this.listaCobro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listaCobro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.listaCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listaCobro.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaCobro.FormattingEnabled = true;
+            this.listaCobro.Items.AddRange(new object[] {
+            "20%",
+            "0%"});
+            this.listaCobro.Location = new System.Drawing.Point(3, 33);
+            this.listaCobro.Name = "listaCobro";
+            this.listaCobro.Size = new System.Drawing.Size(282, 28);
+            this.listaCobro.TabIndex = 3;
             // 
             // gb2
             // 
@@ -146,7 +165,7 @@
             this.btnIniciarImportacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnIniciarImportacion.Image = ((System.Drawing.Image)(resources.GetObject("btnIniciarImportacion.Image")));
             this.btnIniciarImportacion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIniciarImportacion.Location = new System.Drawing.Point(353, 111);
+            this.btnIniciarImportacion.Location = new System.Drawing.Point(200, 196);
             this.btnIniciarImportacion.Name = "btnIniciarImportacion";
             this.btnIniciarImportacion.Size = new System.Drawing.Size(197, 47);
             this.btnIniciarImportacion.TabIndex = 26;
@@ -154,27 +173,38 @@
             this.btnIniciarImportacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIniciarImportacion.UseVisualStyleBackColor = true;
             // 
-            // listaCobro
+            // groupBox1
             // 
-            this.listaCobro.BackColor = System.Drawing.Color.White;
-            this.listaCobro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listaCobro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.listaCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.listaCobro.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaCobro.FormattingEnabled = true;
-            this.listaCobro.Items.AddRange(new object[] {
+            this.groupBox1.Controls.Add(this.listaCobradores);
+            this.groupBox1.Location = new System.Drawing.Point(305, 91);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(294, 79);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Seleccione un cobrador";
+            // 
+            // listaCobradores
+            // 
+            this.listaCobradores.BackColor = System.Drawing.Color.White;
+            this.listaCobradores.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listaCobradores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.listaCobradores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listaCobradores.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaCobradores.FormattingEnabled = true;
+            this.listaCobradores.Items.AddRange(new object[] {
             "20%",
             "0%"});
-            this.listaCobro.Location = new System.Drawing.Point(3, 33);
-            this.listaCobro.Name = "listaCobro";
-            this.listaCobro.Size = new System.Drawing.Size(282, 28);
-            this.listaCobro.TabIndex = 3;
+            this.listaCobradores.Location = new System.Drawing.Point(6, 33);
+            this.listaCobradores.Name = "listaCobradores";
+            this.listaCobradores.Size = new System.Drawing.Size(282, 28);
+            this.listaCobradores.TabIndex = 2;
             // 
             // FrmConfiguracionCargaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 185);
+            this.ClientSize = new System.Drawing.Size(600, 277);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnIniciarImportacion);
             this.Controls.Add(this.gb5);
             this.Controls.Add(this.gb4);
@@ -196,6 +226,7 @@
             this.gb2.ResumeLayout(false);
             this.gb4.ResumeLayout(false);
             this.gb5.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -211,5 +242,7 @@
         private System.Windows.Forms.Button btnIniciarImportacion;
         private System.Windows.Forms.ComboBox listaProductos;
         private System.Windows.Forms.ComboBox listaCobro;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox listaCobradores;
     }
 }

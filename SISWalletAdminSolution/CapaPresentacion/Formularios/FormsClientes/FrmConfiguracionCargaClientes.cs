@@ -35,6 +35,21 @@
 
             this.Load += FrmConfiguracionCargaClientes_Load;
             this.btnIniciarImportacion.Click += BtnIniciarImportacion_Click;
+            this.listaCobro.SelectedIndexChanged += ListaCobro_SelectedIndexChanged;
+        }
+
+        private void ListaCobro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(this.listaCobro.SelectedValue.ToString(), out int id_cobro))
+            {
+                List<Usuarios> us = this.CargarListaCobradores(id_cobro);
+                if (us != null)
+                {
+                    this.listaCobradores.DataSource = us;
+                    this.listaCobradores.ValueMember = "Id_usuario";
+                    this.listaCobradores.DisplayMember = "NombreCompleto";
+                }
+            }
         }
 
         public event EventHandler OnBtnContinuarClick;
@@ -48,7 +63,7 @@
             }
 
             int id_zona = 0;
-            DataTable dtCobros = 
+            DataTable dtCobros =
                 NCobros.BuscarCobros("ID COBRO", id_cobro.ToString(), "", out string rpta);
             if (dtCobros != null)
             {
@@ -59,6 +74,12 @@
             if (id_zona == 0)
             {
                 Mensajes.MensajeInformacion("Compruebe la zona del cobro", "Entendido");
+                return;
+            }
+
+            if (!int.TryParse(this.listaCobradores.SelectedValue.ToString(), out int id_cobrador))
+            {
+                Mensajes.MensajeInformacion("Compruebe el cobrador seleccionado", "Entendido");
                 return;
             }
 
@@ -87,6 +108,7 @@
                 valor_interes,
                 this.listaFrecuencia.Text,
                 id_zona,
+                id_cobrador,
             };
 
             this.OnBtnContinuarClick.Invoke(objs, e);
@@ -122,6 +144,20 @@
             }
         }
 
+        private List<Usuarios> CargarListaCobradores(int id_cobro)
+        {
+            MainController main = MainController.GetInstance();
+            DataTable dtCobradores = NUsuariosCobros.BuscarUsuariosCobros("ID COBRO", id_cobro.ToString(), out string rpta);
+            if (dtCobradores != null)
+            {
+                List<Usuarios> usuarios = (from DataRow dr in dtCobradores.Rows
+                                           select new Usuarios(dr)).ToList();
+                return usuarios;
+            }
+            else
+                return null;
+        }
+
         private List<Cobros> CargarListaCobros()
         {
             MainController main = MainController.GetInstance();
@@ -129,7 +165,7 @@
             if (dtCobros != null)
             {
                 List<Cobros> cobros = (from DataRow dr in dtCobros.Rows
-                                                  select new Cobros(dr)).ToList();
+                                       select new Cobros(dr)).ToList();
                 return cobros;
             }
             else
