@@ -62,8 +62,8 @@
 
             this.FrmConfiguracionCargaClientes.OnBtnContinuarClick += FrmConfiguracionCargaClientes_OnBtnContinuarClick;
             this.FrmConfiguracionCargaClientes.Show();
-           
-            
+
+
         }
 
         private void FrmConfiguracionCargaClientes_OnBtnContinuarClick(object sender, EventArgs e)
@@ -101,7 +101,7 @@
             int id_zona = (int)objs[4];
             int id_cobrador = (int)objs[5];
 
-            int contador = 1;
+            int contador = 0;
 
             StringBuilder consultaCompleta = new StringBuilder();
             consultaCompleta.Append("DECLARE @Id_usuario int, " +
@@ -169,7 +169,6 @@
 
                 if (result)
                 {
-                    contador += 1;
                     decimal total_venta = (valor_venta * valor_interes) + valor_venta;
                     decimal total_x_cuota = total_venta / cuotas_totales;
 
@@ -220,8 +219,10 @@
                         "VALUES ({0}, @Id_venta); ",
                         id_cobrador));
 
-                    consultaCompleta.Append(string.Format("INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Fecha_cobro, Hora_cobro, Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
-                        "VALUES (@Id_venta, 0, '{0}', '{1}', {2}, {3}, {4}, '{5}', '{6}', " +
+
+
+                    consultaCompleta.Append(string.Format("INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Orden_cobro, Fecha_cobro, Hora_cobro, Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
+                        "VALUES (@Id_venta, 0, {8}, '{0}', '{1}', {2}, {3}, {4}, '{5}', '{6}', " +
                         "'{7}'); ",
                         DateTime.Now.ToString("yyyy-MM-dd"),
                         DateTime.Now.ToString("HH:mm"),
@@ -230,7 +231,9 @@
                         saldo_restante.ToString().Replace(",", "."),
                         frecuencia,
                         "",
-                        "PENDIENTE"));
+                        "PENDIENTE",
+                        contador));
+                    contador += 1;
                 }
             }
             consulta = Convert.ToString(consultaCompleta);
