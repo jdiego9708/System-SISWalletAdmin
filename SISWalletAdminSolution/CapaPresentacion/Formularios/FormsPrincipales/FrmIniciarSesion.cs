@@ -36,13 +36,13 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     main.Usuario = credencial.Usuario;
                     DataTable dtArticulos = (DataTable)objects[1];
 
-                    FrmArticulos frmArticulos = new FrmArticulos
+                    FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                     {
                         StartPosition = FormStartPosition.CenterScreen,
                         WindowState = FormWindowState.Maximized,
                     };
-                    frmArticulos.LoadArticulos(dtArticulos);
                     frmArticulos.Show();
+                    frmArticulos.LoadArticulos(dtArticulos);
                     this.Hide();
                 }
                 else
@@ -70,13 +70,13 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     main.Usuario = credencial.Usuario;
                     DataTable dtArticulos = (DataTable)objects[1];
 
-                    FrmArticulos frmArticulos = new FrmArticulos
+                    FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                     {
                         StartPosition = FormStartPosition.CenterScreen,
                         WindowState = FormWindowState.Maximized,
                     };
-                    frmArticulos.LoadArticulos(dtArticulos);
                     frmArticulos.Show();
+                    frmArticulos.LoadArticulos(dtArticulos);
                     this.Hide();
                 }
                 else

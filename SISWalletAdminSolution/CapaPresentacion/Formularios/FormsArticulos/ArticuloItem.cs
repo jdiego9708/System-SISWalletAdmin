@@ -30,7 +30,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         {
             this.txtValor.Text = "$" + articulo.Valor_articulo.ToString("N2");
             this.txtReferencia.Text = articulo.Referencia_articulo;
-            this.txtStock.Text = articulo.Cantidad_articulo + " " + articulo.Tipo_cantidad;
+            this.txtStock.Text = ((int)articulo.Cantidad_articulo) + " " + articulo.Tipo_cantidad;
             this.txtDescripcion.Text = articulo.Descripcion_articulo;
         }
 

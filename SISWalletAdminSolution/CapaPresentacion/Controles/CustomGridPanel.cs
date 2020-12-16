@@ -1,22 +1,23 @@
-﻿namespace CapaPresentacion
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
+namespace CapaPresentacion.Controles
+{
     public partial class CustomGridPanel : Panel
     {
         public List<UserControl> controlsUser;
         public List<Control> controlsDefault;
+
         public CustomGridPanel()
         {
             controlsUser = new List<UserControl>();
             controlsDefault = new List<Control>();
             this.AutoScroll = true;
-            this.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) 
+            this.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
                 | AnchorStyles.Left) | AnchorStyles.Right)));
         }
 
@@ -71,7 +72,7 @@
             {
                 user = userControl;
                 //Agregamos el control a las listas
-                this.controlsUser.Add(userControl);              
+                this.controlsUser.Add(userControl);
             }
 
             if (user != null)
@@ -93,7 +94,7 @@
         public void RemoveControl(Control control)
         {
             //Si la lista de controles está null o no hay controles retornamos
-            if (controlsDefault == null || 
+            if (controlsDefault == null ||
                 controlsDefault.Count == 0)
                 return;
 
@@ -255,6 +256,9 @@
 
         public BindingSource bs = new BindingSource();
         BindingList<DataTable> tables = new BindingList<DataTable>();
+        BindingList<List<UserControl>> UserControls = new BindingList<List<UserControl>>();
+        BindingList<List<Control>> ControlsDefault = new BindingList<List<Control>>();
+        BindingList<List<object>> objetos = new BindingList<List<object>>();
 
         public void SetPagedDataSource(DataTable dataTable,
             BindingNavigator bnav)
@@ -275,18 +279,96 @@
                     counter = 1;
                 }
             }
+
             bnav.BindingSource = bs;
             bs.DataSource = tables;
-            bs.PositionChanged += bs_PositionChanged;
-            bs_PositionChanged(bs, EventArgs.Empty);
+            bs.PositionChanged += bs_PositionChangedDataTable;
+            bs_PositionChangedDataTable(bs, EventArgs.Empty);
         }
 
-        public event EventHandler OnBsPositionChanged;
+        public void SetPagedDataSource(List<UserControl> controls,
+            BindingNavigator bnav)
+        {
+            this.clearDataSource();
+            int counter = 0;
+            List<UserControl> list = new List<UserControl>();
 
-        void bs_PositionChanged(object sender, EventArgs e)
+            foreach (UserControl c in controls)
+            {
+                list.Add(c);
+                counter += 1;
+                if (counter > PageSize)
+                {
+                    UserControls.Add(list);
+                    counter = 1;
+                    list = new List<UserControl>();
+                }
+            }
+
+            if (list.Count > 0)
+                UserControls.Add(list);
+
+            bnav.BindingSource = bs;
+            bs.DataSource = UserControls;
+            bs.PositionChanged += bs_PositionChangedList;
+            bs_PositionChangedList(bs, EventArgs.Empty);
+        }
+
+        public void SetPagedDataSource(List<object> controls,
+           BindingNavigator bnav)
+        {
+            this.clearDataSource();
+            int counter = 0;
+            List<object> list = new List<object>();
+
+            foreach (object c in controls)
+            {
+                list.Add(c);
+                counter += 1;
+                if (counter > PageSize)
+                {
+                    objetos.Add(list);
+                    counter = 1;
+                    list = new List<object>();
+                }
+            }
+
+            if (list.Count > 0)
+                objetos.Add(list);
+
+            bnav.BindingSource = bs;
+            bs.DataSource = objetos;
+            bs.PositionChanged += bs_PositionChangedList;
+            bs_PositionChangedObject(bs, EventArgs.Empty);
+        }
+
+        private void bs_PositionChangedObject(object sender, EventArgs e)
+        {
+            List<object> list = objetos[bs.Position];
+
+            if (this.Controls.Count > 0)
+                this.Limpiar();
+
+            OnBsPositionChanged?.Invoke(list, e);
+        }
+
+        private void bs_PositionChangedList(object sender, EventArgs e)
+        {
+            List<UserControl> list = UserControls[bs.Position];
+
+            if (this.Controls.Count > 0)
+                this.Limpiar();
+
+            OnBsPositionChanged?.Invoke(list, e);
+        }
+
+        private void bs_PositionChangedDataTable(object sender, EventArgs e)
         {
             DataTable dt = tables[bs.Position];
-            this.Limpiar();
+
+            if (this.Controls.Count > 0)
+                this.Limpiar();
+
             OnBsPositionChanged?.Invoke(dt, e);
         }
 
@@ -294,7 +376,12 @@
         {
             this.Limpiar();
             this.tables = new BindingList<DataTable>();
-            this.bs = new BindingSource();
+            this.UserControls = new BindingList<List<UserControl>>();
+            this.ControlsDefault = new BindingList<List<Control>>();
+            this.objetos = new BindingList<List<object>>();
+            this.bs = new BindingSource();          
         }
+
+        public event EventHandler OnBsPositionChanged;
     }
 }

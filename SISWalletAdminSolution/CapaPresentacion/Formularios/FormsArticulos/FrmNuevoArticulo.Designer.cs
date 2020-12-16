@@ -37,7 +37,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listaTipoCantidad = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtStockInicial = new System.Windows.Forms.TextBox();
+            this.numericCantidad = new System.Windows.Forms.NumericUpDown();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtValor = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -45,6 +45,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +72,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtReferencia.Location = new System.Drawing.Point(7, 21);
             this.txtReferencia.MaxLength = 200;
             this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.ReadOnly = true;
             this.txtReferencia.Size = new System.Drawing.Size(321, 20);
             this.txtReferencia.TabIndex = 0;
             this.txtReferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -99,7 +99,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtDescripcion.MaxLength = 300;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.ReadOnly = true;
             this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.Size = new System.Drawing.Size(321, 85);
             this.txtDescripcion.TabIndex = 0;
@@ -119,6 +118,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // listaTipoCantidad
             // 
             this.listaTipoCantidad.BackColor = System.Drawing.Color.White;
+            this.listaTipoCantidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.listaTipoCantidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.listaTipoCantidad.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.listaTipoCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -130,7 +130,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtStockInicial);
+            this.groupBox4.Controls.Add(this.numericCantidad);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.groupBox4.Location = new System.Drawing.Point(196, 185);
             this.groupBox4.Name = "groupBox4";
@@ -139,20 +139,32 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Stock inicial";
             // 
-            // txtStockInicial
+            // numericCantidad
             // 
-            this.txtStockInicial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStockInicial.BackColor = System.Drawing.Color.White;
-            this.txtStockInicial.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtStockInicial.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.txtStockInicial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtStockInicial.Location = new System.Drawing.Point(6, 25);
-            this.txtStockInicial.Name = "txtStockInicial";
-            this.txtStockInicial.ReadOnly = true;
-            this.txtStockInicial.Size = new System.Drawing.Size(138, 20);
-            this.txtStockInicial.TabIndex = 1;
-            this.txtStockInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericCantidad.BackColor = System.Drawing.Color.White;
+            this.numericCantidad.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericCantidad.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numericCantidad.Location = new System.Drawing.Point(14, 23);
+            this.numericCantidad.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCantidad.Name = "numericCantidad";
+            this.numericCantidad.Size = new System.Drawing.Size(120, 23);
+            this.numericCantidad.TabIndex = 0;
+            this.numericCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // groupBox5
             // 
@@ -163,7 +175,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox5.Size = new System.Drawing.Size(178, 57);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Valor unitario";
+            this.groupBox5.Text = "Valor unitario ($)";
             // 
             // txtValor
             // 
@@ -175,7 +187,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtValor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtValor.Location = new System.Drawing.Point(6, 25);
             this.txtValor.Name = "txtValor";
-            this.txtValor.ReadOnly = true;
             this.txtValor.Size = new System.Drawing.Size(166, 20);
             this.txtValor.TabIndex = 1;
             this.txtValor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -224,7 +235,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
@@ -240,9 +251,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox listaTipoCantidad;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtStockInicial;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txtValor;
         public System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.NumericUpDown numericCantidad;
     }
 }

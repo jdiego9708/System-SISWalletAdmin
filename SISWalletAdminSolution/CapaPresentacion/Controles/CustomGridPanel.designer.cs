@@ -1,4 +1,4 @@
-﻿namespace CapaPresentacion
+﻿namespace CapaPresentacion.Controles
 {
     partial class CustomGridPanel
     {

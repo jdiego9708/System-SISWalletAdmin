@@ -97,17 +97,17 @@
     <Compile Include="Formularios\FormsArticulos\ArticuloItem.Designer.cs">
       <DependentUpon>ArticuloItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\FormsArticulos\FrmArticulos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\FormsArticulos\FrmArticulos.Designer.cs">
-      <DependentUpon>FrmArticulos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Formularios\FormsArticulos\FrmNuevoArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\FormsArticulos\FrmNuevoArticulo.Designer.cs">
       <DependentUpon>FrmNuevoArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmObservarArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmObservarArticulos.Designer.cs">
+      <DependentUpon>FrmObservarArticulos.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsClientes\FrmCargarClientes.cs">
       <SubType>Form</SubType>
@@ -206,11 +206,11 @@
     <EmbeddedResource Include="Formularios\FormsArticulos\ArticuloItem.resx">
       <DependentUpon>ArticuloItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\FormsArticulos\FrmArticulos.resx">
-      <DependentUpon>FrmArticulos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsArticulos\FrmNuevoArticulo.resx">
       <DependentUpon>FrmNuevoArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\FrmObservarArticulos.resx">
+      <DependentUpon>FrmObservarArticulos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmCargarClientes.resx">
       <DependentUpon>FrmCargarClientes.cs</DependentUpon>
