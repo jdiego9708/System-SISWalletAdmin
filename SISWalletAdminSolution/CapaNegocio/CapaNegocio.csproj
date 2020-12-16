@@ -42,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NAgendamiento_cobros.cs" />
+    <Compile Include="NArticulos.cs" />
     <Compile Include="NCiudades.cs" />
     <Compile Include="NCobros.cs" />
+    <Compile Include="NConceptos.cs" />
     <Compile Include="NCredenciales.cs" />
     <Compile Include="NDireccion_clientes.cs" />
     <Compile Include="NGastos.cs" />
+    <Compile Include="NMovimientos.cs" />
     <Compile Include="NPaises.cs" />
     <Compile Include="NSolicitudes.cs" />
     <Compile Include="NTipo_gastos.cs" />

@@ -42,13 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAgendamiento_cobros.cs" />
+    <Compile Include="DArticulos.cs" />
     <Compile Include="DCiudades.cs" />
     <Compile Include="DCobros.cs" />
+    <Compile Include="DConceptos.cs" />
     <Compile Include="DConexion.cs" />
     <Compile Include="DCredenciales.cs" />
     <Compile Include="DDireccion_clientes.cs" />
     <Compile Include="DGastos.cs" />
     <Compile Include="DIngresos.cs" />
+    <Compile Include="DMovimientos.cs" />
     <Compile Include="DPaises.cs" />
     <Compile Include="DSolicitudes.cs" />
     <Compile Include="DTipo_gastos.cs" />

@@ -17,7 +17,7 @@ namespace SISWalletAdmin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmPrincipal
+            Application.Run(new FrmIniciarSesion
             {
                 WindowState = FormWindowState.Normal,
                 StartPosition = FormStartPosition.CenterScreen

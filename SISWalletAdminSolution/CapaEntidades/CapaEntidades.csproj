@@ -42,16 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agendamiento_cobros.cs" />
+    <Compile Include="Articulos.cs" />
     <Compile Include="Ciudades.cs" />
     <Compile Include="Cobros.cs" />
+    <Compile Include="Conceptos.cs" />
     <Compile Include="Credenciales.cs" />
     <Compile Include="Direccion_clientes.cs" />
     <Compile Include="Gastos.cs" />
     <Compile Include="Ingresos.cs" />
+    <Compile Include="Movimientos.cs" />
     <Compile Include="Paises.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Solicitudes.cs" />
     <Compile Include="TimeSpanConvert.cs" />
     <Compile Include="Tipo_gastos.cs" />
@@ -64,5 +68,6 @@
     <Compile Include="Ventas.cs" />
     <Compile Include="Zonas.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

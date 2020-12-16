@@ -270,7 +270,7 @@
 
                     if (this.VerificarClientes(out string consulta))
                     {
-                        rpta = NUsuarios.InsertarUsuarios(consulta);
+                        //rpta = NUsuarios.InsertarUsuarios(consulta);
                         if (rpta.Equals("OK"))
                         {
                             MensajeEspera.CloseForm();

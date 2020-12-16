@@ -91,6 +91,24 @@
     <Compile Include="Controles\PoperContainer.designer.cs">
       <DependentUpon>PoperContainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsArticulos\ArticuloItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\ArticuloItem.Designer.cs">
+      <DependentUpon>ArticuloItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmArticulos.Designer.cs">
+      <DependentUpon>FrmArticulos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmNuevoArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\FrmNuevoArticulo.Designer.cs">
+      <DependentUpon>FrmNuevoArticulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsClientes\FrmCargarClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +126,12 @@
     </Compile>
     <Compile Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.Designer.cs">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsPrincipales\FrmIniciarSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsPrincipales\FrmIniciarSesion.designer.cs">
+      <DependentUpon>FrmIniciarSesion.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsPrincipales\FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -179,6 +203,15 @@
     <EmbeddedResource Include="Controles\PoperContainer.resx">
       <DependentUpon>PoperContainer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\ArticuloItem.resx">
+      <DependentUpon>ArticuloItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\FrmArticulos.resx">
+      <DependentUpon>FrmArticulos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\FrmNuevoArticulo.resx">
+      <DependentUpon>FrmNuevoArticulo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmCargarClientes.resx">
       <DependentUpon>FrmCargarClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.resx">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsPrincipales\FrmIniciarSesion.resx">
+      <DependentUpon>FrmIniciarSesion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsPrincipales\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
@@ -234,5 +270,6 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

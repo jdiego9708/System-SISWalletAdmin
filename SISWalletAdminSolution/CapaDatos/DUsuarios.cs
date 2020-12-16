@@ -5,6 +5,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class DUsuarios
     {
@@ -44,52 +45,6 @@
         #endregion
 
         #region METODO INSERTAR
-        public string InsertarUsuarios(string consulta)
-        {
-            string rpta = "";
-
-            SqlConnection SqlCon = new SqlConnection();
-            SqlCon.InfoMessage += new SqlInfoMessageEventHandler(SqlCon_InfoMessage);
-            SqlCon.FireInfoMessageEventOnUserErrors = true;
-            try
-            {
-                SqlCon.ConnectionString = DConexion.Cn;
-                SqlCon.Open();
-                SqlCommand SqlCmd = new SqlCommand
-                {
-                    Connection = SqlCon,
-                    CommandText = consulta,
-                    CommandType = CommandType.Text
-                };
-
-                //Ejecutamos nuestro comando
-                rpta = SqlCmd.ExecuteNonQuery() >= 1 ? "OK" : "NO SE INGRESÓ";
-                if (!rpta.Equals("OK"))
-                {
-                    if (this.Mensaje_respuesta != null)
-                    {
-                        rpta = this.Mensaje_respuesta;
-                    }
-                }
-            }
-            //Mostramos posible error que tengamos
-            catch (SqlException ex)
-            {
-                rpta = ex.Message;
-            }
-            catch (Exception ex)
-            {
-                rpta = ex.Message;
-            }
-            finally
-            {
-                //Si la cadena SqlCon esta abierta la cerramos
-                if (SqlCon.State == ConnectionState.Open)
-                    SqlCon.Close();
-            }
-            return rpta;
-        }
-
         public string InsertarUsuario(out int id_usuario, Usuarios usuario)
         {
             id_usuario = 0;
@@ -405,17 +360,24 @@
         #endregion
 
         #region METODO BUSCAR USUARIOS
-        public DataTable BuscarUsuarios(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public async Task<(DataTable dtUsuarios, string rpta)> BuscarUsuarios(string tipo_busqueda, string texto_busqueda)
         {
-            rpta = "OK";
+            string rpta = "OK";
 
             StringBuilder consulta = new StringBuilder();
 
-            consulta.Append("SELECT * FROM Usuarios us ");
+            consulta.Append("SELECT us.Id_usuario, us.Fecha_ingreso, us.Alias, us.Nombres, us.Apellidos, " +
+                "us.Identificacion, us.Celular, us.Email, us.Tipo_usuario, us.Estado_usuario, " +
+                "(us.Nombres + ' ' + us.Apellidos) as Nombre_completo " +
+                "FROM Usuarios us ");
 
             if (tipo_busqueda.Equals("ID USUARIO"))
             {
                 consulta.Append("WHERE us.Id_usuario = @Texto_busqueda ");
+            }
+            else if (tipo_busqueda.Equals("TIPO USUARIO"))
+            {
+                consulta.Append("WHERE us.Tipo_usuario = @Texto_busqueda ");
             }
 
             consulta.Append("ORDER BY us.Id_usuario DESC");
@@ -427,6 +389,7 @@
             try
             {
                 SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
                 SqlCommand Sqlcmd = new SqlCommand
                 {
                     Connection = SqlCon,
@@ -444,7 +407,7 @@
                 Sqlcmd.Parameters.Add(Texto_busqueda);
 
                 SqlDataAdapter SqlData = new SqlDataAdapter(Sqlcmd);
-                SqlData.Fill(DtResultado);
+                await Task.Run(() => SqlData.Fill(DtResultado));
 
                 if (DtResultado.Rows.Count < 1)
                 {
@@ -461,7 +424,74 @@
                 rpta = ex.Message;
                 DtResultado = null;
             }
-            return DtResultado;
+            return (DtResultado, rpta);
+        }
+
+        public async Task<(DataTable dtClientes, string rpta)> BuscarClientes(string tipo_busqueda, string texto_busqueda1,
+            string texto_busqueda2)
+        {
+            string rpta = "OK";
+            DataTable DtResultado = new DataTable("Clientes");
+            SqlConnection SqlCon = new SqlConnection();
+            SqlCon.InfoMessage += new SqlInfoMessageEventHandler(SqlCon_InfoMessage);
+            SqlCon.FireInfoMessageEventOnUserErrors = true;
+            try
+            {
+                SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
+                SqlCommand Sqlcmd = new SqlCommand
+                {
+                    Connection = SqlCon,
+                    CommandText = "sp_Buscar_clientes",
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                SqlParameter Tipo_busqueda = new SqlParameter
+                {
+                    ParameterName = "@Tipo_busqueda",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 50,
+                    Value = tipo_busqueda.Trim()
+                };
+                Sqlcmd.Parameters.Add(Tipo_busqueda);
+
+                SqlParameter Texto_busqueda1 = new SqlParameter
+                {
+                    ParameterName = "@Texto_busqueda1",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 50,
+                    Value = texto_busqueda1.Trim()
+                };
+                Sqlcmd.Parameters.Add(Texto_busqueda1);
+
+                SqlParameter Texto_busqueda2 = new SqlParameter
+                {
+                    ParameterName = "@Texto_busqueda2",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 50,
+                    Value = texto_busqueda2.Trim()
+                };
+                Sqlcmd.Parameters.Add(Texto_busqueda2);
+
+                SqlDataAdapter SqlData = new SqlDataAdapter(Sqlcmd);
+                await Task.Run(() => SqlData.Fill(DtResultado));
+
+                if (DtResultado.Rows.Count < 1)
+                {
+                    DtResultado = null;
+                }
+            }
+            catch (SqlException ex)
+            {
+                rpta = ex.Message;
+                DtResultado = null;
+            }
+            catch (Exception ex)
+            {
+                rpta = ex.Message;
+                DtResultado = null;
+            }
+            return (DtResultado, rpta);
         }
         #endregion
     }
