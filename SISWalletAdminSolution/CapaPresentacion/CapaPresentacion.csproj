@@ -109,6 +109,12 @@
     <Compile Include="Formularios\FormsArticulos\FrmObservarArticulos.Designer.cs">
       <DependentUpon>FrmObservarArticulos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsClientes\ClienteSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\ClienteSmall.Designer.cs">
+      <DependentUpon>ClienteSmall.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsClientes\FrmCargarClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,12 @@
     </Compile>
     <Compile Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.Designer.cs">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.Designer.cs">
+      <DependentUpon>FrmEstadisticasCobro.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsPrincipales\FrmIniciarSesion.cs">
       <SubType>Form</SubType>
@@ -221,6 +233,9 @@
     <EmbeddedResource Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.resx">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.resx">
+      <DependentUpon>FrmEstadisticasCobro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsPrincipales\FrmIniciarSesion.resx">
       <DependentUpon>FrmIniciarSesion.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +285,8 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Formularios\FormsSolicitudes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

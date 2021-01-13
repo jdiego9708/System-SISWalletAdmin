@@ -1,6 +1,7 @@
 ﻿using CapaEntidades;
 using CapaNegocio;
 using CapaPresentacion.Formularios.FormsArticulos;
+using CapaPresentacion.Formularios.FormsEstadisticas;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -34,16 +35,30 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     Credenciales credencial = (Credenciales)objects[0];
                     MainController main = MainController.GetInstance();
                     main.Usuario = credencial.Usuario;
-                    DataTable dtArticulos = (DataTable)objects[1];
-
-                    FrmObservarArticulos frmArticulos = new FrmObservarArticulos
+                    if (credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {
-                        StartPosition = FormStartPosition.CenterScreen,
-                        WindowState = FormWindowState.Maximized,
-                    };
-                    frmArticulos.Show();
-                    frmArticulos.LoadArticulos(dtArticulos);
-                    this.Hide();
+                        DataTable dtArticulos = (DataTable)objects[1];
+
+                        FrmObservarArticulos frmArticulos = new FrmObservarArticulos
+                        {
+                            StartPosition = FormStartPosition.CenterScreen,
+                            WindowState = FormWindowState.Maximized,
+                        };
+                        frmArticulos.Show();
+                        frmArticulos.LoadArticulos(dtArticulos);
+                        this.Hide();
+                    }
+                    else
+                    {
+                        FrmEstadisticasCobro FrmEstadisticasCobro = new FrmEstadisticasCobro
+                        {
+                            StartPosition = FormStartPosition.CenterScreen,
+                            WindowState = FormWindowState.Maximized,
+                        };
+                        FrmEstadisticasCobro.Show();
+                        //FrmEstadisticasCobro.LoadArticulos(dtArticulos);
+                        this.Hide();
+                    }
                 }
                 else
                 {
@@ -68,16 +83,31 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     Credenciales credencial = (Credenciales)objects[0];
                     MainController main = MainController.GetInstance();
                     main.Usuario = credencial.Usuario;
-                    DataTable dtArticulos = (DataTable)objects[1];
 
-                    FrmObservarArticulos frmArticulos = new FrmObservarArticulos
+                    if(credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {
-                        StartPosition = FormStartPosition.CenterScreen,
-                        WindowState = FormWindowState.Maximized,
-                    };
-                    frmArticulos.Show();
-                    frmArticulos.LoadArticulos(dtArticulos);
-                    this.Hide();
+                        DataTable dtArticulos = (DataTable)objects[1];
+
+                        FrmObservarArticulos frmArticulos = new FrmObservarArticulos
+                        {
+                            StartPosition = FormStartPosition.CenterScreen,
+                            WindowState = FormWindowState.Maximized,
+                        };
+                        frmArticulos.Show();
+                        frmArticulos.LoadArticulos(dtArticulos);
+                        this.Hide();
+                    }
+                    else
+                    {
+                        FrmEstadisticasCobro FrmEstadisticasCobro = new FrmEstadisticasCobro
+                        {
+                            StartPosition = FormStartPosition.CenterScreen,
+                            WindowState = FormWindowState.Maximized,
+                        };
+                        FrmEstadisticasCobro.Show();
+                        //FrmEstadisticasCobro.LoadArticulos(dtArticulos);
+                        this.Hide();
+                    }
                 }
                 else
                 {
@@ -130,7 +160,7 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
             this.txtPass.txtBusqueda.UseSystemPasswordChar = true;
 
             var (dtUsuarios, rpta) =
-               await NUsuarios.BuscarUsuarios("TIPO USUARIO", "TRABAJADOR CARTERAS");
+               await NUsuarios.BuscarUsuarios("TIPO USUARIO", "CARTERAS");
 
             if (dtUsuarios != null)
             {

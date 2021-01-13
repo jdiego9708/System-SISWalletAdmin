@@ -10,7 +10,7 @@
         {
             InitializeComponent();
             this.Load += FrmPrincipal_Load;
-            this.btnClientes.Click += BtnClientes_Click;
+            //this.btnClientes.Click += BtnClientes_Click;
         }
 
         private void BtnClientes_Click(object sender, System.EventArgs e)

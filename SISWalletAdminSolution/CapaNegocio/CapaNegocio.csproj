@@ -60,6 +60,7 @@
     <Compile Include="NUsuariosCobros.cs" />
     <Compile Include="NUsuariosVentas.cs" />
     <Compile Include="NVentas.cs" />
+    <Compile Include="NProveedores.cs" />
     <Compile Include="NZonas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

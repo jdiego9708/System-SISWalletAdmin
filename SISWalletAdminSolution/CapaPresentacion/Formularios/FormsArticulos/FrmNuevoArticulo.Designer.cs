@@ -41,19 +41,32 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtValor = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnSeleccionarProveedor = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.numericValorProveedor = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.groupBox5.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorProveedor)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtReferencia);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(6, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(334, 49);
             this.groupBox1.TabIndex = 2;
@@ -80,7 +93,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // 
             this.groupBox2.Controls.Add(this.txtDescripcion);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.groupBox2.Location = new System.Drawing.Point(12, 67);
+            this.groupBox2.Location = new System.Drawing.Point(6, 70);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 112);
             this.groupBox2.TabIndex = 3;
@@ -108,7 +121,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // 
             this.groupBox3.Controls.Add(this.listaTipoCantidad);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.groupBox3.Location = new System.Drawing.Point(12, 185);
+            this.groupBox3.Location = new System.Drawing.Point(6, 188);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(178, 57);
             this.groupBox3.TabIndex = 4;
@@ -132,7 +145,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // 
             this.groupBox4.Controls.Add(this.numericCantidad);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.groupBox4.Location = new System.Drawing.Point(196, 185);
+            this.groupBox4.Location = new System.Drawing.Point(190, 188);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(150, 57);
             this.groupBox4.TabIndex = 5;
@@ -170,7 +183,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // 
             this.groupBox5.Controls.Add(this.txtValor);
             this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.groupBox5.Location = new System.Drawing.Point(12, 248);
+            this.groupBox5.Location = new System.Drawing.Point(6, 251);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(178, 57);
             this.groupBox5.TabIndex = 6;
@@ -202,7 +215,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.Location = new System.Drawing.Point(202, 260);
+            this.btnGuardar.Location = new System.Drawing.Point(196, 263);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(144, 41);
             this.btnGuardar.TabIndex = 17;
@@ -210,18 +223,112 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.UseVisualStyleBackColor = true;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(387, 362);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.btnGuardar);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.groupBox5);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(379, 332);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Datos principales";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox7);
+            this.tabPage2.Controls.Add(this.groupBox6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(379, 332);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Datos de proveedor";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnSeleccionarProveedor);
+            this.groupBox6.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(367, 70);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Seleccione un proveedor";
+            // 
+            // btnSeleccionarProveedor
+            // 
+            this.btnSeleccionarProveedor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSeleccionarProveedor.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnSeleccionarProveedor.FlatAppearance.BorderSize = 0;
+            this.btnSeleccionarProveedor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnSeleccionarProveedor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnSeleccionarProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarProveedor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleccionarProveedor.Image = ((System.Drawing.Image)(resources.GetObject("btnSeleccionarProveedor.Image")));
+            this.btnSeleccionarProveedor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSeleccionarProveedor.Location = new System.Drawing.Point(6, 24);
+            this.btnSeleccionarProveedor.Name = "btnSeleccionarProveedor";
+            this.btnSeleccionarProveedor.Size = new System.Drawing.Size(355, 38);
+            this.btnSeleccionarProveedor.TabIndex = 18;
+            this.btnSeleccionarProveedor.Text = "Seleccione un proveedor";
+            this.btnSeleccionarProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionarProveedor.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.numericValorProveedor);
+            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.groupBox7.Location = new System.Drawing.Point(6, 82);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(367, 58);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Valor del proveedor ($)";
+            // 
+            // numericValorProveedor
+            // 
+            this.numericValorProveedor.BackColor = System.Drawing.Color.White;
+            this.numericValorProveedor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericValorProveedor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericValorProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numericValorProveedor.Location = new System.Drawing.Point(6, 26);
+            this.numericValorProveedor.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericValorProveedor.Name = "numericValorProveedor";
+            this.numericValorProveedor.Size = new System.Drawing.Size(355, 23);
+            this.numericValorProveedor.TabIndex = 1;
+            this.numericValorProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // FrmNuevoArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(364, 318);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(411, 386);
+            this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -238,6 +345,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorProveedor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -255,5 +368,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.TextBox txtValor;
         public System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.NumericUpDown numericCantidad;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox6;
+        public System.Windows.Forms.Button btnSeleccionarProveedor;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.NumericUpDown numericValorProveedor;
     }
 }

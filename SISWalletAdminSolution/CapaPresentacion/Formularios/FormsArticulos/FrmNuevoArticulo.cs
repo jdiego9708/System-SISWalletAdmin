@@ -19,6 +19,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             InitializeComponent();
             this.Load += FrmNuevoArticulo_Load;
             this.txtValor.KeyPress += TxtValor_KeyPress;
+            this.numericValorProveedor.KeyPress += TxtValor_KeyPress;
             this.btnGuardar.Click += BtnGuardar_Click;
         }
 

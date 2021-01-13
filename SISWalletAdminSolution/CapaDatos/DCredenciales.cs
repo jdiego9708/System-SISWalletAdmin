@@ -424,8 +424,11 @@
 
                         DataTable dtSolicitudes = ds.Tables[2];
 
+                        DataTable dtCobros = ds.Tables[3];
+
                         objects.Add(credencial);
                         objects.Add(dtSolicitudes);
+                        objects.Add(dtCobros);
                     }
                     else if (tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {

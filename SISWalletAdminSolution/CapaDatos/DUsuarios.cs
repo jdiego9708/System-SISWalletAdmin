@@ -167,7 +167,7 @@
                 };
                 SqlCmd.Parameters.Add(Estado_usuario);
                 contador += 1;
-             
+
                 //Ejecutamos nuestro comando
                 rpta = SqlCmd.ExecuteNonQuery() >= 1 ? "OK" : "NO SE INGRESÓ";
                 if (!rpta.Equals("OK"))
@@ -377,7 +377,11 @@
             }
             else if (tipo_busqueda.Equals("TIPO USUARIO"))
             {
-                consulta.Append("WHERE us.Tipo_usuario = @Texto_busqueda ");
+                if (texto_busqueda.Equals("CARTERAS"))
+                    consulta.Append("WHERE us.Tipo_usuario = 'TRABAJADOR CARTERAS' or " +
+                        "us.Tipo_usuario = 'ADMINISTRADOR' ");
+                else
+                    consulta.Append("WHERE us.Tipo_usuario = @Texto_busqueda ");
             }
 
             consulta.Append("ORDER BY us.Id_usuario DESC");

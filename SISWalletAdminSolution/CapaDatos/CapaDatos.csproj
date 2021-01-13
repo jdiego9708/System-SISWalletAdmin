@@ -53,6 +53,7 @@
     <Compile Include="DIngresos.cs" />
     <Compile Include="DMovimientos.cs" />
     <Compile Include="DPaises.cs" />
+    <Compile Include="DProveedores.cs" />
     <Compile Include="DSolicitudes.cs" />
     <Compile Include="DTipo_gastos.cs" />
     <Compile Include="DTipo_productos.cs" />
