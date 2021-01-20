@@ -15,6 +15,15 @@
         {
             try
             {
+                this.Valor_venta = Convert.ToDecimal(row["Valor_venta"]);
+                this.Interes_venta = Convert.ToDecimal(row["Interes_venta"]);
+                this.Total_venta = Convert.ToDecimal(row["Total_venta"]);
+                this.Numero_cuotas = Convert.ToInt32(row["Numero_cuotas"]);
+                this.Frecuencia_cobro = Convert.ToString(row["Frecuencia_cobro"]);
+                this.Valor_cuota = Convert.ToDecimal(row["Valor_cuota"]);
+                this.Estado_venta = Convert.ToString(row["Estado_venta"]);
+                this.Tipo_venta = Convert.ToString(row["Tipo_venta"]);
+
                 this.Id_venta = Convert.ToInt32(row["Id_venta"]);
                 this.Id_cobro = Convert.ToInt32(row["Id_cobro"]);
                 this.Cobro = new Cobros(row);

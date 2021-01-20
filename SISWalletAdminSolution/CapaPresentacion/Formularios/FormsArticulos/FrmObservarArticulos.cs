@@ -1,6 +1,9 @@
 ﻿using CapaEntidades;
 using CapaEntidades.Helpers;
 using CapaNegocio;
+using CapaPresentacion.Formularios.FormsEstadisticas;
+using CapaPresentacion.Formularios.FormsPrincipales;
+using CapaPresentacion.Formularios.FormsReportes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +23,169 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             InitializeComponent();
             this.btnNuevoArticulo.Click += BtnNuevoArticulo_Click;
             this.btnRefresh.Click += BtnRefresh_Click;
+            this.btnEstadisticas.Click += BtnEstadisticas_Click;
+            this.Load += FrmObservarArticulos_Load;
+            this.btnImprimirArticulos.Click += BtnImprimirArticulos_Click;
+            this.btnClientes.Click += BtnClientes_Click;
+        }
+
+        private async void BtnClientes_Click(object sender, EventArgs e)
+        {
+            MensajeEspera.ShowWait("Cargando reporte...");
+
+            MainController main = MainController.GetInstance();
+            int id_cobro = main.Turno.Id_cobro;
+
+            DataTable dtClientes = new DataTable("Clientes");
+            dtClientes.Columns.Add("Id_cliente", typeof(int));
+            dtClientes.Columns.Add("Nombre_cliente", typeof(string));
+            dtClientes.Columns.Add("Celular_cliente", typeof(string));
+            dtClientes.Columns.Add("Referencia_articulo", typeof(string));
+            dtClientes.Columns.Add("Saldo_restante", typeof(string));
+            dtClientes.Columns.Add("Venta_total", typeof(string));
+            dtClientes.Columns.Add("Fecha_venta", typeof(string));
+
+            int id_cliente = 0;
+            string nombre_cliente = string.Empty;
+            string celular_cliente = string.Empty;
+            string referencia_articulo = string.Empty;
+            decimal saldo_restante = 0;
+            decimal total_venta = 0;
+            DateTime fecha_venta = DateTime.Now;
+            decimal suma_ventas = 0;
+            decimal suma_saldos = 0;
+
+            DataTable dtVentas =
+                NVentas.BuscarVentas("ID COBRO", id_cobro.ToString(), out string rpta);
+            if (dtVentas != null)
+            {
+                foreach(DataRow row in dtVentas.Rows)
+                {
+                    Ventas venta = new Ventas(row);
+                    id_cliente = venta.Id_cliente;
+                    nombre_cliente = venta.Cliente.NombreCompleto;
+                    celular_cliente = venta.Cliente.Celular;
+                    total_venta = venta.Total_venta;
+                    fecha_venta = venta.Fecha_venta;
+                    suma_ventas += venta.Total_venta;
+
+                    var (dtDetalleArticulos, rptaBusqueda) = 
+                        await NArticulos.BuscarArticulos("ID VENTA", venta.Id_venta.ToString());
+                    if (dtDetalleArticulos != null)
+                    {
+                        StringBuilder referencias = new StringBuilder();
+                        referencias.Append(dtDetalleArticulos.Rows.Count + " referencias: ");
+                        foreach(DataRow rowArt in dtDetalleArticulos.Rows)
+                        {
+                            Detalle_articulos_venta detalle = new Detalle_articulos_venta(rowArt);
+                            referencias.Append("(" + detalle.Articulo.Id_articulo + ") ");
+                            referencias.Append(detalle.Articulo.Referencia_articulo + " - ");
+                        }
+                        referencia_articulo = referencias.ToString();
+                    }
+                    else
+                    {
+                        referencia_articulo = "NO SE ENCONTRARON LAS REFERENCIAS";
+                    }
+
+                    //Buscar los agendamientos de cada venta para ver su saldo restante
+                    DataTable dtAgendamientos = NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString(),
+                        out rpta);
+                    if (dtAgendamientos != null)
+                    {
+                        Agendamiento_cobros ag = new Agendamiento_cobros(dtAgendamientos.Rows[0]);
+                        saldo_restante = ag.Saldo_restante;
+                        suma_saldos += ag.Saldo_restante;
+                    }
+
+                    DataRow newRow = dtClientes.NewRow();
+                    newRow["Id_cliente"] = id_cliente;
+                    newRow["Nombre_cliente"] = nombre_cliente;
+                    newRow["Celular_cliente"] = celular_cliente;
+                    newRow["Referencia_articulo"] = referencia_articulo;
+                    newRow["Saldo_restante"] = saldo_restante.ToString("C");
+                    newRow["Venta_total"] = total_venta.ToString("C");
+                    newRow["Fecha_venta"] = fecha_venta.ToString("dd-MM-yyyy");
+                    dtClientes.Rows.Add(newRow);
+                }
+
+                if (dtClientes.Rows.Count > 0)
+                {
+                    MensajeEspera.CloseForm();
+                    //Enviar informe
+                    FrmReporteClientes frmReporteClientes = new FrmReporteClientes
+                    {
+                        WindowState = FormWindowState.Maximized,
+                        dtClientes = dtClientes,
+                        Total_saldos = suma_saldos.ToString("C"),
+                        Total_ventas = suma_ventas.ToString("C"),
+                    };
+                    frmReporteClientes.Show();
+                }
+                else
+                    Mensajes.MensajeInformacion("No se encontraron clientes", "Entendido");
+            }
+            else
+                Mensajes.MensajeInformacion("No se encontraron clientes", "Entendido");
+
+            MensajeEspera.CloseForm();
+        }
+
+        private void BtnImprimirArticulos_Click(object sender, EventArgs e)
+        {
+            if (this.DtArticulos != null)
+            {
+                DataTable dtArticulosImpresion = new DataTable("Articulos");
+                dtArticulosImpresion.Columns.Add("Id_articulo", typeof(int));
+                dtArticulosImpresion.Columns.Add("Referencia_articulo", typeof(string));
+                dtArticulosImpresion.Columns.Add("Stock_articulo", typeof(int));
+                dtArticulosImpresion.Columns.Add("Proveedor", typeof(string));
+                dtArticulosImpresion.Columns.Add("Valor_proveedor", typeof(string));
+                dtArticulosImpresion.Columns.Add("Valor_cliente", typeof(string));
+
+                foreach (DataRow row in this.DtArticulos.Rows)
+                {
+                    int id_articulo = Convert.ToInt32(row["Id_articulo"]);
+                    string referencia = Convert.ToString(row["Referencia_articulo"]);
+                    int stock = Convert.ToInt32(row["Cantidad_articulo"]);
+                    string proveedor = Convert.ToString(row["Nombre_proveedor"]);
+                    decimal valor_proveedor = Convert.ToDecimal(row["Valor_proveedor"]);
+                    decimal valor_articulo = Convert.ToDecimal(row["Valor_articulo"]);
+
+                    DataRow rowNew = dtArticulosImpresion.NewRow();
+                    rowNew["Id_articulo"] = id_articulo;
+                    rowNew["Referencia_articulo"] = referencia;
+                    rowNew["Stock_articulo"] = stock;
+                    rowNew["Proveedor"] = proveedor;
+                    rowNew["Valor_proveedor"] = valor_proveedor.ToString("C");
+                    rowNew["Valor_cliente"] = valor_articulo.ToString("C");
+                    dtArticulosImpresion.Rows.Add(rowNew);
+                }
+
+                FrmReporteArticulos frmReporteArticulos = new FrmReporteArticulos
+                {
+                    WindowState = FormWindowState.Maximized,
+                    dtArticulos = dtArticulosImpresion,
+                };
+                frmReporteArticulos.Show();
+            }
+            else
+                Mensajes.MensajeInformacion("NO hay artículos para imprimir", "Entendido");
+        }
+
+        private async void FrmObservarArticulos_Load(object sender, EventArgs e)
+        {
+            this.Show();
+            await this.LoadArticulos("COMPLETO", "");
+        }
+
+        private void BtnEstadisticas_Click(object sender, EventArgs e)
+        {
+            FrmEstadisticasCobro frmEstadisticasCobro = new FrmEstadisticasCobro
+            {
+                WindowState = FormWindowState.Maximized,
+            };
+            frmEstadisticasCobro.Show();
         }
 
         private async void BtnRefresh_Click(object sender, EventArgs e)
@@ -63,6 +229,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
 
                     if (Comprobaciones.dtArticulos != null)
                     {
+                        this.DtArticulos = Comprobaciones.dtArticulos;
                         List<Articulos> articulos = (from DataRow dr in Comprobaciones.dtArticulos.Rows
                                                      select new Articulos(dr)).ToList();
 
@@ -184,6 +351,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                     "Hubo un error al buscar artículos", ex.Message);
             }
         }
+
+        public DataTable DtArticulos { get; set; }
 
         private List<Articulos> _articulosList;
 

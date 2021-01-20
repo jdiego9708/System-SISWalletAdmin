@@ -43,11 +43,15 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnGuardar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkImprimir = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnSeleccionarProveedor = new System.Windows.Forms.Button();
+            this.rdPendiente = new System.Windows.Forms.RadioButton();
+            this.rdPaga = new System.Windows.Forms.RadioButton();
+            this.lblValorTotalProveedor = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.numericValorProveedor = new System.Windows.Forms.NumericUpDown();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnSeleccionarProveedor = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -57,9 +61,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorProveedor)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -150,7 +154,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox4.Size = new System.Drawing.Size(150, 57);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Stock inicial";
+            this.groupBox4.Text = "Stock";
             // 
             // numericCantidad
             // 
@@ -188,7 +192,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox5.Size = new System.Drawing.Size(178, 57);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Valor unitario ($)";
+            this.groupBox5.Text = "Valor al público ($)";
             // 
             // txtValor
             // 
@@ -233,11 +237,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(387, 362);
+            this.tabControl1.Size = new System.Drawing.Size(387, 375);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkImprimir);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.btnGuardar);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -247,22 +252,99 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(379, 332);
+            this.tabPage1.Size = new System.Drawing.Size(379, 345);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos principales";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // chkImprimir
+            // 
+            this.chkImprimir.AutoSize = true;
+            this.chkImprimir.Checked = true;
+            this.chkImprimir.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkImprimir.Location = new System.Drawing.Point(214, 318);
+            this.chkImprimir.Name = "chkImprimir";
+            this.chkImprimir.Size = new System.Drawing.Size(120, 21);
+            this.chkImprimir.TabIndex = 18;
+            this.chkImprimir.Text = "Imprimir factura";
+            this.chkImprimir.UseVisualStyleBackColor = true;
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.rdPendiente);
+            this.tabPage2.Controls.Add(this.rdPaga);
+            this.tabPage2.Controls.Add(this.lblValorTotalProveedor);
             this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(379, 332);
+            this.tabPage2.Size = new System.Drawing.Size(379, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Datos de proveedor";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // rdPendiente
+            // 
+            this.rdPendiente.AutoSize = true;
+            this.rdPendiente.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rdPendiente.Location = new System.Drawing.Point(114, 146);
+            this.rdPendiente.Name = "rdPendiente";
+            this.rdPendiente.Size = new System.Drawing.Size(130, 21);
+            this.rdPendiente.TabIndex = 7;
+            this.rdPendiente.Text = "Factura pendiente";
+            this.rdPendiente.UseVisualStyleBackColor = true;
+            // 
+            // rdPaga
+            // 
+            this.rdPaga.AutoSize = true;
+            this.rdPaga.Checked = true;
+            this.rdPaga.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rdPaga.Location = new System.Drawing.Point(6, 146);
+            this.rdPaga.Name = "rdPaga";
+            this.rdPaga.Size = new System.Drawing.Size(102, 21);
+            this.rdPaga.TabIndex = 6;
+            this.rdPaga.TabStop = true;
+            this.rdPaga.Text = "Factura paga";
+            this.rdPaga.UseVisualStyleBackColor = true;
+            // 
+            // lblValorTotalProveedor
+            // 
+            this.lblValorTotalProveedor.AutoSize = true;
+            this.lblValorTotalProveedor.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorTotalProveedor.Location = new System.Drawing.Point(8, 191);
+            this.lblValorTotalProveedor.Name = "lblValorTotalProveedor";
+            this.lblValorTotalProveedor.Size = new System.Drawing.Size(151, 20);
+            this.lblValorTotalProveedor.TabIndex = 5;
+            this.lblValorTotalProveedor.Text = "Valor total proveedor";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.numericValorProveedor);
+            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.groupBox7.Location = new System.Drawing.Point(6, 82);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(367, 58);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Valor del proveedor ($)";
+            // 
+            // numericValorProveedor
+            // 
+            this.numericValorProveedor.BackColor = System.Drawing.Color.White;
+            this.numericValorProveedor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericValorProveedor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericValorProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numericValorProveedor.Location = new System.Drawing.Point(6, 26);
+            this.numericValorProveedor.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericValorProveedor.Name = "numericValorProveedor";
+            this.numericValorProveedor.Size = new System.Drawing.Size(355, 23);
+            this.numericValorProveedor.TabIndex = 1;
+            this.numericValorProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox6
             // 
@@ -294,40 +376,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnSeleccionarProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSeleccionarProveedor.UseVisualStyleBackColor = true;
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.numericValorProveedor);
-            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.groupBox7.Location = new System.Drawing.Point(6, 82);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(367, 58);
-            this.groupBox7.TabIndex = 4;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Valor del proveedor ($)";
-            // 
-            // numericValorProveedor
-            // 
-            this.numericValorProveedor.BackColor = System.Drawing.Color.White;
-            this.numericValorProveedor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericValorProveedor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericValorProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.numericValorProveedor.Location = new System.Drawing.Point(6, 26);
-            this.numericValorProveedor.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericValorProveedor.Name = "numericValorProveedor";
-            this.numericValorProveedor.Size = new System.Drawing.Size(355, 23);
-            this.numericValorProveedor.TabIndex = 1;
-            this.numericValorProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // FrmNuevoArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(411, 386);
+            this.ClientSize = new System.Drawing.Size(411, 399);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -347,10 +401,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.groupBox5.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericValorProveedor)).EndInit();
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -375,5 +431,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         public System.Windows.Forms.Button btnSeleccionarProveedor;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.NumericUpDown numericValorProveedor;
+        private System.Windows.Forms.Label lblValorTotalProveedor;
+        private System.Windows.Forms.RadioButton rdPaga;
+        private System.Windows.Forms.RadioButton rdPendiente;
+        private System.Windows.Forms.CheckBox chkImprimir;
     }
 }

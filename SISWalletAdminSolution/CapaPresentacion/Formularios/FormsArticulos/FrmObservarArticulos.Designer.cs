@@ -34,17 +34,20 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnNuevoArticulo = new System.Windows.Forms.Button();
             this.lblResultados = new System.Windows.Forms.Label();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnEstadisticas = new System.Windows.Forms.Button();
             this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
             this.txtBusqueda = new CapaPresentacion.CustomTextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnImprimirArticulos = new System.Windows.Forms.Button();
+            this.btnClientes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +101,13 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.bindingNavigator1.TabIndex = 7;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Text = "de {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -131,16 +141,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
-            this.bindingNavigatorCountItem.Text = "de {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -160,6 +163,32 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Location = new System.Drawing.Point(56, 12);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(35, 35);
+            this.btnRefresh.TabIndex = 8;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // btnEstadisticas
+            // 
+            this.btnEstadisticas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEstadisticas.BackgroundImage")));
+            this.btnEstadisticas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEstadisticas.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnEstadisticas.FlatAppearance.BorderSize = 0;
+            this.btnEstadisticas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEstadisticas.Location = new System.Drawing.Point(99, 12);
+            this.btnEstadisticas.Name = "btnEstadisticas";
+            this.btnEstadisticas.Size = new System.Drawing.Size(35, 35);
+            this.btnEstadisticas.TabIndex = 9;
+            this.btnEstadisticas.UseVisualStyleBackColor = true;
             // 
             // panelArticulos
             // 
@@ -182,29 +211,42 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtBusqueda.Imagen = null;
-            this.txtBusqueda.Location = new System.Drawing.Point(109, 20);
+            this.txtBusqueda.Location = new System.Drawing.Point(222, 20);
             this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBusqueda.MaxLenght = 0;
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(778, 20);
+            this.txtBusqueda.Size = new System.Drawing.Size(665, 20);
             this.txtBusqueda.TabIndex = 0;
             this.txtBusqueda.Texto = "Búsqueda de artículos";
             this.txtBusqueda.Texto_inicial = "Búsqueda de artículos";
             this.txtBusqueda.Tipo_txt = null;
             this.txtBusqueda.Visible_px = true;
             // 
-            // btnRefresh
+            // btnImprimirArticulos
             // 
-            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Location = new System.Drawing.Point(58, 12);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(35, 35);
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnImprimirArticulos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnImprimirArticulos.BackgroundImage")));
+            this.btnImprimirArticulos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnImprimirArticulos.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnImprimirArticulos.FlatAppearance.BorderSize = 0;
+            this.btnImprimirArticulos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirArticulos.Location = new System.Drawing.Point(140, 12);
+            this.btnImprimirArticulos.Name = "btnImprimirArticulos";
+            this.btnImprimirArticulos.Size = new System.Drawing.Size(35, 35);
+            this.btnImprimirArticulos.TabIndex = 10;
+            this.btnImprimirArticulos.UseVisualStyleBackColor = true;
+            // 
+            // btnClientes
+            // 
+            this.btnClientes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClientes.BackgroundImage")));
+            this.btnClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnClientes.FlatAppearance.BorderSize = 0;
+            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClientes.Location = new System.Drawing.Point(181, 12);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(35, 35);
+            this.btnClientes.TabIndex = 11;
+            this.btnClientes.UseVisualStyleBackColor = true;
             // 
             // FrmObservarArticulos
             // 
@@ -212,6 +254,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(898, 459);
+            this.Controls.Add(this.btnClientes);
+            this.Controls.Add(this.btnImprimirArticulos);
+            this.Controls.Add(this.btnEstadisticas);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.panelArticulos);
@@ -248,5 +293,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnEstadisticas;
+        private System.Windows.Forms.Button btnImprimirArticulos;
+        private System.Windows.Forms.Button btnClientes;
     }
 }

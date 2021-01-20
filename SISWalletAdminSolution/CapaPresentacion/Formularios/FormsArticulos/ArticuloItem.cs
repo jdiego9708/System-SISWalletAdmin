@@ -32,6 +32,15 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtReferencia.Text = articulo.Referencia_articulo;
             this.txtStock.Text = ((int)articulo.Cantidad_articulo) + " " + articulo.Tipo_cantidad;
             this.txtDescripcion.Text = articulo.Descripcion_articulo;
+            if (articulo.Estado_articulo.Equals("ACTIVO"))
+                this.panel1.BackColor = Color.Teal;
+            else
+                this.panel1.BackColor = Color.FromArgb(255, 128, 128);
+
+            if (articulo.Cantidad_articulo < 5)            
+                this.txtStock.ForeColor = Color.FromArgb(255, 128, 128);
+            else
+                this.txtStock.ForeColor = Color.FromArgb(64, 64, 64);
         }
 
         private Articulos _articulo;

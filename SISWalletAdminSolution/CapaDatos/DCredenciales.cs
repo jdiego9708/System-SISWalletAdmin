@@ -346,6 +346,7 @@
             List<object> objects = new List<object>();
             DataTable dtArticulos = new DataTable();
             Credenciales credencial = new Credenciales();
+            Turnos turno = new Turnos();
 
             DataSet ds = new DataSet("Login");
             SqlConnection SqlCon = new SqlConnection();
@@ -438,10 +439,13 @@
                         if (dtCredencial.Rows.Count > 0)
                             credencial = new Credenciales(dtCredencial.Rows[0]);
 
-                        dtArticulos = ds.Tables[2];
+                        DataTable dtTurno = ds.Tables[2];
+
+                        if (dtTurno.Rows.Count > 0)
+                            turno = new Turnos(dtTurno.Rows[0]);
 
                         objects.Add(credencial);
-                        objects.Add(dtArticulos);
+                        objects.Add(turno);
                     }
                 }
                 else

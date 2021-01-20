@@ -33,19 +33,20 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                 if (rpta.Equals("OK"))
                 {
                     Credenciales credencial = (Credenciales)objects[0];
+                    Turnos turno = (Turnos)objects[1];
                     MainController main = MainController.GetInstance();
                     main.Usuario = credencial.Usuario;
+                    main.Turno = turno;
+
                     if (credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {
-                        DataTable dtArticulos = (DataTable)objects[1];
-
                         FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {
                             StartPosition = FormStartPosition.CenterScreen,
                             WindowState = FormWindowState.Maximized,
                         };
                         frmArticulos.Show();
-                        frmArticulos.LoadArticulos(dtArticulos);
+                        //frmArticulos.LoadArticulos(dtArticulos);
                         this.Hide();
                     }
                     else
@@ -81,31 +82,31 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                 if (rpta.Equals("OK"))
                 {
                     Credenciales credencial = (Credenciales)objects[0];
+                    Turnos turno = (Turnos)objects[1];
                     MainController main = MainController.GetInstance();
                     main.Usuario = credencial.Usuario;
+                    main.Turno = turno;
 
                     if(credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
-                    {
-                        DataTable dtArticulos = (DataTable)objects[1];
-
+                    {                    
                         FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {
                             StartPosition = FormStartPosition.CenterScreen,
                             WindowState = FormWindowState.Maximized,
                         };
                         frmArticulos.Show();
-                        frmArticulos.LoadArticulos(dtArticulos);
+                        //frmArticulos.LoadArticulos(dtArticulos);
                         this.Hide();
                     }
                     else
                     {
-                        FrmEstadisticasCobro FrmEstadisticasCobro = new FrmEstadisticasCobro
+                        FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {
                             StartPosition = FormStartPosition.CenterScreen,
                             WindowState = FormWindowState.Maximized,
                         };
-                        FrmEstadisticasCobro.Show();
-                        //FrmEstadisticasCobro.LoadArticulos(dtArticulos);
+                        frmArticulos.Show();
+                        //frmArticulos.LoadArticulos(dtArticulos);
                         this.Hide();
                     }
                 }
@@ -119,6 +120,7 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
             }
             catch (Exception ex)
             {
+                MensajeEspera.CloseForm();
                 Mensajes.MensajeErrorCompleto(this.Name, "BtnIngresar_Click",
                     "Hubo un error al ingresar", ex.Message);
             }

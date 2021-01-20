@@ -50,10 +50,10 @@
             int contador = 0;
             string rpta = "";
 
-            string consulta = "INSERT INTO Articulos (Referencia_articulo, Descripcion_articulo, " +
-                "Tipo_cantidad, Cantidad_articulo, Valor_articulo, Estado_articulo) " +
-                "VALUES(@Referencia_articulo, @Descripcion_articulo, " +
-                "@Tipo_cantidad, @Cantidad_articulo, @Valor_articulo, @Estado_articulo) " +
+            string consulta = "INSERT INTO Articulos (Id_proveedor, Valor_proveedor, Referencia_articulo, Descripcion_articulo, " +
+                "Tipo_cantidad, Cantidad_articulo, Cantidad_inicial, Valor_articulo, Estado_articulo) " +
+                "VALUES(@Id_proveedor, @Valor_proveedor, @Referencia_articulo, @Descripcion_articulo, " +
+                "@Tipo_cantidad, @Cantidad_articulo, @Cantidad_inicial, @Valor_articulo, @Estado_articulo) " +
                 "SET @Id_articulo = SCOPE_IDENTITY() ";
 
             SqlConnection SqlCon = new SqlConnection();
@@ -79,6 +79,24 @@
                     Direction = ParameterDirection.Output
                 };
                 SqlCmd.Parameters.Add(Id_articulo);
+
+                SqlParameter Id_proveedor = new SqlParameter
+                {
+                    ParameterName = "@Id_proveedor",
+                    SqlDbType = SqlDbType.Int,
+                    Value = articulo.Id_proveedor,
+                };
+                SqlCmd.Parameters.Add(Id_proveedor);
+                contador += 1;
+
+                SqlParameter Valor_proveedor = new SqlParameter
+                {
+                    ParameterName = "@Valor_proveedor",
+                    SqlDbType = SqlDbType.Decimal,
+                    Value = articulo.Valor_proveedor,
+                };
+                SqlCmd.Parameters.Add(Valor_proveedor);
+                contador += 1;
 
                 SqlParameter Referencia_articulo = new SqlParameter
                 {
@@ -117,6 +135,15 @@
                     Value = articulo.Cantidad_articulo,
                 };
                 SqlCmd.Parameters.Add(Cantidad_articulo);
+                contador += 1;
+
+                SqlParameter Cantidad_inicial = new SqlParameter
+                {
+                    ParameterName = "@Cantidad_inicial",
+                    SqlDbType = SqlDbType.Decimal,
+                    Value = articulo.Cantidad_inicial,
+                };
+                SqlCmd.Parameters.Add(Cantidad_inicial);
                 contador += 1;
 
                 SqlParameter Valor_articulo = new SqlParameter
@@ -189,6 +216,8 @@
             string rpta = "";
 
             string consulta = "UPDATE Articulos SET " +
+                "Id_proveedor = @Id_proveedor, " +
+                "Valor_proveedor = @Valor_proveedor, " +
                 "Referencia_articulo = @Referencia_articulo, " +
                 "Descripcion_articulo = @Descripcion_articulo, " +
                  "Tipo_cantidad = @Tipo_cantidad, " +
@@ -220,6 +249,24 @@
                     Value = id_articulo,
                 };
                 SqlCmd.Parameters.Add(Id_articulo);
+
+                SqlParameter Id_proveedor = new SqlParameter
+                {
+                    ParameterName = "@Id_proveedor",
+                    SqlDbType = SqlDbType.Int,
+                    Value = articulo.Id_proveedor,
+                };
+                SqlCmd.Parameters.Add(Id_proveedor);
+                contador += 1;
+
+                SqlParameter Valor_proveedor = new SqlParameter
+                {
+                    ParameterName = "@Valor_proveedor",
+                    SqlDbType = SqlDbType.Decimal,
+                    Value = articulo.Valor_proveedor,
+                };
+                SqlCmd.Parameters.Add(Valor_proveedor);
+                contador += 1;
 
                 SqlParameter Referencia_articulo = new SqlParameter
                 {
@@ -325,14 +372,25 @@
 
             StringBuilder consulta = new StringBuilder();
 
-            consulta.Append("SELECT * FROM Articulos art ");
-
-            if (tipo_busqueda.Equals("ID ARTICULO"))
+            if (tipo_busqueda.Equals("ID VENTA"))
             {
-                consulta.Append("WHERE art.Id_articulo = @Texto_busqueda ");
+                consulta.Append("SELECT * FROM Detalle_articulos_venta dart " +
+                "INNER JOIN Articulos art ON dart.Id_articulo = art.Id_articulo " +
+                "INNER JOIN Ventas ve ON dart.Id_venta = ve.Id_venta " +
+                "WHERE ve.Id_venta = @Texto_busqueda ");
             }
+            else
+            {
+                consulta.Append("SELECT * FROM Articulos art " +
+                "INNER JOIN Proveedores pr ON art.Id_proveedor = pr.Id_proveedor ");
 
-            consulta.Append("ORDER BY art.Id_articulo DESC");
+                if (tipo_busqueda.Equals("ID ARTICULO"))
+                {
+                    consulta.Append("WHERE art.Id_articulo = @Texto_busqueda ");
+                }
+
+                consulta.Append("ORDER BY art.Id_articulo DESC ");
+            }
 
             DataTable DtResultado = new DataTable("Articulos");
             SqlConnection SqlCon = new SqlConnection();

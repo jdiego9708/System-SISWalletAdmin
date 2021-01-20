@@ -493,8 +493,13 @@
             {
                 consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda ");
             }
+            else if (tipo_busqueda.Equals("ID COBRO ACTIVO"))
+            {
+                consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda and " +
+                    "ve.Estado_venta = 'ACTIVO' ");
+            }
 
-            consulta.Append("ORDER BY ve.Id_venta DESC");
+            consulta.Append("ORDER BY ve.Id_venta DESC ");
 
             DataTable DtResultado = new DataTable("Ventas");
             SqlConnection SqlCon = new SqlConnection();

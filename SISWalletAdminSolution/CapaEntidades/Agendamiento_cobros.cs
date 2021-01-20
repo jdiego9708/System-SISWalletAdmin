@@ -6,7 +6,33 @@
 
     public class Agendamiento_cobros
     {
-       
+
+        public Agendamiento_cobros()
+        {
+
+        }
+
+        public Agendamiento_cobros(DataRow row)
+        {
+            try
+            {
+                this.Id_agendamiento = Convert.ToInt32(row["Id_agendamiento"]);
+                this.Id_venta = Convert.ToInt32(row["Id_venta"]);
+                this.Venta = new Ventas(row);
+                this.Fecha_cobro = Convert.ToDateTime(row["Fecha_cobro"]);
+                this.Valor_cobro = Convert.ToDecimal(row["Valor_cobro"]);
+                this.Valor_pagado = Convert.ToDecimal(row["Valor_pagado"]);
+                this.Saldo_restante = Convert.ToDecimal(row["Saldo_restante"]);
+                this.Tipo_cobro = Convert.ToString(row["Tipo_cobro"]);
+                this.Observaciones_cobro = Convert.ToString(row["Observaciones_cobro"]);
+                this.Estado_cobro = Convert.ToString(row["Estado_cobro"]);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         public int Id_agendamiento { get; set; }
 
         public int Id_venta { get; set; }

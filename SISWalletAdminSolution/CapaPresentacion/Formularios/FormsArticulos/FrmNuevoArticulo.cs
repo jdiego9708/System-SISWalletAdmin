@@ -1,5 +1,7 @@
 ﻿using CapaEntidades;
 using CapaNegocio;
+using CapaPresentacion.Formularios.FormsProveedores;
+using CapaPresentacion.Formularios.FormsReportes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +23,31 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtValor.KeyPress += TxtValor_KeyPress;
             this.numericValorProveedor.KeyPress += TxtValor_KeyPress;
             this.btnGuardar.Click += BtnGuardar_Click;
+            this.btnSeleccionarProveedor.Click += BtnSeleccionarProveedor_Click;
+            this.numericCantidad.ValueChanged += NumericCantidad_ValueChanged;
+        }
+
+        private void NumericCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            this.lblValorTotalProveedor.Text = "Total valor proveedor " + (this.numericCantidad.Value * this.numericValorProveedor.Value).ToString("C");
+        }
+
+        private void BtnSeleccionarProveedor_Click(object sender, EventArgs e)
+        {
+            FrmObservarProveedores frmObservarProveedores = new FrmObservarProveedores
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                AddArticulo = true,
+            };
+            frmObservarProveedores.OnProveedorSelected += FrmObservarProveedores_OnProveedorSelected;
+            frmObservarProveedores.ShowDialog();
+        }
+
+        private void FrmObservarProveedores_OnProveedorSelected(object sender, EventArgs e)
+        {
+            Proveedores proveedor = (Proveedores)sender;
+            this.btnSeleccionarProveedor.Text = proveedor.Nombre_proveedor;
+            this.btnSeleccionarProveedor.Tag = proveedor;
         }
 
         public event EventHandler OnArticuloSuccess;
@@ -72,12 +99,48 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                 }
             }
 
+            Proveedores proveedor;
+            if (this.btnSeleccionarProveedor.Tag == null)
+            {
+                Mensajes.MensajeInformacion("Verifique el proveedor seleccionado", "Entendido");
+                return false;
+            }
+
+            proveedor = (Proveedores)this.btnSeleccionarProveedor.Tag;
+
+            if (!decimal.TryParse(this.numericValorProveedor.Value.ToString(), out decimal valor_proveedor))
+            {
+                Mensajes.MensajeInformacion("Verifique el valor del proveedor", "Entendido");
+                return false;
+            }
+            else
+            {
+                if (valor == 0)
+                {
+                    Mensajes.MensajeInformacion("Verifique el valor no puede ser 0", "Entendido");
+                    return false;
+                }
+            }
+
+            articulo.Proveedor = proveedor;
+            articulo.Id_proveedor = proveedor.Id_proveedor;
+            articulo.Valor_proveedor = valor_proveedor;
             articulo.Referencia_articulo = this.txtReferencia.Text.ToUpper();
             articulo.Tipo_cantidad = this.listaTipoCantidad.Text.ToUpper();
             articulo.Cantidad_articulo = this.numericCantidad.Value;
+            articulo.Cantidad_inicial = this.numericCantidad.Value;
             articulo.Valor_articulo = valor;
             articulo.Descripcion_articulo = this.txtDescripcion.Text;
-            articulo.Estado_articulo = "ACTIVO";
+
+            if (this.rdPendiente.Checked)
+            {
+                articulo.Estado_articulo = "PENDIENTE";
+            }
+            else
+            {
+                articulo.Estado_articulo = "ACTIVO";
+            }
+
             return true;
         }
 
@@ -99,6 +162,39 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                         var (rptaArticulo, id_articulo) = await NArticulos.InsertarArticulo(articulo);
                         rpta = rptaArticulo;
                         articulo.Id_articulo = id_articulo;
+
+                        if (this.chkImprimir.Checked)
+                        {
+                            DataTable dtFacturaArticulos = new DataTable("dtArticulosFacturas");
+                            dtFacturaArticulos.Columns.Add("Id_articulo", typeof(int));
+                            dtFacturaArticulos.Columns.Add("Referencia_articulo", typeof(string));
+                            dtFacturaArticulos.Columns.Add("Cantidad_articulo", typeof(string));
+                            dtFacturaArticulos.Columns.Add("Id_proveedor", typeof(string));
+                            dtFacturaArticulos.Columns.Add("Proveedor", typeof(string));
+                            dtFacturaArticulos.Columns.Add("Valor_proveedor", typeof(string));
+                            dtFacturaArticulos.Columns.Add("Descripcion_articulo", typeof(string));
+
+                            DataRow newRow = dtFacturaArticulos.NewRow();
+                            newRow["Id_articulo"] = articulo.Id_articulo;
+                            newRow["Referencia_articulo"] = articulo.Referencia_articulo;
+                            newRow["Cantidad_articulo"] = articulo.Cantidad_articulo;
+                            newRow["Id_proveedor"] = articulo.Id_proveedor;
+                            newRow["Proveedor"] = articulo.Proveedor.Nombre_proveedor;
+                            newRow["Valor_proveedor"] = articulo.Valor_proveedor;
+                            newRow["Descripcion_articulo"] = articulo.Descripcion_articulo;
+                            dtFacturaArticulos.Rows.Add(newRow);
+
+                            FrmReporteFactura frmReporte = new FrmReporteFactura
+                            {
+                                Id_articulo = articulo.Id_articulo.ToString(),
+                                FechaHora = DateTime.Now.ToLongTimeString() + " " + DateTime.Now.ToLongTimeString(),
+                                EstadoFactura = articulo.Estado_articulo,
+                                TotalFactura = (this.numericCantidad.Value * this.numericValorProveedor.Value).ToString(),
+                                WindowState = FormWindowState.Maximized,
+                                dtArticulosFactura = dtFacturaArticulos,
+                            };
+                            frmReporte.Show();
+                        }
                     }
 
                     MensajeEspera.CloseForm();
@@ -107,6 +203,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                         this.Limpiar();
                         Mensajes.MensajeInformacion("Se guardó correctamente el artículo", "Entendido");
                         this.OnArticuloSuccess?.Invoke(articulo, e);
+                        this.Close();
                     }
                     else
                         throw new Exception(rpta);
@@ -157,6 +254,16 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtDescripcion.Text = articulo.Descripcion_articulo;
             this.ListaTipoCantidad();
             this.listaTipoCantidad.SelectedIndex = listaTipoCantidad.FindStringExact(articulo.Tipo_cantidad);
+            this.btnSeleccionarProveedor.Tag = articulo.Proveedor;
+            this.btnSeleccionarProveedor.Text = articulo.Proveedor.Nombre_proveedor;
+            this.numericValorProveedor.Value = articulo.Valor_proveedor;
+            this.lblValorTotalProveedor.Text = 
+                "(Cantidad inicial " + (int)articulo.Cantidad_inicial + ") Total valor proveedor $" + (articulo.Cantidad_inicial * articulo.Valor_proveedor).ToString("N2");
+
+            if (articulo.Estado_articulo.Equals("ACTIVO"))
+                this.rdPaga.Checked = true;
+            else
+                this.rdPendiente.Checked = true;
         }
 
         private bool isEditar;
@@ -169,9 +276,9 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             {
                 isEditar = value;
                 this.Text = "Editar un artículo";
-                this.txtReferencia.ReadOnly = true;
-                this.txtDescripcion.ReadOnly = true;
-                this.txtValor.ReadOnly = true;
+                this.txtReferencia.ReadOnly = false;
+                this.txtDescripcion.ReadOnly = false;
+                this.txtValor.ReadOnly = false;
                 this.listaTipoCantidad.Enabled = false;
             }
         }

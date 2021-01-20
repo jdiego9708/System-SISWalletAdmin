@@ -16,5 +16,19 @@ namespace CapaPresentacion.Formularios.FormsEstadisticas
         {
             InitializeComponent();
         }
+
+        //private Task LoadArticulos()
+        //{
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Mensajes.MensajeErrorCompleto(this.Name, "",
+        //            "Hubo un error al cargar los artículos", ex.Message);
+        //    }
+        //}
     }
 }

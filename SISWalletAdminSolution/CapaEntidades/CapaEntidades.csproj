@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agendamiento_cobros.cs" />
+    <Compile Include="Detalle_articulos_venta.cs" />
     <Compile Include="Articulos.cs" />
     <Compile Include="Ciudades.cs" />
     <Compile Include="Cobros.cs" />

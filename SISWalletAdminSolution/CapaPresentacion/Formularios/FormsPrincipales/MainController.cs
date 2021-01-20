@@ -21,5 +21,7 @@
         public FrmPrincipal FrmPrincipal { get; set; }
 
         public Usuarios Usuario { get; set; }
+
+        public Turnos Turno { get; set; }
     }
 }

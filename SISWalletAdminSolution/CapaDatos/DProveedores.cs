@@ -117,7 +117,7 @@
                     Size = 50,
                     Value = proveedor.Contacto_proveedor.Trim()
                 };
-                SqlCmd.Parameters.Add(Descripcion_proveedor);
+                SqlCmd.Parameters.Add(Contacto_proveedor);
                 contador += 1;
 
                 SqlParameter Estado_proveedor = new SqlParameter
