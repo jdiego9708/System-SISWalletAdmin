@@ -123,6 +123,12 @@
     <Compile Include="Formularios\FormsArticulos\ArticuloItem.Designer.cs">
       <DependentUpon>ArticuloItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsArticulos\ArticuloSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\ArticuloSmall.Designer.cs">
+      <DependentUpon>ArticuloSmall.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsArticulos\FrmNuevoArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,12 @@
     </Compile>
     <Compile Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.Designer.cs">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\FrmNuevoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\FrmNuevoCliente.Designer.cs">
+      <DependentUpon>FrmNuevoCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.cs">
       <SubType>Form</SubType>
@@ -292,6 +304,9 @@
     <EmbeddedResource Include="Formularios\FormsArticulos\ArticuloItem.resx">
       <DependentUpon>ArticuloItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\ArticuloSmall.resx">
+      <DependentUpon>ArticuloSmall.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsArticulos\FrmNuevoArticulo.resx">
       <DependentUpon>FrmNuevoArticulo.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmConfiguracionCargaClientes.resx">
       <DependentUpon>FrmConfiguracionCargaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsClientes\FrmNuevoCliente.resx">
+      <DependentUpon>FrmNuevoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.resx">
       <DependentUpon>FrmEstadisticasCobro.cs</DependentUpon>

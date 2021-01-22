@@ -27,6 +27,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.Load += FrmObservarArticulos_Load;
             this.btnImprimirArticulos.Click += BtnImprimirArticulos_Click;
             this.btnClientes.Click += BtnClientes_Click;
+            this.FormClosed += FrmObservarArticulos_FormClosed;
+        }
+
+        private void FrmObservarArticulos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private async void BtnClientes_Click(object sender, EventArgs e)

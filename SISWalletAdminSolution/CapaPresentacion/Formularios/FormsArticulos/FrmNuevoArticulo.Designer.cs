@@ -260,8 +260,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             // chkImprimir
             // 
             this.chkImprimir.AutoSize = true;
-            this.chkImprimir.Checked = true;
-            this.chkImprimir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkImprimir.Location = new System.Drawing.Point(214, 318);
             this.chkImprimir.Name = "chkImprimir";
             this.chkImprimir.Size = new System.Drawing.Size(120, 21);
