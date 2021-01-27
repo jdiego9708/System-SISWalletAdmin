@@ -168,20 +168,10 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             0,
             0,
             0});
-            this.numericCantidad.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numericCantidad.Name = "numericCantidad";
             this.numericCantidad.Size = new System.Drawing.Size(120, 23);
             this.numericCantidad.TabIndex = 0;
             this.numericCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericCantidad.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // groupBox5
             // 

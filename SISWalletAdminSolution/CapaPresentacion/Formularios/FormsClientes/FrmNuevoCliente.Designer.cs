@@ -70,10 +70,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.listaFrecuencia = new System.Windows.Forms.ComboBox();
             this.numericPlazo = new System.Windows.Forms.NumericUpDown();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panelArticulosSelected = new CapaPresentacion.Controles.CustomGridPanel();
             this.txtBuscarArticulos = new CapaPresentacion.CustomTextBox();
             this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -401,7 +401,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(50, 50);
             this.btnSave.TabIndex = 32;
-            this.toolTip1.SetToolTip(this.btnSave, "Agregar un barrio");
+            this.toolTip1.SetToolTip(this.btnSave, "Guardar datos de cliente");
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // gbArticulosSelected
@@ -554,6 +554,20 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.numericPlazo.Size = new System.Drawing.Size(50, 25);
             this.numericPlazo.TabIndex = 38;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Location = new System.Drawing.Point(610, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(30, 30);
+            this.btnRefresh.TabIndex = 33;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
             // panelArticulosSelected
             // 
             this.panelArticulosSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -595,20 +609,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.panelArticulos.PageSize = 10;
             this.panelArticulos.Size = new System.Drawing.Size(670, 236);
             this.panelArticulos.TabIndex = 0;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Location = new System.Drawing.Point(610, 15);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(30, 30);
-            this.btnRefresh.TabIndex = 33;
-            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // FrmNuevoCliente
             // 

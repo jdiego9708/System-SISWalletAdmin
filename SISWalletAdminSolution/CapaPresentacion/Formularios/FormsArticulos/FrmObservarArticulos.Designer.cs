@@ -266,7 +266,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnAddCliente.Name = "btnAddCliente";
             this.btnAddCliente.Size = new System.Drawing.Size(35, 35);
             this.btnAddCliente.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.btnAddCliente, "Nuevo artículo");
+            this.toolTip1.SetToolTip(this.btnAddCliente, "Nuevo cliente");
             this.btnAddCliente.UseVisualStyleBackColor = true;
             // 
             // FrmObservarArticulos
