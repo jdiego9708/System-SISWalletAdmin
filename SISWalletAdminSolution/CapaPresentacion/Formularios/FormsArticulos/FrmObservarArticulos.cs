@@ -61,6 +61,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             dtClientes.Columns.Add("Saldo_restante", typeof(string));
             dtClientes.Columns.Add("Venta_total", typeof(string));
             dtClientes.Columns.Add("Fecha_venta", typeof(string));
+            dtClientes.Columns.Add("Fecha_ultimo_pago", typeof(string));
 
             int id_cliente = 0;
             string nombre_cliente = string.Empty;
@@ -71,6 +72,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             DateTime fecha_venta = DateTime.Now;
             decimal suma_ventas = 0;
             decimal suma_saldos = 0;
+            DateTime fecha_ultimo_pago = DateTime.Now;
 
             DataTable dtVentas =
                 NVentas.BuscarVentas("ID COBRO", id_cobro.ToString(), out string rpta);
@@ -113,6 +115,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                         Agendamiento_cobros ag = new Agendamiento_cobros(dtAgendamientos.Rows[0]);
                         saldo_restante = ag.Saldo_restante;
                         suma_saldos += ag.Saldo_restante;
+                        fecha_ultimo_pago = ag.Fecha_cobro;
                     }
 
                     DataRow newRow = dtClientes.NewRow();
@@ -123,6 +126,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                     newRow["Saldo_restante"] = saldo_restante.ToString("C");
                     newRow["Venta_total"] = total_venta.ToString("C");
                     newRow["Fecha_venta"] = fecha_venta.ToString("dd-MM-yyyy");
+                    newRow["Fecha_ultimo_pago"] = fecha_ultimo_pago.ToString("dd-MM-yyyy");
                     dtClientes.Rows.Add(newRow);
                 }
 

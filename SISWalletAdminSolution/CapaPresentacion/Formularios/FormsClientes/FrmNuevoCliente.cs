@@ -32,9 +32,53 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.txtValorAbono.LostFocus += Txt_LostFocus;
             this.txtValorAbono.TextChanged += TxtValorAbono_TextChanged;
 
+            this.txtValorTotalVenta.KeyPress += Txt_KeyPress;
+            this.txtValorTotalVenta.GotFocus += Txt_GotFocus;
+            this.txtValorTotalVenta.LostFocus += Txt_LostFocus;
+            this.txtValorTotalVenta.TextChanged += TxtValorTotalVenta_TextChanged;
+
             this.btnAddBarrio.Click += BtnAddBarrio_Click;
             this.btnSave.Click += BtnSave_Click;
             this.btnRefresh.Click += BtnRefresh_Click;
+
+            this.rdActual.CheckedChanged += RdActual_CheckedChanged;
+            this.rdAnterior.CheckedChanged += RdAnterior_CheckedChanged;
+        }
+
+        private void TxtValorTotalVenta_TextChanged(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            if (int.TryParse(txt.Text, out int total_venta))
+            {
+                this.Total_articulos = total_venta;
+                this.Calcular();
+            }
+        }
+
+        private void RdAnterior_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rd = (RadioButton)sender;
+            if (rd.Checked)
+            {
+                this.gbValorVenta.Visible = true;
+                this.gbUltimoPago.Visible = true;
+                this.gbArticulosSelected.Enabled = false;
+                this.gbBusquedaArticulos.Enabled = false;
+                this.gbResultados.Enabled = false;
+            }
+        }
+
+        private void RdActual_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rd = (RadioButton)sender;
+            if (rd.Checked)
+            {
+                this.gbValorVenta.Visible = false;
+                this.gbUltimoPago.Visible = false;
+                this.gbArticulosSelected.Enabled = true;
+                this.gbBusquedaArticulos.Enabled = true;
+                this.gbResultados.Enabled = true;
+            }
         }
 
         private async void BtnRefresh_Click(object sender, EventArgs e)
@@ -87,9 +131,13 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 return false;
             }
 
-            if (int.TryParse(this.listaBarrios.SelectedValue.ToString(), out int id_barrio))
+            if (!int.TryParse(this.listaBarrios.SelectedValue.ToString(), out int id_barrio))
+            {
+                Mensajes.MensajeInformacion("Verifique el barrio seleccionado", "Entendido");
+                return false;
+            }
 
-                usuario.Fecha_ingreso = DateTime.Now;
+            usuario.Fecha_ingreso = DateTime.Now;
             usuario.Alias = this.txtNombres.Text;
             usuario.Nombres = this.txtNombres.Text;
             usuario.Apellidos = this.txtApellidos.Text;
@@ -113,7 +161,18 @@ namespace CapaPresentacion.Formularios.FormsClientes
             venta.Id_cliente = 0;
             venta.Id_direccion = 0;
             venta.Id_turno = main.Turno.Id_turno;
-            venta.Fecha_venta = DateTime.Now;
+
+            if (this.rdActual.Checked)
+            {
+                venta.Fecha_venta = DateTime.Now;
+                venta.Tipo_venta = "NUEVA";
+            }
+            else
+            {
+                venta.Fecha_venta = dateUltimoPago.Value;
+                venta.Tipo_venta = "MIGRACION";
+            }
+
             venta.Hora_venta = DateTime.Now.TimeOfDay;
             venta.Valor_venta = this.Total_articulos;
             venta.Interes_venta = 0;
@@ -122,12 +181,16 @@ namespace CapaPresentacion.Formularios.FormsClientes
             venta.Frecuencia_cobro = this.listaFrecuencia.Text;
             venta.Valor_cuota = (this.Total_articulos / Convert.ToInt32(numericPlazo.Value));
             venta.Estado_venta = "ACTIVO";
-            venta.Tipo_venta = "MIGRACION";
-
+            
             agendamiento.Id_venta = 0;
             agendamiento.Id_turno = main.Turno.Id_turno;
             agendamiento.Orden_cobro = 0;
-            agendamiento.Fecha_cobro = DateTime.Now;
+
+            if (this.rdActual.Checked)
+                agendamiento.Fecha_cobro = DateTime.Now;
+            else
+                agendamiento.Fecha_cobro = dateUltimoPago.Value;
+
             agendamiento.Hora_cobro = DateTime.Now.TimeOfDay;
             agendamiento.Valor_cobro = venta.Valor_cuota;
             agendamiento.Valor_pagado = valor_abono;
@@ -160,22 +223,25 @@ namespace CapaPresentacion.Formularios.FormsClientes
                             if (rpta.Equals("OK"))
                             {
                                 venta.Id_venta = id_venta;
-                                foreach (Articulos art in this.ArticulosSelected)
+                                if (this.rdActual.Checked)
                                 {
-                                    Detalle_articulos_venta detalle = new Detalle_articulos_venta
+                                    foreach (Articulos art in this.ArticulosSelected)
                                     {
-                                        Articulo = art,
-                                        Id_articulo = art.Id_articulo,
-                                        Venta = venta,
-                                        Id_venta = id_venta,
-                                        Cantidad_articulo = (int)art.Cantidad_articulo,
-                                        Estado_detalle = "ACTIVO",
-                                    };
+                                        Detalle_articulos_venta detalle = new Detalle_articulos_venta
+                                        {
+                                            Articulo = art,
+                                            Id_articulo = art.Id_articulo,
+                                            Venta = venta,
+                                            Id_venta = id_venta,
+                                            Cantidad_articulo = (int)art.Cantidad_articulo,
+                                            Estado_detalle = "ACTIVO",
+                                        };
 
-                                    var (rptaDetalle, id_detalle) =
-                                        await NDetalle_articulos_venta.InsertarDetalle(detalle);
-                                    if (!rptaDetalle.Equals("OK"))
-                                        errores.Add(rptaDetalle);
+                                        var (rptaDetalle, id_detalle) =
+                                            await NDetalle_articulos_venta.InsertarDetalle(detalle);
+                                        if (!rptaDetalle.Equals("OK"))
+                                            errores.Add(rptaDetalle);
+                                    }
                                 }
 
                                 MainController main = MainController.GetInstance();

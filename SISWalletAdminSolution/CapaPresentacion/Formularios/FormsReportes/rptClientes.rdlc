@@ -45,6 +45,10 @@
           <DataField>Fecha_venta</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Fecha_ultimo_pago">
+          <DataField>Fecha_ultimo_pago</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsReportes</rd:DataSetName>
@@ -64,22 +68,25 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>4.59021cm</Width>
+                  <Width>4.06104cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.49937cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.25646cm</Width>
+                  <Width>4.78292cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.42063cm</Width>
                 </TablixColumn>
                 <TablixColumn>
+                  <Width>2.12958cm</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>2.20896cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.60583cm</Width>
+                  <Width>2.23541cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -193,6 +200,7 @@
                                 <TextRun>
                                   <Value>Fecha venta</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>SemiBold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -201,6 +209,39 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Ultimo pago</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -407,6 +448,38 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Fecha_ultimo_pago">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Fecha_ultimo_pago.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Fecha_ultimo_pago</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Venta_total">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -481,6 +554,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -496,7 +570,7 @@
             <DataSetName>dtClientes</DataSetName>
             <Top>0.42842cm</Top>
             <Height>1.2cm</Height>
-            <Width>21.58146cm</Width>
+            <Width>20.33792cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -523,7 +597,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
             <Top>2.07849cm</Top>
-            <Left>19.08146cm</Left>
+            <Left>18.20833cm</Left>
             <Height>0.62646cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>1</ZIndex>
@@ -557,7 +631,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
             <Top>2.07849cm</Top>
-            <Left>14.34604cm</Left>
+            <Left>13.47292cm</Left>
             <Height>0.62646cm</Height>
             <Width>2.42063cm</Width>
             <ZIndex>2</ZIndex>
@@ -574,7 +648,7 @@
           <Line Name="Line1">
             <Top>1.76953cm</Top>
             <Height>0cm</Height>
-            <Width>21.58146cm</Width>
+            <Width>20.70834cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -585,7 +659,7 @@
           <Line Name="Line2">
             <Top>3.00493cm</Top>
             <Height>0cm</Height>
-            <Width>21.58146cm</Width>
+            <Width>20.70834cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -596,7 +670,7 @@
           <Line Name="Line3">
             <Top>0.13434cm</Top>
             <Height>0cm</Height>
-            <Width>21.58146cm</Width>
+            <Width>20.70834cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -607,7 +681,7 @@
           <Line Name="Line4">
             <Top>0.13434cm</Top>
             <Height>0cm</Height>
-            <Width>21.58146cm</Width>
+            <Width>19.26667cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -619,10 +693,10 @@
         <Height>12.68729cm</Height>
         <Style />
       </Body>
-      <Width>21.58146cm</Width>
+      <Width>20.70834cm</Width>
       <Page>
         <PageHeader>
-          <Height>2.8575cm</Height>
+          <Height>1.40285cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -647,9 +721,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>0.97578cm</Top>
               <Height>0.6cm</Height>
-              <Width>21.58146cm</Width>
+              <Width>20.70834cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -680,9 +753,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox9</rd:DefaultName>
-              <Top>1.75217cm</Top>
+              <Top>0.77639cm</Top>
               <Height>0.62646cm</Height>
-              <Width>21.58146cm</Width>
+              <Width>20.70834cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -702,7 +775,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.27542cm</Height>
+          <Height>1.00542cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -725,8 +798,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox9</rd:DefaultName>
-              <Top>0.10583cm</Top>
-              <Left>18.57875cm</Left>
+              <Top>0.07056cm</Top>
+              <Left>17.785cm</Left>
               <Height>0.62646cm</Height>
               <Width>2.92334cm</Width>
               <Style>
