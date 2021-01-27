@@ -388,6 +388,10 @@
                 {
                     consulta.Append("WHERE art.Id_articulo = @Texto_busqueda ");
                 }
+                else if (tipo_busqueda.Equals("REFERENCIA"))
+                {
+                    consulta.Append("WHERE art.Referencia_articulo like '" + texto_busqueda + "%' ");
+                }
 
                 consulta.Append("ORDER BY art.Id_articulo DESC ");
             }

@@ -1,6 +1,7 @@
 ﻿using CapaEntidades;
 using CapaEntidades.Helpers;
 using CapaNegocio;
+using CapaPresentacion.Formularios.FormsClientes;
 using CapaPresentacion.Formularios.FormsEstadisticas;
 using CapaPresentacion.Formularios.FormsPrincipales;
 using CapaPresentacion.Formularios.FormsReportes;
@@ -28,6 +29,16 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnImprimirArticulos.Click += BtnImprimirArticulos_Click;
             this.btnClientes.Click += BtnClientes_Click;
             this.FormClosed += FrmObservarArticulos_FormClosed;
+            this.btnAddCliente.Click += BtnAddCliente_Click;
+        }
+
+        private void BtnAddCliente_Click(object sender, EventArgs e)
+        {
+            FrmNuevoCliente frmNuevoCliente = new FrmNuevoCliente
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+            frmNuevoCliente.Show();
         }
 
         private void FrmObservarArticulos_FormClosed(object sender, FormClosedEventArgs e)

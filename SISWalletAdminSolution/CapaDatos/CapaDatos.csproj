@@ -48,6 +48,7 @@
     <Compile Include="DConceptos.cs" />
     <Compile Include="DConexion.cs" />
     <Compile Include="DCredenciales.cs" />
+    <Compile Include="DDetalle_articulos_venta.cs" />
     <Compile Include="DDireccion_clientes.cs" />
     <Compile Include="DGastos.cs" />
     <Compile Include="DIngresos.cs" />

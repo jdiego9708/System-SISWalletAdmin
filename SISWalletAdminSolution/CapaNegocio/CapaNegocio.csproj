@@ -47,6 +47,7 @@
     <Compile Include="NCobros.cs" />
     <Compile Include="NConceptos.cs" />
     <Compile Include="NCredenciales.cs" />
+    <Compile Include="NDetalle_articulos_venta.cs" />
     <Compile Include="NDireccion_clientes.cs" />
     <Compile Include="NGastos.cs" />
     <Compile Include="NMovimientos.cs" />

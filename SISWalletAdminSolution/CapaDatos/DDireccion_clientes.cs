@@ -50,8 +50,8 @@
             int contador = 0;
             string rpta = "";
 
-            string consulta = "INSERT INTO Direccion_clientes (Id_usuario, Direccion, Estado_direccion) " +
-                "VALUES(@Id_usuario, @Direccion, @Estado_direccion) " +
+            string consulta = "INSERT INTO Direccion_clientes (Id_usuario, Id_zona, Direccion, Estado_direccion) " +
+                "VALUES(@Id_usuario, @Id_zona ,@Direccion, @Estado_direccion) " +
                 "SET @Id_direccion = SCOPE_IDENTITY() ";
 
             SqlConnection SqlCon = new SqlConnection();
@@ -83,6 +83,15 @@
                     Value = direccion.Id_usuario
                 };
                 SqlCmd.Parameters.Add(Id_usuario);
+                contador += 1;
+
+                SqlParameter Id_zona = new SqlParameter
+                {
+                    ParameterName = "@Id_zona",
+                    SqlDbType = SqlDbType.Int,
+                    Value = direccion.Id_zona
+                };
+                SqlCmd.Parameters.Add(Id_zona);
                 contador += 1;
 
                 SqlParameter Direccion = new SqlParameter

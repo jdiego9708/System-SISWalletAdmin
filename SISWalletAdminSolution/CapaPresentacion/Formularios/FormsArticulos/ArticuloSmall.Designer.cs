@@ -34,8 +34,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtReferencia = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.btnNext = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.numericCantidad = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -45,7 +45,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(471, 5);
+            this.panel1.Size = new System.Drawing.Size(514, 5);
             this.panel1.TabIndex = 1;
             // 
             // txtReferencia
@@ -55,10 +55,12 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtReferencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtReferencia.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.txtReferencia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtReferencia.Location = new System.Drawing.Point(5, 12);
+            this.txtReferencia.Location = new System.Drawing.Point(5, 7);
             this.txtReferencia.MaxLength = 200;
+            this.txtReferencia.Multiline = true;
             this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(273, 15);
+            this.txtReferencia.ReadOnly = true;
+            this.txtReferencia.Size = new System.Drawing.Size(273, 33);
             this.txtReferencia.TabIndex = 2;
             this.txtReferencia.Text = "REFERENCIA XXXXX";
             this.txtReferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -70,10 +72,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtPrecio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.txtPrecio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPrecio.Location = new System.Drawing.Point(284, 12);
+            this.txtPrecio.Location = new System.Drawing.Point(293, 18);
             this.txtPrecio.MaxLength = 200;
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(77, 15);
+            this.txtPrecio.ReadOnly = true;
+            this.txtPrecio.Size = new System.Drawing.Size(106, 15);
             this.txtPrecio.TabIndex = 4;
             this.txtPrecio.Text = "PRECIO";
             this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -86,29 +89,29 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(438, 8);
+            this.btnNext.Location = new System.Drawing.Point(467, 8);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(25, 25);
+            this.btnNext.Size = new System.Drawing.Size(36, 35);
             this.btnNext.TabIndex = 33;
             this.btnNext.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // numericCantidad
             // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.White;
-            this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.numericUpDown1.Location = new System.Drawing.Point(372, 7);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(46, 27);
-            this.numericUpDown1.TabIndex = 34;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericCantidad.BackColor = System.Drawing.Color.White;
+            this.numericCantidad.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numericCantidad.Location = new System.Drawing.Point(415, 11);
+            this.numericCantidad.Name = "numericCantidad";
+            this.numericCantidad.Size = new System.Drawing.Size(46, 27);
+            this.numericCantidad.TabIndex = 34;
+            this.numericCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ArticuloSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericCantidad);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.txtReferencia);
@@ -117,8 +120,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ArticuloSmall";
-            this.Size = new System.Drawing.Size(469, 36);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Size = new System.Drawing.Size(512, 46);
+            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +133,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.TextBox txtReferencia;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericCantidad;
     }
 }

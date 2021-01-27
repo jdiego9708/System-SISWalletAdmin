@@ -48,6 +48,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.btnImprimirArticulos = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAddCliente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +65,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnNuevoArticulo.Name = "btnNuevoArticulo";
             this.btnNuevoArticulo.Size = new System.Drawing.Size(35, 35);
             this.btnNuevoArticulo.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.btnNuevoArticulo, "Nuevo artículo");
             this.btnNuevoArticulo.UseVisualStyleBackColor = true;
             // 
             // lblResultados
@@ -171,10 +174,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Location = new System.Drawing.Point(56, 12);
+            this.btnRefresh.Location = new System.Drawing.Point(94, 12);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(35, 35);
             this.btnRefresh.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.btnRefresh, "Refrescar artículos");
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnEstadisticas
@@ -184,10 +188,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnEstadisticas.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnEstadisticas.FlatAppearance.BorderSize = 0;
             this.btnEstadisticas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEstadisticas.Location = new System.Drawing.Point(99, 12);
+            this.btnEstadisticas.Location = new System.Drawing.Point(137, 12);
             this.btnEstadisticas.Name = "btnEstadisticas";
             this.btnEstadisticas.Size = new System.Drawing.Size(35, 35);
             this.btnEstadisticas.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.btnEstadisticas, "Estadísticas diarias");
             this.btnEstadisticas.UseVisualStyleBackColor = true;
             // 
             // panelArticulos
@@ -211,11 +216,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtBusqueda.Imagen = null;
-            this.txtBusqueda.Location = new System.Drawing.Point(222, 20);
+            this.txtBusqueda.Location = new System.Drawing.Point(270, 20);
             this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBusqueda.MaxLenght = 0;
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(665, 20);
+            this.txtBusqueda.Size = new System.Drawing.Size(631, 20);
             this.txtBusqueda.TabIndex = 0;
             this.txtBusqueda.Texto = "Búsqueda de artículos";
             this.txtBusqueda.Texto_inicial = "Búsqueda de artículos";
@@ -229,10 +234,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnImprimirArticulos.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnImprimirArticulos.FlatAppearance.BorderSize = 0;
             this.btnImprimirArticulos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimirArticulos.Location = new System.Drawing.Point(140, 12);
+            this.btnImprimirArticulos.Location = new System.Drawing.Point(178, 12);
             this.btnImprimirArticulos.Name = "btnImprimirArticulos";
             this.btnImprimirArticulos.Size = new System.Drawing.Size(35, 35);
             this.btnImprimirArticulos.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.btnImprimirArticulos, "Lista de artículos");
             this.btnImprimirArticulos.UseVisualStyleBackColor = true;
             // 
             // btnClientes
@@ -242,11 +248,26 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnClientes.FlatAppearance.BorderSize = 0;
             this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Location = new System.Drawing.Point(181, 12);
+            this.btnClientes.Location = new System.Drawing.Point(219, 12);
             this.btnClientes.Name = "btnClientes";
             this.btnClientes.Size = new System.Drawing.Size(35, 35);
             this.btnClientes.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.btnClientes, "Lista de clientes");
             this.btnClientes.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCliente
+            // 
+            this.btnAddCliente.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddCliente.BackgroundImage")));
+            this.btnAddCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddCliente.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnAddCliente.FlatAppearance.BorderSize = 0;
+            this.btnAddCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddCliente.Location = new System.Drawing.Point(53, 12);
+            this.btnAddCliente.Name = "btnAddCliente";
+            this.btnAddCliente.Size = new System.Drawing.Size(35, 35);
+            this.btnAddCliente.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.btnAddCliente, "Nuevo artículo");
+            this.btnAddCliente.UseVisualStyleBackColor = true;
             // 
             // FrmObservarArticulos
             // 
@@ -254,6 +275,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(898, 459);
+            this.Controls.Add(this.btnAddCliente);
             this.Controls.Add(this.btnClientes);
             this.Controls.Add(this.btnImprimirArticulos);
             this.Controls.Add(this.btnEstadisticas);
@@ -296,5 +318,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Button btnImprimirArticulos;
         private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnAddCliente;
     }
 }

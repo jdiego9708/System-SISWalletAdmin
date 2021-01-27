@@ -50,9 +50,9 @@
             int contador = 0;
             string rpta = "";
 
-            string consulta = "INSERT INTO Agendamiento_cobros (Id_venta, Fecha_cobro, Hora_cobro, " +
+            string consulta = "INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Orden_cobro, Fecha_cobro, Hora_cobro, " +
                 "Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
-                "VALUES(@Id_venta, @Fecha_cobro, @Hora_cobro, " +
+                "VALUES(@Id_venta, @Id_turno, @Orden_cobro, @Fecha_cobro, @Hora_cobro, " +
                 "@Valor_cobro, @Valor_pagado, @Saldo_restante, @Tipo_cobro, @Observaciones_cobro, @Estado_cobro) " +
                 "SET @Id_agendamiento = SCOPE_IDENTITY() ";
 
@@ -85,6 +85,24 @@
                     Value = agendamiento.Id_venta
                 };
                 SqlCmd.Parameters.Add(Id_venta);
+                contador += 1;
+
+                SqlParameter Id_turno = new SqlParameter
+                {
+                    ParameterName = "@Id_turno",
+                    SqlDbType = SqlDbType.Int,
+                    Value = agendamiento.Id_turno
+                };
+                SqlCmd.Parameters.Add(Id_turno);
+                contador += 1;
+
+                SqlParameter Orden_cobro = new SqlParameter
+                {
+                    ParameterName = "@Orden_cobro",
+                    SqlDbType = SqlDbType.Int,
+                    Value = agendamiento.Orden_cobro,
+                };
+                SqlCmd.Parameters.Add(Orden_cobro);
                 contador += 1;
 
                 SqlParameter Fecha_cobro = new SqlParameter

@@ -17,8 +17,11 @@
             try
             {
                 this.Id_agendamiento = Convert.ToInt32(row["Id_agendamiento"]);
+                this.Orden_cobro = Convert.ToInt32(row["Orden_cobro"]);
                 this.Id_venta = Convert.ToInt32(row["Id_venta"]);
                 this.Venta = new Ventas(row);
+                this.Id_turno = Convert.ToInt32(row["Id_turno"]);
+                this.Turno = new Turnos(row);
                 this.Fecha_cobro = Convert.ToDateTime(row["Fecha_cobro"]);
                 this.Valor_cobro = Convert.ToDecimal(row["Valor_cobro"]);
                 this.Valor_pagado = Convert.ToDecimal(row["Valor_pagado"]);
@@ -37,7 +40,11 @@
 
         public int Id_venta { get; set; }
 
+        public int Id_turno { get; set; }
+
+        public virtual Turnos Turno { get; set; }
         public virtual Ventas Venta { get; set; }
+        public int Orden_cobro { get; set; }
         public DateTime Fecha_cobro { get; set; } = DateTime.Now;
         public TimeSpan Hora_cobro { get; set; } = DateTime.Now.TimeOfDay;
         public decimal Valor_cobro { get; set; }
