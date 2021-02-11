@@ -54,15 +54,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
             this.gbBusquedaArticulos = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.txtBuscarArticulos = new CapaPresentacion.CustomTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.gbArticulosSelected = new System.Windows.Forms.GroupBox();
-            this.panelArticulosSelected = new CapaPresentacion.Controles.CustomGridPanel();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.txtValorAbono = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
@@ -80,6 +77,9 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.rdAnterior = new System.Windows.Forms.RadioButton();
             this.gbUltimoPago = new System.Windows.Forms.GroupBox();
             this.dateUltimoPago = new System.Windows.Forms.DateTimePicker();
+            this.panelArticulosSelected = new CapaPresentacion.Controles.CustomGridPanel();
+            this.txtBuscarArticulos = new CapaPresentacion.CustomTextBox();
+            this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -370,18 +370,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
             // 
-            // panelArticulos
-            // 
-            this.panelArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelArticulos.AutoScroll = true;
-            this.panelArticulos.Location = new System.Drawing.Point(6, 23);
-            this.panelArticulos.Name = "panelArticulos";
-            this.panelArticulos.PageSize = 10;
-            this.panelArticulos.Size = new System.Drawing.Size(670, 258);
-            this.panelArticulos.TabIndex = 0;
-            // 
             // gbBusquedaArticulos
             // 
             this.gbBusquedaArticulos.Controls.Add(this.btnRefresh);
@@ -422,24 +410,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.button2.TabIndex = 32;
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // txtBuscarArticulos
-            // 
-            this.txtBuscarArticulos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtBuscarArticulos.BackColor = System.Drawing.Color.White;
-            this.txtBuscarArticulos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarArticulos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBuscarArticulos.Imagen = null;
-            this.txtBuscarArticulos.Location = new System.Drawing.Point(6, 21);
-            this.txtBuscarArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBuscarArticulos.MaxLenght = 0;
-            this.txtBuscarArticulos.Name = "txtBuscarArticulos";
-            this.txtBuscarArticulos.Size = new System.Drawing.Size(598, 20);
-            this.txtBuscarArticulos.TabIndex = 0;
-            this.txtBuscarArticulos.Texto = "Búsqueda de artículos";
-            this.txtBuscarArticulos.Texto_inicial = "Búsqueda de artículos";
-            this.txtBuscarArticulos.Tipo_txt = null;
-            this.txtBuscarArticulos.Visible_px = true;
-            // 
             // btnSave
             // 
             this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
@@ -464,18 +434,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbArticulosSelected.TabIndex = 15;
             this.gbArticulosSelected.TabStop = false;
             this.gbArticulosSelected.Text = "Artículos seleccionados";
-            // 
-            // panelArticulosSelected
-            // 
-            this.panelArticulosSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelArticulosSelected.AutoScroll = true;
-            this.panelArticulosSelected.Location = new System.Drawing.Point(6, 23);
-            this.panelArticulosSelected.Name = "panelArticulosSelected";
-            this.panelArticulosSelected.PageSize = 10;
-            this.panelArticulosSelected.Size = new System.Drawing.Size(670, 254);
-            this.panelArticulosSelected.TabIndex = 0;
             // 
             // groupBox16
             // 
@@ -627,7 +585,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbValorVenta.TabIndex = 38;
             this.gbValorVenta.TabStop = false;
             this.gbValorVenta.Text = "Valor total venta*";
-            this.gbValorVenta.Visible = false;
             // 
             // txtValorTotalVenta
             // 
@@ -685,6 +642,48 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.dateUltimoPago.Name = "dateUltimoPago";
             this.dateUltimoPago.Size = new System.Drawing.Size(286, 25);
             this.dateUltimoPago.TabIndex = 0;
+            // 
+            // panelArticulosSelected
+            // 
+            this.panelArticulosSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelArticulosSelected.AutoScroll = true;
+            this.panelArticulosSelected.Location = new System.Drawing.Point(6, 23);
+            this.panelArticulosSelected.Name = "panelArticulosSelected";
+            this.panelArticulosSelected.PageSize = 10;
+            this.panelArticulosSelected.Size = new System.Drawing.Size(670, 254);
+            this.panelArticulosSelected.TabIndex = 0;
+            // 
+            // txtBuscarArticulos
+            // 
+            this.txtBuscarArticulos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtBuscarArticulos.BackColor = System.Drawing.Color.White;
+            this.txtBuscarArticulos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarArticulos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBuscarArticulos.Imagen = null;
+            this.txtBuscarArticulos.Location = new System.Drawing.Point(6, 21);
+            this.txtBuscarArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBuscarArticulos.MaxLenght = 0;
+            this.txtBuscarArticulos.Name = "txtBuscarArticulos";
+            this.txtBuscarArticulos.Size = new System.Drawing.Size(598, 20);
+            this.txtBuscarArticulos.TabIndex = 0;
+            this.txtBuscarArticulos.Texto = "Búsqueda de artículos";
+            this.txtBuscarArticulos.Texto_inicial = "Búsqueda de artículos";
+            this.txtBuscarArticulos.Tipo_txt = null;
+            this.txtBuscarArticulos.Visible_px = true;
+            // 
+            // panelArticulos
+            // 
+            this.panelArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelArticulos.AutoScroll = true;
+            this.panelArticulos.Location = new System.Drawing.Point(6, 23);
+            this.panelArticulos.Name = "panelArticulos";
+            this.panelArticulos.PageSize = 10;
+            this.panelArticulos.Size = new System.Drawing.Size(670, 258);
+            this.panelArticulos.TabIndex = 0;
             // 
             // FrmNuevoCliente
             // 
