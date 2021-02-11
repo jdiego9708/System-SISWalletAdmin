@@ -29,12 +29,16 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArticuloSmall));
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtReferencia = new System.Windows.Forms.TextBox();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
             this.btnNext = new System.Windows.Forms.Button();
             this.numericCantidad = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.btnEditarPrecio = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,22 +69,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtReferencia.Text = "REFERENCIA XXXXX";
             this.txtReferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtPrecio
-            // 
-            this.txtPrecio.BackColor = System.Drawing.Color.White;
-            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPrecio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.txtPrecio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPrecio.Location = new System.Drawing.Point(293, 18);
-            this.txtPrecio.MaxLength = 200;
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.ReadOnly = true;
-            this.txtPrecio.Size = new System.Drawing.Size(106, 15);
-            this.txtPrecio.TabIndex = 4;
-            this.txtPrecio.Text = "PRECIO";
-            this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // btnNext
             // 
             this.btnNext.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNext.BackgroundImage")));
@@ -106,14 +94,58 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.numericCantidad.TabIndex = 34;
             this.numericCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(312, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 17);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "PRECIO";
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPrecio.BackColor = System.Drawing.Color.White;
+            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPrecio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.txtPrecio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtPrecio.Location = new System.Drawing.Point(298, 25);
+            this.txtPrecio.MaxLength = 200;
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.ReadOnly = true;
+            this.txtPrecio.Size = new System.Drawing.Size(74, 18);
+            this.txtPrecio.TabIndex = 36;
+            this.txtPrecio.Tag = "0";
+            this.txtPrecio.Text = "$0";
+            this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnEditarPrecio
+            // 
+            this.btnEditarPrecio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEditarPrecio.BackgroundImage")));
+            this.btnEditarPrecio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEditarPrecio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarPrecio.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnEditarPrecio.FlatAppearance.BorderSize = 0;
+            this.btnEditarPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditarPrecio.Location = new System.Drawing.Point(385, 16);
+            this.btnEditarPrecio.Name = "btnEditarPrecio";
+            this.btnEditarPrecio.Size = new System.Drawing.Size(20, 20);
+            this.btnEditarPrecio.TabIndex = 37;
+            this.btnEditarPrecio.UseVisualStyleBackColor = true;
+            // 
             // ArticuloSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnEditarPrecio);
+            this.Controls.Add(this.txtPrecio);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.numericCantidad);
             this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.txtReferencia);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -131,8 +163,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtReferencia;
-        private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.NumericUpDown numericCantidad;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Button btnEditarPrecio;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

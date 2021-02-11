@@ -27,6 +27,54 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.numericCantidad.ValueChanged += NumericCantidad_ValueChanged;
         }
 
+        private void Txt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_GotFocus(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            txt.Text = Convert.ToString(txt.Tag);
+            txt.SelectAll();
+        }
+
+        private void Txt_LostFocus(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+
+            if (txt.Text.Equals(""))
+            {
+                string precio = "0";
+                txt.Text = string.Format("{0:C}", precio);
+            }
+            else
+            {
+                bool result = int.TryParse(txt.Text, out int num);
+                if (result)
+                {
+                    txt.Tag = num;
+                    txt.Text = string.Format("{0:C}", txt.Tag);
+                }
+            }
+        }
+
         private void NumericCantidad_ValueChanged(object sender, EventArgs e)
         {
             this.lblValorTotalProveedor.Text = "Total valor proveedor " + (this.numericCantidad.Value * this.numericValorProveedor.Value).ToString("C");

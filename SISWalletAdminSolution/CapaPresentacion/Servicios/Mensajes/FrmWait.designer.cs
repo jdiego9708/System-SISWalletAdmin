@@ -36,8 +36,11 @@
             // 
             // txtMensaje
             // 
+            this.txtMensaje.BackColor = System.Drawing.Color.White;
             this.txtMensaje.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMensaje.Enabled = false;
             this.txtMensaje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMensaje.ForeColor = System.Drawing.Color.Black;
             this.txtMensaje.Location = new System.Drawing.Point(0, 20);
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(219, 22);

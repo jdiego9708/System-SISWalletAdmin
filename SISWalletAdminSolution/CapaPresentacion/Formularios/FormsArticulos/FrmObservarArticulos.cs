@@ -51,7 +51,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             MensajeEspera.ShowWait("Cargando reporte...");
 
             MainController main = MainController.GetInstance();
-            int id_cobro = main.Turno.Id_cobro;
+            int id_cobro = main.Id_cobro;
 
             DataTable dtClientes = new DataTable("Clientes");
             dtClientes.Columns.Add("Id_cliente", typeof(int));
@@ -75,7 +75,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             DateTime fecha_ultimo_pago = DateTime.Now;
 
             DataTable dtVentas =
-                NVentas.BuscarVentas("ID COBRO", id_cobro.ToString(), out string rpta);
+                NVentas.BuscarVentas("ID COBRO ACTIVO", id_cobro.ToString(), out string rpta);
             if (dtVentas != null)
             {
                 foreach(DataRow row in dtVentas.Rows)
@@ -88,25 +88,24 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                     fecha_venta = venta.Fecha_venta;
                     suma_ventas += venta.Total_venta;
 
-                    var (dtDetalleArticulos, rptaBusqueda) = 
+                    if (!venta.Tipo_venta.Equals("MIGRACION"))
+                    {
+                        var (dtDetalleArticulos, rptaBusqueda) =
                         await NArticulos.BuscarArticulos("ID VENTA", venta.Id_venta.ToString());
-                    if (dtDetalleArticulos != null)
-                    {
-                        StringBuilder referencias = new StringBuilder();
-                        referencias.Append(dtDetalleArticulos.Rows.Count + " referencias: ");
-                        foreach(DataRow rowArt in dtDetalleArticulos.Rows)
+                        if (dtDetalleArticulos != null)
                         {
-                            Detalle_articulos_venta detalle = new Detalle_articulos_venta(rowArt);
-                            referencias.Append("(" + detalle.Articulo.Id_articulo + ") ");
-                            referencias.Append(detalle.Articulo.Referencia_articulo + " - ");
+                            StringBuilder referencias = new StringBuilder();
+                            referencias.Append(dtDetalleArticulos.Rows.Count + " referencias: ");
+                            foreach (DataRow rowArt in dtDetalleArticulos.Rows)
+                            {
+                                Detalle_articulos_venta detalle = new Detalle_articulos_venta(rowArt);
+                                referencias.Append("(" + detalle.Articulo.Id_articulo + ") ");
+                                referencias.Append(detalle.Articulo.Referencia_articulo + " - ");
+                            }
+                            referencia_articulo = referencias.ToString();
                         }
-                        referencia_articulo = referencias.ToString();
                     }
-                    else
-                    {
-                        referencia_articulo = "NO SE ENCONTRARON LAS REFERENCIAS";
-                    }
-
+                  
                     //Buscar los agendamientos de cada venta para ver su saldo restante
                     DataTable dtAgendamientos = NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString(),
                         out rpta);

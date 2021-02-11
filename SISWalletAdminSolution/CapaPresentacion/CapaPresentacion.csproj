@@ -177,6 +177,12 @@
     <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.Designer.cs">
       <DependentUpon>FrmEstadisticasCobro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasDiarias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsEstadisticas\FrmEstadisticasDiarias.Designer.cs">
+      <DependentUpon>FrmEstadisticasDiarias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsPrincipales\FrmIniciarSesion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,7 +195,6 @@
     <Compile Include="Formularios\FormsPrincipales\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\FormsPrincipales\MainController.cs" />
     <Compile Include="Formularios\FormsProveedores\FrmNuevoProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +224,12 @@
     </Compile>
     <Compile Include="Formularios\FormsReportes\FrmReporteClientes.Designer.cs">
       <DependentUpon>FrmReporteClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsReportes\FrmReporteDiario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsReportes\FrmReporteDiario.Designer.cs">
+      <DependentUpon>FrmReporteDiario.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsReportes\FrmReporteFactura.cs">
       <SubType>Form</SubType>
@@ -334,6 +345,9 @@
     <EmbeddedResource Include="Formularios\FormsEstadisticas\FrmEstadisticasCobro.resx">
       <DependentUpon>FrmEstadisticasCobro.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsEstadisticas\FrmEstadisticasDiarias.resx">
+      <DependentUpon>FrmEstadisticasDiarias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsPrincipales\FrmIniciarSesion.resx">
       <DependentUpon>FrmIniciarSesion.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,11 +369,15 @@
     <EmbeddedResource Include="Formularios\FormsReportes\FrmReporteClientes.resx">
       <DependentUpon>FrmReporteClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsReportes\FrmReporteDiario.resx">
+      <DependentUpon>FrmReporteDiario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsReportes\FrmReporteFactura.resx">
       <DependentUpon>FrmReporteFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsReportes\rptArticulos.rdlc" />
     <EmbeddedResource Include="Formularios\FormsReportes\rptClientes.rdlc" />
+    <EmbeddedResource Include="Formularios\FormsReportes\rptEstadisticasDiarias.rdlc" />
     <EmbeddedResource Include="Formularios\FormsReportes\rptFacturaProveedor.rdlc" />
     <EmbeddedResource Include="Formularios\FormsZonas\AddZonaSmall.resx">
       <DependentUpon>AddZonaSmall.cs</DependentUpon>

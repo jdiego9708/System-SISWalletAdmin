@@ -353,6 +353,12 @@
             {
                 consulta.Append("WHERE ga.Id_turno = @Texto_busqueda ");
             }
+            else if (tipo_busqueda.Equals("FECHA ID COBRO"))
+            {
+                MainController main = MainController.GetInstance();
+                consulta.Append("WHERE ga.Fecha_gasto = '" + texto_busqueda + "' and " +
+                    "tu.Id_cobro = " + main.Id_cobro + " ");
+            }
 
             consulta.Append("ORDER BY ga.Id_gasto DESC");
 

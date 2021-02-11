@@ -49,6 +49,7 @@
     <Compile Include="Conceptos.cs" />
     <Compile Include="Credenciales.cs" />
     <Compile Include="Direccion_clientes.cs" />
+    <Compile Include="MainController.cs" />
     <Compile Include="Proveedores.cs" />
     <Compile Include="Gastos.cs" />
     <Compile Include="Ingresos.cs" />

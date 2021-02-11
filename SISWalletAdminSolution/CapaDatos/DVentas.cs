@@ -498,6 +498,12 @@
                 consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda and " +
                     "ve.Estado_venta = 'ACTIVO' ");
             }
+            else if (tipo_busqueda.Equals("FECHA ID COBRO"))
+            {
+                MainController main = MainController.GetInstance();
+                consulta.Append("WHERE ve.Id_cobro = " + main.Id_cobro + " and " +
+                    "ve.Fecha_venta = '" + texto_busqueda + "' ");
+            }
 
             consulta.Append("ORDER BY ve.Id_venta DESC ");
 

@@ -32,14 +32,15 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     this.txtPass.Texto, DateTime.Now.ToString("yyyy-MM-dd"));
                 if (rpta.Equals("OK"))
                 {
-                    Credenciales credencial = (Credenciales)objects[0];
-                    Turnos turno = (Turnos)objects[1];
+                    Credenciales credencial = (Credenciales)objects[0];                    
                     MainController main = MainController.GetInstance();
                     main.Usuario = credencial.Usuario;
-                    main.Turno = turno;
-
+                    
                     if (credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {
+                        Turnos turno = (Turnos)objects[1];
+                        main.Turno = turno;
+
                         FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {
                             StartPosition = FormStartPosition.CenterScreen,
@@ -51,12 +52,17 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     }
                     else
                     {
-                        FrmEstadisticasCobro FrmEstadisticasCobro = new FrmEstadisticasCobro
+                        DataTable dtSolicitudes = (DataTable)objects[1];
+                        DataTable dtCobros = (DataTable)objects[2];
+
+                        FrmPrincipal FrmPrincipal = new FrmPrincipal
                         {
                             StartPosition = FormStartPosition.CenterScreen,
                             WindowState = FormWindowState.Maximized,
                         };
-                        FrmEstadisticasCobro.Show();
+                        FrmPrincipal.LoadCobros(dtCobros);
+                        FrmPrincipal.LoadNotificaciones(dtSolicitudes);
+                        FrmPrincipal.Show();
                         //FrmEstadisticasCobro.LoadArticulos(dtArticulos);
                         this.Hide();
                     }
@@ -100,12 +106,12 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     }
                     else
                     {
-                        FrmObservarArticulos frmArticulos = new FrmObservarArticulos
+                        FrmPrincipal frmPrincipal = new FrmPrincipal
                         {
                             StartPosition = FormStartPosition.CenterScreen,
                             WindowState = FormWindowState.Maximized,
                         };
-                        frmArticulos.Show();
+                        frmPrincipal.Show();
                         //frmArticulos.LoadArticulos(dtArticulos);
                         this.Hide();
                     }

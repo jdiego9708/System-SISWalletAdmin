@@ -682,6 +682,8 @@ namespace CapaPresentacion {
             
             private global::System.Data.DataColumn columnFecha_ultimo_pago;
             
+            private global::System.Data.DataColumn columnDias_mora;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TablaClientesDataTable() {
@@ -781,6 +783,14 @@ namespace CapaPresentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Dias_moraColumn {
+                get {
+                    return this.columnDias_mora;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -816,7 +826,7 @@ namespace CapaPresentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TablaClientesRow AddTablaClientesRow(string Id_cliente, string Nombre_cliente, string Celular_cliente, string Referencia_articulo, string Saldo_restante, string Venta_total, string Fecha_venta, string Fecha_ultimo_pago) {
+            public TablaClientesRow AddTablaClientesRow(string Id_cliente, string Nombre_cliente, string Celular_cliente, string Referencia_articulo, string Saldo_restante, string Venta_total, string Fecha_venta, string Fecha_ultimo_pago, string Dias_mora) {
                 TablaClientesRow rowTablaClientesRow = ((TablaClientesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Id_cliente,
@@ -826,7 +836,8 @@ namespace CapaPresentacion {
                         Saldo_restante,
                         Venta_total,
                         Fecha_venta,
-                        Fecha_ultimo_pago};
+                        Fecha_ultimo_pago,
+                        Dias_mora};
                 rowTablaClientesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTablaClientesRow);
                 return rowTablaClientesRow;
@@ -857,6 +868,7 @@ namespace CapaPresentacion {
                 this.columnVenta_total = base.Columns["Venta_total"];
                 this.columnFecha_venta = base.Columns["Fecha_venta"];
                 this.columnFecha_ultimo_pago = base.Columns["Fecha_ultimo_pago"];
+                this.columnDias_mora = base.Columns["Dias_mora"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -878,6 +890,8 @@ namespace CapaPresentacion {
                 base.Columns.Add(this.columnFecha_venta);
                 this.columnFecha_ultimo_pago = new global::System.Data.DataColumn("Fecha_ultimo_pago", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFecha_ultimo_pago);
+                this.columnDias_mora = new global::System.Data.DataColumn("Dias_mora", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDias_mora);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1665,6 +1679,22 @@ namespace CapaPresentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Dias_mora {
+                get {
+                    try {
+                        return ((string)(this[this.tableTablaClientes.Dias_moraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Dias_mora\' de la tabla \'TablaClientes\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTablaClientes.Dias_moraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsId_clienteNull() {
                 return this.IsNull(this.tableTablaClientes.Id_clienteColumn);
             }
@@ -1757,6 +1787,18 @@ namespace CapaPresentacion {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetFecha_ultimo_pagoNull() {
                 this[this.tableTablaClientes.Fecha_ultimo_pagoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDias_moraNull() {
+                return this.IsNull(this.tableTablaClientes.Dias_moraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDias_moraNull() {
+                this[this.tableTablaClientes.Dias_moraColumn] = global::System.Convert.DBNull;
             }
         }
         

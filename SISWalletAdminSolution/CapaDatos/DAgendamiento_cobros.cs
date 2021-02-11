@@ -380,14 +380,16 @@
                 "uss.Identificacion as Identificacion_cobrador, " +
                 "uss.Email as Email_cobrador, " +
                 "uss.Tipo_usuario as Tipo_cobrador, " +
-                "uss.Estado_usuario as Estado_cobrador " +
+                "uss.Estado_usuario as Estado_cobrador, " +
+                "tu.* " +
                 "FROM Agendamiento_cobros ag " +
                 "INNER JOIN Ventas ve ON ve.Id_venta = ag.Id_venta " +
                 "INNER JOIN Tipo_productos tppr ON ve.Id_tipo_producto = tppr.Id_tipo_producto " +
                 "INNER JOIN Usuarios us ON ve.Id_cliente = us.Id_usuario " +
                 "INNER JOIN Direccion_clientes drcl ON ve.Id_direccion = drcl.Id_direccion " +
                 "INNER JOIN Usuarios_ventas usve ON ve.Id_venta = usve.Id_venta " +
-                "INNER JOIN Usuarios uss ON usve.Id_usuario = uss.Id_usuario ");
+                "INNER JOIN Usuarios uss ON usve.Id_usuario = uss.Id_usuario " +
+                "INNER JOIN Turnos tu ON ag.Id_turno = tu.Id_turno ");
 
             if (tipo_busqueda.Equals("ID VENTA"))
             {

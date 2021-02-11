@@ -21,7 +21,7 @@
                 this.Id_cobro = Convert.ToInt32(row["Id_cobro"]);
                 this.Cobro = new Cobros(row);
                 this.Fecha_inicio_turno = Convert.ToDateTime(row["Fecha_inicio_turno"]);
-                this.Fecha_inicio_turno = Convert.ToDateTime(row["Fecha_inicio_turno"]);
+                this.Fecha_fin_turno = Convert.ToDateTime(row["Fecha_fin_turno"]);
                 this.Hora_inicio_turno = TimeSpanConvert.StringToTimeSpan(row["Hora_inicio_turno"].ToString());
                 this.Hora_fin_turno = TimeSpanConvert.StringToTimeSpan(row["Hora_fin_turno"].ToString());
                 this.Valor_inicial = Convert.ToDecimal(row["Valor_inicial"]);
@@ -37,7 +37,7 @@
                 this.Gastos_total = Convert.ToDecimal(row["Gastos_total"]);
                 this.Estado_turno = Convert.ToString(row["Estado_turno"]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

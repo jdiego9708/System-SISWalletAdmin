@@ -546,7 +546,9 @@
                     }
                     else if (tipo_busqueda.Equals("FECHA INICIO"))
                     {
-                        consulta.Append("WHERE tu.Fecha_inicio_turno = '@Texto_busqueda' ");
+                        MainController main = MainController.GetInstance();
+                        consulta.Append("WHERE tu.Fecha_inicio_turno = '" + texto_busqueda + "' and " +
+                            "tu.Id_cobro = " + main.Id_cobro + " ");
                     }
 
                     consulta.Append("ORDER BY tu.Id_turno DESC");

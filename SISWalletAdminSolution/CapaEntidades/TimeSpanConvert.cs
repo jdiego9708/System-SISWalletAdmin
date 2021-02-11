@@ -8,6 +8,15 @@
         public static TimeSpan StringToTimeSpan(string hora)
         {
             TimeSpan tiempo;
+
+            int findPunto = hora.IndexOf(".");
+            if (findPunto > 0)
+            {
+                int cantidadQuitar = hora.Length;
+                string horaModificada = hora.Remove(findPunto, (hora.Length - findPunto));
+                hora = horaModificada;
+            }
+
             int[] partes = hora.Split(new char[] { ':' }).Select(x => Convert.ToInt32(x)).ToArray();
             if (partes.Length == 2)
             {

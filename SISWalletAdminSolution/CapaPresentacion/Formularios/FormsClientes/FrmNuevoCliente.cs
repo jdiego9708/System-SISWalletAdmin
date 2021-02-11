@@ -73,7 +73,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             RadioButton rd = (RadioButton)sender;
             if (rd.Checked)
             {
-                this.gbValorVenta.Visible = false;
+                this.gbValorVenta.Visible = true;
                 this.gbUltimoPago.Visible = false;
                 this.gbArticulosSelected.Enabled = true;
                 this.gbBusquedaArticulos.Enabled = true;
@@ -547,7 +547,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             {
                 this.ArticulosSelected.Add(art);
                 this.LoadArticulosSelected();
-                this.Total_articulos += art.Valor_articulo * art.Cantidad_articulo;
+                //this.Total_articulos += art.Valor_articulo * art.Cantidad_articulo;
                 this.Calcular();
             }
         }
@@ -591,13 +591,13 @@ namespace CapaPresentacion.Formularios.FormsClientes
             {
                 //resta = (int)art.Cantidad_articulo - (int)cantidad;
                 //total_resta = art.Valor_articulo * resta;
-                this.Total_articulos -= art.Valor_articulo;
+                //this.Total_articulos -= art.Valor_articulo;
             }
             else
             {
                 //resta = (int)cantidad - (int)art.Cantidad_articulo;
                 //total_resta = art.Valor_articulo * resta;
-                this.Total_articulos += art.Valor_articulo;
+                //this.Total_articulos += art.Valor_articulo;
             }
             this.Calcular();
         }
@@ -610,7 +610,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             if (artFind.Count > 0)
             {
                 this.ArticulosSelected.Remove(artFind[0]);
-                this.Total_articulos -= art.Cantidad_articulo * art.Valor_articulo;
+                //this.Total_articulos -= art.Cantidad_articulo * art.Valor_articulo;
                 this.Calcular();
                 this.LoadArticulosSelected();
             }
