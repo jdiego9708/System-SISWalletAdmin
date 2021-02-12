@@ -51,8 +51,8 @@
             int contador = 0;
             string rpta = "";
 
-            string consulta = "INSERT INTO Detalle_articulos_venta (Id_articulo, Id_venta, Cantidad_articulo, Estado_detalle) " +
-                "VALUES(@Id_articulo, @Id_venta, @Cantidad_articulo, @Estado_detalle) " +
+            string consulta = "INSERT INTO Detalle_articulos_venta (Id_articulo, Id_venta, Cantidad_articulo, Valor_articulo, Estado_detalle) " +
+                "VALUES(@Id_articulo, @Id_venta, @Cantidad_articulo, @Valor_articulo, @Estado_detalle) " +
                 "SET @Id_detalle_venta = SCOPE_IDENTITY() ";
 
             SqlConnection SqlCon = new SqlConnection();
@@ -104,6 +104,15 @@
                     Value = detalle.Cantidad_articulo,
                 };
                 SqlCmd.Parameters.Add(Cantidad_articulo);
+                contador += 1;
+
+                SqlParameter Valor_articulo = new SqlParameter
+                {
+                    ParameterName = "@Valor_articulo",
+                    SqlDbType = SqlDbType.Decimal,
+                    Value = detalle.Cantidad_articulo,
+                };
+                SqlCmd.Parameters.Add(Valor_articulo);
                 contador += 1;
 
                 SqlParameter Estado_detalle = new SqlParameter

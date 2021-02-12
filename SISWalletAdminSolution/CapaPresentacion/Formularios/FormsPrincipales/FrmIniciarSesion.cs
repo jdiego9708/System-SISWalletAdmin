@@ -40,6 +40,8 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     {
                         Turnos turno = (Turnos)objects[1];
                         main.Turno = turno;
+                        main.Id_cobro = turno.Id_cobro;
+                        main.Cobro = turno.Cobro;
 
                         FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {

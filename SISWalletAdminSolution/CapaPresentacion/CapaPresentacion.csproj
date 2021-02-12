@@ -141,6 +141,12 @@
     <Compile Include="Formularios\FormsArticulos\FrmObservarArticulos.Designer.cs">
       <DependentUpon>FrmObservarArticulos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsArticulos\PrecioSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsArticulos\PrecioSmall.Designer.cs">
+      <DependentUpon>PrecioSmall.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsClientes\ClienteSmall.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -329,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsArticulos\FrmObservarArticulos.resx">
       <DependentUpon>FrmObservarArticulos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsArticulos\PrecioSmall.resx">
+      <DependentUpon>PrecioSmall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmCargarClientes.resx">
       <DependentUpon>FrmCargarClientes.cs</DependentUpon>

@@ -14,85 +14,40 @@ namespace CapaPresentacion.Formularios.FormsArticulos
 {
     public partial class ArticuloSmall : UserControl
     {
+        PoperContainer container;
+
         public ArticuloSmall()
         {
             InitializeComponent();
             this.btnNext.Click += BtnNext_Click;
             this.numericCantidad.ValueChanged += NumericCantidad_ValueChanged;
-            this.btnEditarPrecio.Click += BtnEditarPrecio_Click;
+            this.btnEditar.Click += BtnEditar_Click;
         }
 
-        private void BtnEditarPrecio_Click(object sender, EventArgs e)
+        private void BtnEditar_Click(object sender, EventArgs e)
         {
-            if (this.txtPrecio.ReadOnly)
+            PrecioSmall precioSmall = new PrecioSmall
             {
-                this.txtPrecio.ReadOnly = false;
-                this.txtPrecio.KeyPress += Txt_KeyPress;
-                this.txtPrecio.LostFocus += Txt_GotFocus;
-                this.txtPrecio.GotFocus += Txt_LostFocus;
-            }
-            else
-            {
-                this.txtPrecio.KeyPress -= Txt_KeyPress;
-                this.txtPrecio.LostFocus -= Txt_GotFocus;
-                this.txtPrecio.GotFocus -= Txt_LostFocus;
-                this.txtPrecio.ReadOnly = true;
-            }
-
-            //if (this.txtPrecio.Tag != null)
-            //    this.txtPrecio.Text = ((decimal)this.txtPrecio.Tag).ToString("C");
-
-            this.txtPrecio.SelectAll();
+                PrecioArticulo = this.Articulo.Valor_articulo,
+            };
+            precioSmall.OnBtnSaveClick += PrecioSmall_OnBtnSaveClick;
+            this.container = new PoperContainer(precioSmall);
+            this.container.Show(this.btnEditar);
         }
 
-        private void Txt_KeyPress(object sender, KeyPressEventArgs e)
+        private void PrecioSmall_OnBtnSaveClick(object sender, EventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
+            decimal num = (decimal)sender;
 
-        private void Txt_GotFocus(object sender, EventArgs e)
-        {
-            TextBox txt = (TextBox)sender;
-            txt.Text = Convert.ToString(txt.Tag);
-            txt.SelectAll();
-        }
-
-        private void Txt_LostFocus(object sender, EventArgs e)
-        {
-            TextBox txt = (TextBox)sender;
-
-            if (txt.Text.Equals(""))
+            if (this.Articulo.Valor_articulo != num)
             {
-                string precio = "0";
-                txt.Tag = 0;
-                txt.Text = string.Format("{0:C}", precio);
+                this.Articulo.Valor_articulo = num;
+                this.txtPrecio.Tag = num;
+                this.txtPrecio.Text = num.ToString("C");
             }
-            else
-            {
-                bool result = decimal.TryParse(txt.Text, out decimal num);
-                if (result)
-                {
-                    txt.Tag = num;
-                    txt.Text = string.Format("{0:C}", num);
-                    this.Articulo.Valor_articulo = num;
-                }
-            }
+
+            if (this.container != null)
+                this.container.Close();
         }
 
         private void NumericCantidad_ValueChanged(object sender, EventArgs e)

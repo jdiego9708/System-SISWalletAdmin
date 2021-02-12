@@ -37,8 +37,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.numericCantidad = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.btnEditarPrecio = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnEditar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,26 +122,26 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtPrecio.Text = "$0";
             this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnEditarPrecio
+            // btnEditar
             // 
-            this.btnEditarPrecio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEditarPrecio.BackgroundImage")));
-            this.btnEditarPrecio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnEditarPrecio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarPrecio.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnEditarPrecio.FlatAppearance.BorderSize = 0;
-            this.btnEditarPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditarPrecio.Location = new System.Drawing.Point(385, 16);
-            this.btnEditarPrecio.Name = "btnEditarPrecio";
-            this.btnEditarPrecio.Size = new System.Drawing.Size(20, 20);
-            this.btnEditarPrecio.TabIndex = 37;
-            this.btnEditarPrecio.UseVisualStyleBackColor = true;
+            this.btnEditar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEditar.BackgroundImage")));
+            this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditar.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnEditar.FlatAppearance.BorderSize = 0;
+            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditar.Location = new System.Drawing.Point(385, 12);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(25, 25);
+            this.btnEditar.TabIndex = 37;
+            this.btnEditar.UseVisualStyleBackColor = true;
             // 
             // ArticuloSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.btnEditarPrecio);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericCantidad);
@@ -167,7 +167,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.NumericUpDown numericCantidad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.Button btnEditarPrecio;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnEditar;
     }
 }

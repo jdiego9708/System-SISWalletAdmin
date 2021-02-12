@@ -234,6 +234,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                             Venta = venta,
                                             Id_venta = id_venta,
                                             Cantidad_articulo = (int)art.Cantidad_articulo,
+                                            Valor_articulo = art.Valor_articulo,
                                             Estado_detalle = "ACTIVO",
                                         };
 
