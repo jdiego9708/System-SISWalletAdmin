@@ -79,6 +79,27 @@ namespace CapaPresentacion.Controles
                 this.RefreshPanel(user);
         }
 
+        public void AddArrayControl(List<object> controls)
+        {
+            //Si la lista de controles está null creamos una nueva
+            if (controls == null)
+                controls = new List<object>();
+
+            UserControl user = null;
+            foreach (object obj in controls)
+            {
+                if (obj is UserControl userControl)
+                {
+                    user = userControl;
+                    //Agregamos el control a las listas
+                    this.controlsUser.Add(userControl);
+                }
+            }
+
+            if (user != null)
+                this.RefreshPanel(user);
+        }
+
         public void RemoveControl(UserControl control)
         {
             //Si la lista de controles está null o no hay controles retornamos

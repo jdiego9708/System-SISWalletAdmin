@@ -1,266 +1,182 @@
-﻿namespace CapaPresentacion.Formularios.FormsClientes
+﻿using CapaEntidades;
+using CapaNegocio;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CapaPresentacion.Formularios.FormsClientes
 {
-    using System;
-    using System.Data;
-    using System.Drawing;
-    using System.Text;
-    using System.Windows.Forms;
-    using CapaEntidades;
-    using CapaNegocio;
-    using CapaPresentacion.Formularios.FormsPrincipales;
-    using CapaPresentacion.Formularios.FormsReportes;
-    using Syncfusion.WinForms.Controls;
-
-    public partial class FrmClientes : SfForm
+    public partial class FrmClientes : Form
     {
-        PoperContainer container;
-
         public FrmClientes()
         {
             InitializeComponent();
-
-            #region PROPIEDADES DE FORMULARIO
-            this.Style.TitleBar.Height = 26;
-            this.Style.TitleBar.BackColor = Color.White;
-            this.Style.TitleBar.IconBackColor = Color.FromArgb(15, 161, 212);
-            this.BackColor = Color.White;
-            this.Style.TitleBar.ForeColor = ColorTranslator.FromHtml("#343434");
-            this.Style.TitleBar.CloseButtonForeColor = Color.DarkGray;
-            this.Style.TitleBar.MaximizeButtonForeColor = Color.DarkGray;
-            this.Style.TitleBar.MinimizeButtonForeColor = Color.DarkGray;
-            this.Style.TitleBar.HelpButtonForeColor = Color.DarkGray;
-            this.Style.TitleBar.IconHorizontalAlignment = HorizontalAlignment.Left;
-            this.Style.TitleBar.Font = this.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            this.Style.TitleBar.TextHorizontalAlignment = HorizontalAlignment.Center;
-            this.Style.TitleBar.TextVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
-            #endregion
-
-            this.btnReporteClientes.Click += BtnReporteClientes_Click;
+            this.btnAddCliente.Click += BtnAddCliente_Click;
             this.Load += FrmClientes_Load;
-            this.dateBusqueda.ValueChanged += DateBusqueda_ValueChanged;
+            this.txtBusqueda.OnCustomKeyPress += TxtBusqueda_OnCustomKeyPress;
+            this.txtBusqueda.OnPxClick += TxtBusqueda_OnPxClick;
+            this.btnRefresh.Click += BtnRefresh_Click;
+
+            this.rdPendientes.CheckedChanged += RdPendientes_CheckedChanged;
+            this.rdTerminados.CheckedChanged += RdTerminados_CheckedChanged;
         }
 
-        private void DateBusqueda_ValueChanged(object sender, EventArgs e)
+        private async void BtnRefresh_Click(object sender, EventArgs e)
         {
-            DateTimePicker date = (DateTimePicker)sender;
-            this.LoadReporteDiario(date.Value);
+            await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
         }
 
-        private void FrmClientes_Load(object sender, EventArgs e)
+        private async void RdTerminados_CheckedChanged(object sender, EventArgs e)
         {
-            MainController main = MainController.GetInstance();
-            this.dateBusqueda.MinDate = main.Cobro.Fecha_apertura;
-
-            this.LoadReporteDiario(DateTime.Now);
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked)
+            {
+                await this.LoadAgendamientos("FECHA TERMINADO", DateTime.Now.ToString("yyyy-MM-dd"));
+            }
         }
 
-        private void BtnReporteClientes_Click(object sender, EventArgs e)
+        private async void RdPendientes_CheckedChanged(object sender, EventArgs e)
         {
-            MensajeEspera.ShowWait("Cargando reporte...");
-            DataTable dtClientes = new DataTable("Clientes");
-            dtClientes.Columns.Add("Id_cliente", typeof(int));
-            dtClientes.Columns.Add("Nombre_cliente", typeof(string));
-            dtClientes.Columns.Add("Celular_cliente", typeof(string));
-            dtClientes.Columns.Add("Referencia_articulo", typeof(string));
-            dtClientes.Columns.Add("Saldo_restante", typeof(string));
-            dtClientes.Columns.Add("Venta_total", typeof(string));
-            dtClientes.Columns.Add("Fecha_venta", typeof(string));
-            dtClientes.Columns.Add("Fecha_ultimo_pago", typeof(string));
-            dtClientes.Columns.Add("Dias_mora", typeof(int));
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked)
+            {
+                await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
+            }
+        }
 
-            int id_cliente = 0;
-            string nombre_cliente = string.Empty;
-            string celular_cliente = string.Empty;
-            string referencia_articulo = string.Empty;
-            decimal saldo_restante = 0;
-            decimal total_venta = 0;
-            DateTime fecha_venta = DateTime.Now;
-            decimal suma_ventas = 0;
-            decimal suma_saldos = 0;
-            DateTime fecha_ultimo_pago = DateTime.Now;
+        private async void TxtBusqueda_OnPxClick(object sender, EventArgs e)
+        {
+            CustomTextBox txt = (CustomTextBox)sender;
             MainController main = MainController.GetInstance();
 
-            DataTable dtVentas =
-                NVentas.BuscarVentas("ID COBRO", main.Id_cobro.ToString(), out string rpta);
-            if (dtVentas != null)
-            {
-                foreach (DataRow row in dtVentas.Rows)
-                {
-                    Ventas venta = new Ventas(row);
-                    id_cliente = venta.Id_cliente;
-                    nombre_cliente = venta.Cliente.NombreCompleto;
-                    celular_cliente = venta.Cliente.Celular;
-                    total_venta = venta.Total_venta;
-                    fecha_venta = venta.Fecha_venta;
-                    suma_ventas += venta.Total_venta;
-
-                    //Buscar los agendamientos de cada venta para ver su saldo restante
-                    DataTable dtAgendamientos = NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString(),
-                        out rpta);
-                    if (dtAgendamientos != null)
-                    {
-                        Agendamiento_cobros ag = new Agendamiento_cobros(dtAgendamientos.Rows[0]);
-                        saldo_restante = ag.Saldo_restante;
-                        suma_saldos += ag.Saldo_restante;
-                        fecha_ultimo_pago = ag.Fecha_cobro;
-                    }
-
-                    DateTime fecharegistro = DateTime.Parse("04/05/2018 8:34:01");
-                    TimeSpan timeSpan = DateTime.Now - fecha_ultimo_pago;
-                    double dias_mora = timeSpan.TotalDays;
-
-                    DataRow newRow = dtClientes.NewRow();
-                    newRow["Id_cliente"] = id_cliente;
-                    newRow["Nombre_cliente"] = nombre_cliente;
-                    newRow["Celular_cliente"] = celular_cliente;
-                    newRow["Referencia_articulo"] = referencia_articulo;
-                    newRow["Saldo_restante"] = saldo_restante.ToString("C");
-                    newRow["Venta_total"] = total_venta.ToString("C");
-                    newRow["Fecha_venta"] = fecha_venta.ToString("dd-MM-yyyy");
-                    newRow["Fecha_ultimo_pago"] = fecha_ultimo_pago.ToString("dd-MM-yyyy");
-                    newRow["Dias_mora"] = dias_mora;
-                    dtClientes.Rows.Add(newRow);
-                }
-
-                if (dtClientes.Rows.Count > 0)
-                {
-                    MensajeEspera.CloseForm();
-                    //Enviar informe
-                    FrmReporteClientes frmReporteClientes = new FrmReporteClientes
-                    {
-                        WindowState = FormWindowState.Maximized,
-                        dtClientes = dtClientes,
-                        Total_saldos = suma_saldos.ToString("C"),
-                        Total_ventas = suma_ventas.ToString("C"),
-                    };
-                    frmReporteClientes.Show();
-                }
-                else
-                    Mensajes.MensajeInformacion("No se encontraron clientes", "Entendido");
-            }
+            if (string.IsNullOrEmpty(txt.Texto))
+                await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
             else
-                Mensajes.MensajeInformacion("No se encontraron clientes", "Entendido");
-
-            MensajeEspera.CloseForm();
+                await this.LoadClientes("TODO", txt.Texto, "");
         }
 
-        private void LoadReporteDiario(DateTime fecha)
+        private async void TxtBusqueda_OnCustomKeyPress(object sender, KeyPressEventArgs e)
         {
-            MensajeEspera.ShowWait("Cargando reporte...");
-            StringBuilder info = new StringBuilder();
-            //Obtener el turno de esta fecha
-            DataTable dtTurnos =
-                NTurnos.BuscarTurnos("FECHA INICIO", "2021-02-10", out string rpta);
-            if (dtTurnos != null)
+            CustomTextBox txt = (CustomTextBox)sender;
+            if (e.KeyChar == (int)Keys.Enter)
             {
-                Turnos turno = new Turnos(dtTurnos.Rows[0]);
-                info.Append("Valor inicial en caja ").Append(turno.Valor_inicial.ToString("C")).Append(Environment.NewLine);
-                info.Append("Se empezó con ").Append(turno.Clientes_iniciales).Append(" clientes y se terminó con ").Append(turno.Clientes_total).Append(Environment.NewLine);
+                MainController main = MainController.GetInstance();
 
-                //Obtener los clientes nuevos
-                DataTable dtVentas = NVentas.BuscarVentas("FECHA ID COBRO", "2021-02-10", out rpta);
-                if (dtVentas != null)
-                {
-                    info.Append("Clientes nuevos o renovados ").Append(dtVentas.Rows.Count).Append(Environment.NewLine);
-                }
+                if (string.IsNullOrEmpty(txt.Texto))
+                    await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
                 else
-                    info.Append("No hubieron clientes nuevos o renovados ");
-
-                info.Append("Total de ventas y renovaciones ").Append(turno.Recaudo_ventas_nuevas.ToString("C")).Append(Environment.NewLine);
-                info.Append("Recaudo pretendido ").Append(turno.Recaudo_pretendido_turno.ToString("C")).Append(Environment.NewLine);
-                info.Append("Total recaudado ").Append(turno.Recaudo_cuotas.ToString("C")).Append(Environment.NewLine);
-                info.Append("Otros ingresos ").Append(turno.Recaudo_otros.ToString("C")).Append(Environment.NewLine);
-
-                if (turno.Gastos_total == 0)
-                    info.Append("No hubieron gastos").Append(Environment.NewLine);
-                else
-                    info.Append("Gastos/Egresos ").Append(turno.Gastos_total.ToString("C")).Append(Environment.NewLine);
-
-                info.Append("CAJA FINAL ").Append(turno.Recaudo_real.ToString("C")).Append(Environment.NewLine);
-
-                if (dtVentas != null)
                 {
-                    info.Append("Resumen de clientes nuevos o renovados").Append(Environment.NewLine);
-                    foreach (DataRow row in dtVentas.Rows)
+                    if (this.checkBox1.Checked)
                     {
-                        Ventas venta = new Ventas(row);
-                        info.Append("- Nombre: ").Append(venta.Cliente.NombreCompleto).Append(" - Celular: ").Append(venta.Cliente.Celular);
-                        info.Append("- Valor préstamo: ").Append(venta.Valor_venta).Append(" - Plazo: ").Append(venta.Numero_cuotas).Append(Environment.NewLine);
+                        if (int.TryParse(txt.Texto, out int id_usuario))
+                        {
+                            await this.LoadClientes("ID CLIENTE", id_usuario.ToString(), "");
+                        }
+                        else
+                            Mensajes.MensajeInformacion("Debe digitar un código de solo números", "Entendido");
                     }
+                    else
+                        await this.LoadClientes("TODO", txt.Texto, "");
                 }
-
-                FrmReporteDiario frmReporteDiario = new FrmReporteDiario
-                {
-                    FormBorderStyle = FormBorderStyle.None,
-                    TopMost = false,
-                    TopLevel = false,
-                    Dock = DockStyle.Fill,
-                    InformacionTurno = info.ToString(),
-                    FechaHoraReporte = "Fecha y hora de generación: " + DateTime.Now.ToLongDateString(),
-                    FechaHoraTurno = "Fecha y hora de turno: " + turno.Fecha_inicio_turno.ToLongDateString(),
-                };
-
-                if (this.gbResultados.Controls.Count > 0)
-                    this.gbResultados.Controls.Clear();
-
-                this.gbResultados.Controls.Add(frmReporteDiario);
-                frmReporteDiario.Show();
             }
-            else
-            {
-                info.Append("No se encontró el turno");
-                Mensajes.MensajeInformacion("No se encontró el turno en la fecha seleccionada", "Entendido");
-            }
-            MensajeEspera.CloseForm();
         }
 
-        private void BtnImportarClientes_Click(object sender, EventArgs e)
+        private async void FrmClientes_Load(object sender, EventArgs e)
+        {
+            this.Show();
+
+            MainController main = MainController.GetInstance();
+            await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+
+        private void BtnAddCliente_Click(object sender, EventArgs e)
+        {
+            FrmNuevoCliente frmNuevoCliente = new FrmNuevoCliente
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+            frmNuevoCliente.Show();
+        }
+
+        private async Task LoadClientes(string tipo_busqueda, string texto_busqueda1, string texto_busqueda2)
         {
             try
             {
-                FrmCargarClientes frm = new FrmCargarClientes
+                MensajeEspera.ShowWait("Cargando...");
+                var (dtClientes, rpta) = await NUsuarios.BuscarClientes(tipo_busqueda, texto_busqueda1, texto_busqueda2);
+
+                this.panelClientes.clearDataSource();
+                this.positionChanged = 1;
+
+                if (dtClientes != null)
                 {
-                    TopLevel = false,
-                    FormBorderStyle = FormBorderStyle.None,
-                    Dock = DockStyle.Fill,
-                };
-                Form FormComprobado = this.ComprobarExistencia(frm);
-                if (FormComprobado != null)
-                {
-                    frm.WindowState = FormWindowState.Normal;
-                    frm.Activate();
+                    List<ClienteSmall> controls = (from DataRow dr in dtClientes.Rows
+                                                   select new ClienteSmall { Venta = new Ventas(dr) }).ToList();
+
+                    List<UserControl> userControls = new List<UserControl>();
+                    userControls.AddRange(controls);
+
+                    this.panelClientes.PageSize = 20;
+                    this.panelClientes.OnBsPositionChanged += PaneClientes_OnBsPositionChanged;
+                    this.panelClientes.SetPagedDataSource(userControls, this.bindingNavigator2);
                 }
-                else
-                {
-                    this.gbResultados.Controls.Add(frm);
-                    this.gbResultados.Tag = frm;
-                    frm.Show();
-                }
-                frm.BringToFront();
+                MensajeEspera.CloseForm();
             }
             catch (Exception ex)
             {
-                Mensajes.MensajeErrorCompleto(this.Name, "BtnImportarClientes_Click",
-                    "Hubo un error con el botón importar clientes", ex.Message);
+                MensajeEspera.CloseForm();
+                Mensajes.MensajeErrorCompleto(this.Name, "LoadClientes",
+                    "Hubo un error al cargar los clientes", ex.Message);
             }
         }
 
-        private Form ComprobarExistencia(Form form)
+        private async Task LoadAgendamientos(string tipo_busqueda, string texto_busqueda)
         {
-            if (container != null)
-                container.Close();
-
-            Form frmDevolver = null;
-            foreach (Form frm in this.gbResultados.Controls)
+            try
             {
-                if (frm.Name.Equals(form.Name))
-                {
-                    frmDevolver = frm;
-                    break;
-                }
+                MensajeEspera.ShowWait("Cargando...");
+                var (rpta, dtAgendamiento) = await NAgendamiento_cobros.BuscarAgendamientos(tipo_busqueda, texto_busqueda);
 
+                this.panelClientes.clearDataSource();
+                this.positionChanged = 1;
+
+                if (dtAgendamiento != null)
+                {
+                    List<ClienteSmall> controls = (from DataRow dr in dtAgendamiento.Rows
+                                                   select new ClienteSmall { Agendamiento = new Agendamiento_cobros(dr) }).ToList();
+
+                    List<UserControl> userControls = new List<UserControl>();
+                    userControls.AddRange(controls);
+
+                    this.panelClientes.PageSize = 20;
+                    this.panelClientes.OnBsPositionChanged += PaneClientes_OnBsPositionChanged;
+                    this.panelClientes.SetPagedDataSource(userControls, this.bindingNavigator2);
+                }
+                MensajeEspera.CloseForm();
             }
-            return frmDevolver;
+            catch (Exception ex)
+            {
+                MensajeEspera.CloseForm();
+                Mensajes.MensajeErrorCompleto(this.Name, "LoadClientes",
+                    "Hubo un error al cargar los agendamientos", ex.Message);
+            }
+        }
+
+        int positionChanged = 1;
+        private void PaneClientes_OnBsPositionChanged(object sender, EventArgs e)
+        {
+            if (positionChanged != this.panelClientes.bs.Position)
+            {
+                this.positionChanged = this.panelClientes.bs.Position;
+                List<UserControl> controls = (List<UserControl>)sender;
+                this.panelClientes.AddArrayControl(controls);
+            }
         }
     }
 }

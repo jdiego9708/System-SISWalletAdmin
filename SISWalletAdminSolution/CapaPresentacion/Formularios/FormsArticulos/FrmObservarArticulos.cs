@@ -34,11 +34,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
 
         private void BtnAddCliente_Click(object sender, EventArgs e)
         {
-            FrmNuevoCliente frmNuevoCliente = new FrmNuevoCliente
+            FrmClientes frmClientes = new FrmClientes
             {
                 StartPosition = FormStartPosition.CenterScreen,
             };
-            frmNuevoCliente.Show();
+            frmClientes.Show();
         }
 
         private void FrmObservarArticulos_FormClosed(object sender, FormClosedEventArgs e)
@@ -74,8 +74,8 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             decimal suma_saldos = 0;
             DateTime fecha_ultimo_pago = DateTime.Now;
 
-            DataTable dtVentas =
-                NVentas.BuscarVentas("ID COBRO ACTIVO", id_cobro.ToString(), out string rpta);
+            var (rpta, dtVentas) =
+                await NVentas.BuscarVentas("ID COBRO ACTIVO", id_cobro.ToString());
             if (dtVentas != null)
             {
                 foreach(DataRow row in dtVentas.Rows)
@@ -107,8 +107,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                     }
                   
                     //Buscar los agendamientos de cada venta para ver su saldo restante
-                    DataTable dtAgendamientos = NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString(),
-                        out rpta);
+                    var (rpta1, dtAgendamientos) = await NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString());
                     if (dtAgendamientos != null)
                     {
                         Agendamiento_cobros ag = new Agendamiento_cobros(dtAgendamientos.Rows[0]);

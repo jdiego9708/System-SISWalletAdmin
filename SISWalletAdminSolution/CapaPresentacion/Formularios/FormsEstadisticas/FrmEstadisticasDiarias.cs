@@ -39,7 +39,7 @@
             this.LoadReporteDiario(DateTime.Now);
         }
 
-        private void BtnReporteClientes_Click(object sender, EventArgs e)
+        private async void BtnReporteClientes_Click(object sender, EventArgs e)
         {
             MensajeEspera.ShowWait("Cargando reporte...");
             DataTable dtClientes = new DataTable("Clientes");
@@ -65,8 +65,8 @@
             DateTime fecha_ultimo_pago = DateTime.Now;
             MainController main = MainController.GetInstance();
 
-            DataTable dtVentas =
-                NVentas.BuscarVentas("ID COBRO ACTIVO", main.Id_cobro.ToString(), out string rpta);
+            var (rpta, dtVentas) =
+                await NVentas.BuscarVentas("ID COBRO ACTIVO", main.Id_cobro.ToString());
             if (dtVentas != null)
             {
                 foreach (DataRow row in dtVentas.Rows)
@@ -80,8 +80,7 @@
                     suma_ventas += venta.Total_venta;
 
                     //Buscar los agendamientos de cada venta para ver su saldo restante
-                    DataTable dtAgendamientos = NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString(),
-                        out rpta);
+                    var (rpta1, dtAgendamientos) = await NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString());
                     if (dtAgendamientos != null)
                     {
                         Agendamiento_cobros ag = new Agendamiento_cobros(dtAgendamientos.Rows[0]);
@@ -134,7 +133,7 @@
             MensajeEspera.CloseForm();
         }
 
-        private void LoadReporteDiario(DateTime fecha)
+        private async void LoadReporteDiario(DateTime fecha)
         {
             MensajeEspera.ShowWait("Cargando reporte...");
             StringBuilder info = new StringBuilder();
@@ -148,7 +147,8 @@
                 info.Append("Se empezó con ").Append(turno.Clientes_iniciales).Append(" clientes y se terminó con ").Append(turno.Clientes_total).Append(Environment.NewLine);
 
                 //Obtener los clientes nuevos
-                DataTable dtVentas = NVentas.BuscarVentas("FECHA ID COBRO", fecha.ToString("yyyy-MM-dd"), out rpta);
+                var (rpta1, dtVentas) = 
+                    await NVentas.BuscarVentas("FECHA ID COBRO", fecha.ToString("yyyy-MM-dd"));
                 if (dtVentas != null)
                 {
                     info.Append("Clientes nuevos o renovados ").Append(dtVentas.Rows.Count).Append(Environment.NewLine);

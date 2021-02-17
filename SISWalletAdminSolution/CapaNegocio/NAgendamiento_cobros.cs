@@ -3,6 +3,7 @@
     using CapaDatos;
     using CapaEntidades;
     using System.Data;
+    using System.Threading.Tasks;
 
     public class NAgendamiento_cobros
     {
@@ -12,16 +13,16 @@
             return DAgendamiento_cobros.InsertarAgendamiento(out id_agendamiento, agendamiento);
         }
 
-        public static string EditarAgendamiento(int id_agendamiento, Agendamiento_cobros agendamiento)
+        public static async Task<string>EditarAgendamiento(int id_agendamiento, Agendamiento_cobros agendamiento)
         {
             DAgendamiento_cobros DAgendamiento_cobros = new DAgendamiento_cobros();
-            return DAgendamiento_cobros.EditarAgendamiento(id_agendamiento, agendamiento);
+            return await DAgendamiento_cobros.EditarAgendamiento(id_agendamiento, agendamiento);
         }
 
-        public static DataTable BuscarAgendamientos(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public static async Task<(string rpta, DataTable dtAgendamientos)>BuscarAgendamientos(string tipo_busqueda, string texto_busqueda)
         {
             DAgendamiento_cobros DAgendamiento_cobros = new DAgendamiento_cobros();
-            return DAgendamiento_cobros.BuscarAgendamiento(tipo_busqueda, texto_busqueda, out rpta);
+            return await DAgendamiento_cobros.BuscarAgendamiento(tipo_busqueda, texto_busqueda);
         }
     }
 }

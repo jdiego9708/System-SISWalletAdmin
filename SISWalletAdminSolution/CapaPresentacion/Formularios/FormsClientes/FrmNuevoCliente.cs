@@ -259,7 +259,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                     if (rpta.Equals("OK"))
                                     {
                                         MensajeEspera.CloseForm();
-                                        Mensajes.MensajeInformacion("Se guardó correctamente el cliente", "Entendido");
+                                        Mensajes.MensajeInformacion("Se guardó correctamente el cliente, número asignado: " + id_usuario, "Entendido");
                                         this.Close();
                                     }
                                     else

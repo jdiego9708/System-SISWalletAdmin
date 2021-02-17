@@ -4,6 +4,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
+    using System.Threading.Tasks;
     using CapaEntidades;
 
     public class DAgendamiento_cobros
@@ -214,13 +215,14 @@
         #endregion
 
         #region METODO EDITAR
-        public string EditarAgendamiento(int id_agendamiento, Agendamiento_cobros agendamiento)
+        public async Task<string> EditarAgendamiento(int id_agendamiento, Agendamiento_cobros agendamiento)
         {
             int contador = 0;
             string rpta = "";
 
             string consulta = "UPDATE Agendamiento_cobros SET " +
                 "Id_venta = @Id_venta, " +
+                "Id_turno = @Id_turno, " +
                 "Fecha_cobro = @Fecha_cobro, " +
                 "Hora_cobro = @Hora_cobro, " +
                 "Valor_cobro = @Valor_cobro, " +
@@ -237,7 +239,7 @@
             try
             {
                 SqlCon.ConnectionString = DConexion.Cn;
-                SqlCon.Open();
+                await SqlCon.OpenAsync();
                 SqlCommand SqlCmd = new SqlCommand
                 {
                     Connection = SqlCon,
@@ -260,6 +262,15 @@
                     Value = agendamiento.Id_venta,
                 };
                 SqlCmd.Parameters.Add(Id_venta);
+                contador += 1;
+
+                SqlParameter Id_turno = new SqlParameter
+                {
+                    ParameterName = "@Id_turno",
+                    SqlDbType = SqlDbType.Int,
+                    Value = agendamiento.Id_turno,
+                };
+                SqlCmd.Parameters.Add(Id_turno);
                 contador += 1;
 
                 SqlParameter Fecha_cobro = new SqlParameter
@@ -338,7 +349,7 @@
                 contador += 1;
 
                 //Ejecutamos nuestro comando
-                rpta = SqlCmd.ExecuteNonQuery() >= 1 ? "OK" : "NO SE INGRESÓ";
+                rpta = await SqlCmd.ExecuteNonQueryAsync() >= 1 ? "OK" : "NO SE INGRESÓ";
                 if (!rpta.Equals("OK"))
                 {
                     if (this.Mensaje_respuesta != null)
@@ -367,45 +378,11 @@
         #endregion
 
         #region METODO BUSCAR AGENDAMIENTOS
-        public DataTable BuscarAgendamiento(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public async Task<(string rpta, DataTable dtAgendamientos)>BuscarAgendamiento(string tipo_busqueda, string texto_busqueda)
         {
-            rpta = "OK";
+            MainController main = MainController.GetInstance();
 
-            StringBuilder consulta = new StringBuilder();
-            consulta.Append("SELECT ag.*, ve.*, tppr.*, us.*, drcl.*, " +
-                "uss.Id_usuario as Id_cobrador, " +
-                "uss.Fecha_ingreso as Fecha_ingreso_sobrador, " +
-                "uss.Nombres as Nombre_cobrador, " +
-                "uss.Apellidos as Apellidos_cobrador, " +
-                "uss.Identificacion as Identificacion_cobrador, " +
-                "uss.Email as Email_cobrador, " +
-                "uss.Tipo_usuario as Tipo_cobrador, " +
-                "uss.Estado_usuario as Estado_cobrador, " +
-                "tu.* " +
-                "FROM Agendamiento_cobros ag " +
-                "INNER JOIN Ventas ve ON ve.Id_venta = ag.Id_venta " +
-                "INNER JOIN Tipo_productos tppr ON ve.Id_tipo_producto = tppr.Id_tipo_producto " +
-                "INNER JOIN Usuarios us ON ve.Id_cliente = us.Id_usuario " +
-                "INNER JOIN Direccion_clientes drcl ON ve.Id_direccion = drcl.Id_direccion " +
-                "INNER JOIN Usuarios_ventas usve ON ve.Id_venta = usve.Id_venta " +
-                "INNER JOIN Usuarios uss ON usve.Id_usuario = uss.Id_usuario " +
-                "INNER JOIN Turnos tu ON ag.Id_turno = tu.Id_turno ");
-
-            if (tipo_busqueda.Equals("ID VENTA"))
-            {
-                consulta.Append("WHERE ve.Id_venta = @Texto_busqueda ");
-            }
-            else if (tipo_busqueda.Equals("FECHA ACTUAL"))
-            {
-                consulta.Append("WHERE ag.Fecha_cobro = '" + texto_busqueda + "'  ");
-            }
-            else if (tipo_busqueda.Equals("ID COBRADOR Y FECHA ACTUAL"))
-            {
-                consulta.Append("WHERE ag.Fecha_cobro = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' and " +
-                    "usve.Id_usuario = " + texto_busqueda + " ");
-            }
-
-            consulta.Append("ORDER BY ag.Id_agendamiento DESC ");
+            string rpta = "OK";
 
             DataTable DtResultado = new DataTable("Agendamientos");
             SqlConnection SqlCon = new SqlConnection();
@@ -414,21 +391,39 @@
             try
             {
                 SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
                 SqlCommand Sqlcmd = new SqlCommand
                 {
                     Connection = SqlCon,
-                    CommandText = consulta.ToString(),
-                    CommandType = CommandType.Text
+                    CommandText = "sp_Buscar_agendamientos",
+                    CommandType = CommandType.StoredProcedure,
                 };
 
-                SqlParameter Texto_busqueda = new SqlParameter
+                SqlParameter Tipo_busqueda = new SqlParameter
                 {
-                    ParameterName = "@Texto_busqueda",
+                    ParameterName = "@Tipo_busqueda",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = texto_busqueda.Trim()
+                    Value = tipo_busqueda.Trim().ToUpper(),
                 };
-                Sqlcmd.Parameters.Add(Texto_busqueda);
+                Sqlcmd.Parameters.Add(Tipo_busqueda);
+
+                SqlParameter Texto_busqueda1 = new SqlParameter
+                {
+                    ParameterName = "@Texto_busqueda1",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 50,
+                    Value = texto_busqueda.Trim(),
+                };
+                Sqlcmd.Parameters.Add(Texto_busqueda1);
+
+                SqlParameter Id_cobro = new SqlParameter
+                {
+                    ParameterName = "@Id_cobro",
+                    SqlDbType = SqlDbType.Int,
+                    Value = main.Id_cobro,
+                };
+                Sqlcmd.Parameters.Add(Id_cobro);
 
                 SqlDataAdapter SqlData = new SqlDataAdapter(Sqlcmd);
                 SqlData.Fill(DtResultado);
@@ -448,7 +443,7 @@
                 rpta = ex.Message;
                 DtResultado = null;
             }
-            return DtResultado;
+            return (rpta, DtResultado);
         }
         #endregion
     }

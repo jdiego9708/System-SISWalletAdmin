@@ -61,12 +61,10 @@ namespace CapaPresentacion.Formularios.FormsEstadisticas
             // 
             // gbBusqueda
             // 
-            this.gbBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBusqueda.Controls.Add(this.dateBusqueda);
-            this.gbBusqueda.Location = new System.Drawing.Point(221, 3);
+            this.gbBusqueda.Location = new System.Drawing.Point(12, 12);
             this.gbBusqueda.Name = "gbBusqueda";
-            this.gbBusqueda.Size = new System.Drawing.Size(664, 66);
+            this.gbBusqueda.Size = new System.Drawing.Size(296, 66);
             this.gbBusqueda.TabIndex = 13;
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Búsqueda por fecha";
@@ -82,9 +80,9 @@ namespace CapaPresentacion.Formularios.FormsEstadisticas
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnReporteClientes);
-            this.groupBox1.Location = new System.Drawing.Point(5, 3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 84);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(208, 66);
+            this.groupBox1.Size = new System.Drawing.Size(296, 66);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones";
@@ -94,9 +92,9 @@ namespace CapaPresentacion.Formularios.FormsEstadisticas
             this.gbResultados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbResultados.Location = new System.Drawing.Point(5, 75);
+            this.gbResultados.Location = new System.Drawing.Point(314, 12);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(880, 416);
+            this.gbResultados.Size = new System.Drawing.Size(564, 470);
             this.gbResultados.TabIndex = 11;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";

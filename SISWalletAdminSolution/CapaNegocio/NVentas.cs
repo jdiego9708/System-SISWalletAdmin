@@ -3,6 +3,7 @@
     using CapaDatos;
     using CapaEntidades;
     using System.Data;
+    using System.Threading.Tasks;
 
     public class NVentas
     {
@@ -18,10 +19,10 @@
             return DVentas.EditarVentas(id_venta, venta);
         }
 
-        public static DataTable BuscarVentas(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public static async Task<(string rpta, DataTable dtVentas)> BuscarVentas(string tipo_busqueda, string texto_busqueda)
         {
             DVentas DVentas = new DVentas();
-            return DVentas.BuscarVentas(tipo_busqueda, texto_busqueda, out rpta);
+            return await DVentas.BuscarVentas(tipo_busqueda, texto_busqueda);
         }
     }
 }

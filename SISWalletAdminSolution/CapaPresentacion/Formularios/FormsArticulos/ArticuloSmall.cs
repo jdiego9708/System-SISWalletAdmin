@@ -83,6 +83,7 @@ namespace CapaPresentacion.Formularios.FormsArticulos
                 "Referencia: (" + articulo.Id_articulo + ")" + articulo.Referencia_articulo + ".";
             this.txtPrecio.Text = articulo.Valor_articulo.ToString("C");
             this.txtPrecio.Tag = articulo.Valor_articulo;
+            this.numericCantidad.Minimum = 0;
             this.numericCantidad.Value = articulo.Cantidad_articulo;
         }
 

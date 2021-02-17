@@ -5,6 +5,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class DVentas
     {
@@ -464,9 +465,9 @@
         #endregion
 
         #region METODO BUSCAR VENTAS
-        public DataTable BuscarVentas(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public async Task<(string rpta, DataTable dtVentas)> BuscarVentas(string tipo_busqueda, string texto_busqueda)
         {
-            rpta = "OK";
+            string rpta = "OK";
 
             StringBuilder consulta = new StringBuilder();
 
@@ -514,6 +515,7 @@
             try
             {
                 SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
                 SqlCommand Sqlcmd = new SqlCommand
                 {
                     Connection = SqlCon,
@@ -548,7 +550,7 @@
                 rpta = ex.Message;
                 DtResultado = null;
             }
-            return DtResultado;
+            return (rpta, DtResultado);
         }
         #endregion
     }

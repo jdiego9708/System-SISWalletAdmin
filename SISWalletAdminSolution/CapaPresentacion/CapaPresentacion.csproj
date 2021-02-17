@@ -147,11 +147,29 @@
     <Compile Include="Formularios\FormsArticulos\PrecioSmall.Designer.cs">
       <DependentUpon>PrecioSmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormsClientes\AbonoSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\AbonoSmall.Designer.cs">
+      <DependentUpon>AbonoSmall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\AgendamientoSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\AgendamientoSmall.Designer.cs">
+      <DependentUpon>AgendamientoSmall.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormsClientes\ClienteSmall.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Formularios\FormsClientes\ClienteSmall.Designer.cs">
       <DependentUpon>ClienteSmall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\FrmAgendamientoVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsClientes\FrmAgendamientoVentas.Designer.cs">
+      <DependentUpon>FrmAgendamientoVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsClientes\FrmCargarClientes.cs">
       <SubType>Form</SubType>
@@ -242,6 +260,18 @@
     </Compile>
     <Compile Include="Formularios\FormsReportes\FrmReporteFactura.Designer.cs">
       <DependentUpon>FrmReporteFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsVentas\FrmVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsVentas\FrmVentas.Designer.cs">
+      <DependentUpon>FrmVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormsVentas\VentaSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormsVentas\VentaSmall.Designer.cs">
+      <DependentUpon>VentaSmall.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FormsZonas\AddZonaSmall.cs">
       <SubType>UserControl</SubType>
@@ -339,6 +369,18 @@
     <EmbeddedResource Include="Formularios\FormsArticulos\PrecioSmall.resx">
       <DependentUpon>PrecioSmall.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsClientes\AbonoSmall.resx">
+      <DependentUpon>AbonoSmall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsClientes\AgendamientoSmall.resx">
+      <DependentUpon>AgendamientoSmall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsClientes\ClienteSmall.resx">
+      <DependentUpon>ClienteSmall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsClientes\FrmAgendamientoVentas.resx">
+      <DependentUpon>FrmAgendamientoVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsClientes\FrmCargarClientes.resx">
       <DependentUpon>FrmCargarClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -388,6 +430,12 @@
     <EmbeddedResource Include="Formularios\FormsReportes\rptClientes.rdlc" />
     <EmbeddedResource Include="Formularios\FormsReportes\rptEstadisticasDiarias.rdlc" />
     <EmbeddedResource Include="Formularios\FormsReportes\rptFacturaProveedor.rdlc" />
+    <EmbeddedResource Include="Formularios\FormsVentas\FrmVentas.resx">
+      <DependentUpon>FrmVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormsVentas\VentaSmall.resx">
+      <DependentUpon>VentaSmall.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormsZonas\AddZonaSmall.resx">
       <DependentUpon>AddZonaSmall.cs</DependentUpon>
     </EmbeddedResource>
