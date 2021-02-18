@@ -47,7 +47,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
             this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.btnImprimirArticulos = new System.Windows.Forms.Button();
-            this.btnClientes = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddCliente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
@@ -216,11 +215,11 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtBusqueda.Imagen = null;
-            this.txtBusqueda.Location = new System.Drawing.Point(270, 20);
+            this.txtBusqueda.Location = new System.Drawing.Point(219, 20);
             this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBusqueda.MaxLenght = 0;
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(631, 20);
+            this.txtBusqueda.Size = new System.Drawing.Size(682, 20);
             this.txtBusqueda.TabIndex = 0;
             this.txtBusqueda.Texto = "Búsqueda de artículos";
             this.txtBusqueda.Texto_inicial = "Búsqueda de artículos";
@@ -240,20 +239,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.btnImprimirArticulos.TabIndex = 10;
             this.toolTip1.SetToolTip(this.btnImprimirArticulos, "Lista de artículos");
             this.btnImprimirArticulos.UseVisualStyleBackColor = true;
-            // 
-            // btnClientes
-            // 
-            this.btnClientes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClientes.BackgroundImage")));
-            this.btnClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnClientes.FlatAppearance.BorderSize = 0;
-            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Location = new System.Drawing.Point(219, 12);
-            this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(35, 35);
-            this.btnClientes.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.btnClientes, "Lista de clientes");
-            this.btnClientes.UseVisualStyleBackColor = true;
             // 
             // btnAddCliente
             // 
@@ -276,7 +261,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(898, 459);
             this.Controls.Add(this.btnAddCliente);
-            this.Controls.Add(this.btnClientes);
             this.Controls.Add(this.btnImprimirArticulos);
             this.Controls.Add(this.btnEstadisticas);
             this.Controls.Add(this.btnRefresh);
@@ -317,7 +301,6 @@ namespace CapaPresentacion.Formularios.FormsArticulos
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Button btnImprimirArticulos;
-        private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnAddCliente;
     }
