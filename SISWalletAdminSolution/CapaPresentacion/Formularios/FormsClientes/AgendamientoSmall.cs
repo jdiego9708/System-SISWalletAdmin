@@ -43,6 +43,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 this.Agendamiento.Saldo_restante -= valor_abono;
                 this.Agendamiento.Id_turno = main.Turno.Id_turno;
                 this.Agendamiento.Turno = main.Turno;
+                this.Agendamiento.Estado_cobro = "TERMINADO";
 
                 string rpta =
                     await NAgendamiento_cobros.EditarAgendamiento(this.Agendamiento.Id_agendamiento, this.Agendamiento);
