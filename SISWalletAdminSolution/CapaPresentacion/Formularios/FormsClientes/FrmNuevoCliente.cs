@@ -47,6 +47,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.dateFechaVenta.ValueChanged += DateFechaVenta_ValueChanged;
         }
 
+        public event EventHandler OnRefresh;
+
         private void DateFechaVenta_ValueChanged(object sender, EventArgs e)
         {
             DateTimePicker date = (DateTimePicker)sender;
@@ -120,6 +122,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 venta.Id_tipo_producto = id_tipo_producto;
 
                 venta.Id_turno = main.Turno.Id_turno;
+
+                this.Total_articulos = venta.Total_venta;
             }
             else
             {
@@ -139,6 +143,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 venta.Id_cobro = id_cobro;
                 venta.Id_tipo_producto = id_tipo_producto;
+                venta.Id_turno = main.Turno.Id_turno;
                 venta.Hora_venta = DateTime.Now.TimeOfDay;
                 venta.Valor_venta = this.Total_articulos;
                 venta.Total_venta = this.Total_articulos;
@@ -272,7 +277,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                             if (rpta.Equals("OK"))
                             {
-                                if (this.rdActual.Checked && !this.IsEditar)
+                                if (this.rdActual.Checked && !this.IsEditar && this.Total_articulos == 0)
                                 {
                                     foreach (Articulos art in this.ArticulosSelected)
                                     {
@@ -322,8 +327,33 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                 }
                                 else
                                 {
-                                    Mensajes.MensajeInformacion("Se actualizó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
-                                    this.Close();
+                                    //Obtener el último agendamiento
+                                    var (rptaAg, dt) =
+                                        await NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString());
+                                    if (dt != null)
+                                    {
+                                        agendamiento = new Agendamiento_cobros(dt.Rows[0]);
+                                        agendamiento.Valor_cobro = venta.Valor_cuota;
+                                        rptaAg = await NAgendamiento_cobros.EditarAgendamiento(agendamiento.Id_agendamiento, agendamiento);
+                                        if (rptaAg != "OK")
+                                        {
+                                            Mensajes.MensajeInformacion("Se actualizó el cliente pero no su último pago, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            this.OnRefresh?.Invoke(sender, e);
+                                            this.Close();
+                                        }
+                                        else
+                                        {
+                                            Mensajes.MensajeInformacion("Se actualizó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            this.OnRefresh?.Invoke(sender, e);
+                                            this.Close();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Mensajes.MensajeInformacion("Se actualizó correctamente el cliente pero no se encontraron sus agendamientos, número asignado: " + usuario.Id_usuario, "Entendido");
+                                        this.OnRefresh?.Invoke(sender, e);
+                                        this.Close();
+                                    }                               
                                 }
                             }
                         }

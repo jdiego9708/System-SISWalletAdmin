@@ -36,6 +36,7 @@ namespace CapaPresentacion.Formularios.FormsVentas
                    await NVentas.BuscarVentas(tipo_busqueda, texto_busqueda);
 
                 this.VentasUsuario = new List<Ventas>();
+                this.panelVentas.clearDataSource();
 
                 if (dtVentas != null)
                 {
@@ -79,7 +80,13 @@ namespace CapaPresentacion.Formularios.FormsVentas
                 StartPosition = FormStartPosition.CenterScreen,
                 Venta = ve,
             };
+            frmNuevoCliente.OnRefresh += FrmNuevoCliente_OnRefresh;
             frmNuevoCliente.ShowDialog();
+        }
+
+        private void FrmNuevoCliente_OnRefresh(object sender, EventArgs e)
+        {
+            this.LoadVentas("ID CLIENTE", this.Usuario.Id_usuario.ToString());
         }
 
         private void VentaSmall_OnBtnNext(object sender, EventArgs e)

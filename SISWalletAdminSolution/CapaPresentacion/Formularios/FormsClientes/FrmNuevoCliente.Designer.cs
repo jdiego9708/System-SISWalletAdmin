@@ -679,8 +679,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbUltimoPago.Size = new System.Drawing.Size(300, 55);
             this.gbUltimoPago.TabIndex = 41;
             this.gbUltimoPago.TabStop = false;
-            this.gbUltimoPago.Text = "Fecha último pago";
-            this.gbUltimoPago.Visible = false;
+            this.gbUltimoPago.Text = "Fecha abono";
             // 
             // dateUltimoPago
             // 
@@ -699,7 +698,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbFechaVenta.TabIndex = 42;
             this.gbFechaVenta.TabStop = false;
             this.gbFechaVenta.Text = "Fecha de venta";
-            this.gbFechaVenta.Visible = false;
             // 
             // dateFechaVenta
             // 
