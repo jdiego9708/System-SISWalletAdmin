@@ -39,6 +39,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnNext = new System.Windows.Forms.Button();
             this.btnAbono = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnRemove = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -118,7 +119,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(404, 177);
+            this.btnNext.Location = new System.Drawing.Point(404, 178);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(35, 35);
             this.btnNext.TabIndex = 4;
@@ -139,11 +140,26 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.toolTip1.SetToolTip(this.btnAbono, "Realizar abono");
             this.btnAbono.UseVisualStyleBackColor = true;
             // 
+            // btnRemove
+            // 
+            this.btnRemove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRemove.BackgroundImage")));
+            this.btnRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRemove.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnRemove.FlatAppearance.BorderSize = 0;
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Location = new System.Drawing.Point(3, 178);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(35, 35);
+            this.btnRemove.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.btnRemove, "Inactivar/Borrar cliente");
+            this.btnRemove.UseVisualStyleBackColor = true;
+            // 
             // ClienteSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAbono);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.groupBox1);
@@ -171,5 +187,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnAbono;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnRemove;
     }
 }

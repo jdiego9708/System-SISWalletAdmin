@@ -17,9 +17,17 @@ namespace CapaPresentacion.Formularios.FormsVentas
         {
             InitializeComponent();
             this.btnNext.Click += BtnNext_Click;
+            this.btnEdit.Click += BtnEdit_Click;
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            this.OnBtnEdit?.Invoke(this.Venta, e);
         }
 
         public event EventHandler OnBtnNext;
+
+        public event EventHandler OnBtnEdit;
 
         private void BtnNext_Click(object sender, EventArgs e)
         {

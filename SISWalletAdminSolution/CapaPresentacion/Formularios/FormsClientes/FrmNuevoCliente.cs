@@ -43,6 +43,14 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
             this.rdActual.CheckedChanged += RdActual_CheckedChanged;
             this.rdAnterior.CheckedChanged += RdAnterior_CheckedChanged;
+
+            this.dateFechaVenta.ValueChanged += DateFechaVenta_ValueChanged;
+        }
+
+        private void DateFechaVenta_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePicker date = (DateTimePicker)sender;
+            this.dateUltimoPago.MinDate = date.Value;
         }
 
         private void TxtValorTotalVenta_TextChanged(object sender, EventArgs e)
@@ -62,9 +70,11 @@ namespace CapaPresentacion.Formularios.FormsClientes
             {
                 this.gbValorVenta.Visible = true;
                 this.gbUltimoPago.Visible = true;
+                this.gbFechaVenta.Visible = true;
                 this.gbArticulosSelected.Enabled = false;
                 this.gbBusquedaArticulos.Enabled = false;
                 this.gbResultados.Enabled = false;
+                this.gbUltimoPago.Text = "Fecha de último pago";
             }
         }
 
@@ -74,10 +84,13 @@ namespace CapaPresentacion.Formularios.FormsClientes
             if (rd.Checked)
             {
                 this.gbValorVenta.Visible = true;
-                this.gbUltimoPago.Visible = false;
+                this.gbUltimoPago.Visible = true;
+                this.gbFechaVenta.Visible = true;
                 this.gbArticulosSelected.Enabled = true;
                 this.gbBusquedaArticulos.Enabled = true;
                 this.gbResultados.Enabled = true;
+
+                this.gbUltimoPago.Text = "Fecha de abono";
             }
         }
 
@@ -90,10 +103,52 @@ namespace CapaPresentacion.Formularios.FormsClientes
             out Ventas venta, out Agendamiento_cobros agendamiento)
         {
             MainController main = MainController.GetInstance();
-            usuario = new Usuarios();
-            direccion = new Direccion_clientes();
-            venta = new Ventas();
             agendamiento = new Agendamiento_cobros();
+            int id_cobro = 0;
+            int id_tipo_producto = 0;
+
+            if (this.IsEditar)
+            {
+                id_tipo_producto = this.Venta.Id_tipo_producto;
+                id_cobro = this.Venta.Id_cobro;
+                usuario = this.Venta.Cliente;
+                direccion = this.Venta.Direccion;
+                venta = this.Venta;
+
+                venta.Id_cobro = id_cobro;
+
+                venta.Id_tipo_producto = id_tipo_producto;
+
+                venta.Id_turno = main.Turno.Id_turno;
+            }
+            else
+            {
+                usuario = new Usuarios();
+                direccion = new Direccion_clientes();
+                venta = new Ventas();
+
+                id_tipo_producto = 2;
+                id_cobro = main.Turno.Id_cobro;
+
+                usuario.Fecha_ingreso = DateTime.Now;
+                usuario.Tipo_usuario = "CLIENTE";
+                usuario.Estado_usuario = "ACTIVO";
+                usuario.Email = string.Empty;
+
+                direccion.Estado_direccion = "ACTIVO";
+
+                venta.Id_cobro = id_cobro;
+                venta.Id_tipo_producto = id_tipo_producto;
+                venta.Hora_venta = DateTime.Now.TimeOfDay;
+                venta.Valor_venta = this.Total_articulos;
+                venta.Total_venta = this.Total_articulos;
+                venta.Fecha_venta = this.dateFechaVenta.Value;
+                venta.Tipo_venta = "NUEVA";
+                venta.Interes_venta = 0;
+                venta.Estado_venta = "ACTIVO";
+
+                agendamiento.Orden_cobro = 0;
+            }
 
             if (string.IsNullOrEmpty(this.txtNombres.Text))
             {
@@ -125,79 +180,53 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 return false;
             }
 
-            if (!decimal.TryParse(this.txtValorAbono.Tag.ToString(), out decimal valor_abono))
-            {
-                Mensajes.MensajeInformacion("Verifique el valor del abono", "Entendido");
-                return false;
-            }
-
             if (!int.TryParse(this.listaBarrios.SelectedValue.ToString(), out int id_barrio))
             {
                 Mensajes.MensajeInformacion("Verifique el barrio seleccionado", "Entendido");
                 return false;
             }
 
-            usuario.Fecha_ingreso = DateTime.Now;
             usuario.Alias = this.txtNombres.Text;
             usuario.Nombres = this.txtNombres.Text;
             usuario.Apellidos = this.txtApellidos.Text;
             usuario.Identificacion = this.txtIdentificacion.Text;
-            usuario.Email = string.Empty;
-            usuario.Tipo_usuario = "CLIENTE";
-            usuario.Estado_usuario = "ACTIVO";
 
             if (string.IsNullOrEmpty(this.txtTelResidencia.Text))
                 usuario.Celular = this.txtTelCliente.Text;
             else
                 usuario.Celular = this.txtTelCliente.Text + " - " + this.txtTelResidencia.Text;
 
-            direccion.Id_usuario = 0;
             direccion.Id_zona = id_barrio;
             direccion.Direccion = this.txtDireccionResidencia.Text;
-            direccion.Estado_dirección = "ACTIVO";
 
-            venta.Id_cobro = main.Turno.Id_cobro;
-            venta.Id_tipo_producto = 2;
-            venta.Id_cliente = 0;
-            venta.Id_direccion = 0;
-            venta.Id_turno = main.Turno.Id_turno;
-
-            if (this.rdActual.Checked)
-            {
-                venta.Fecha_venta = DateTime.Now;
-                venta.Tipo_venta = "NUEVA";
-            }
-            else
-            {
-                venta.Fecha_venta = dateUltimoPago.Value;
-                venta.Tipo_venta = "MIGRACION";
-            }
-
-            venta.Hora_venta = DateTime.Now.TimeOfDay;
-            venta.Valor_venta = this.Total_articulos;
-            venta.Interes_venta = 0;
-            venta.Total_venta = this.Total_articulos;
             venta.Numero_cuotas = Convert.ToInt32(numericPlazo.Value);
             venta.Frecuencia_cobro = this.listaFrecuencia.Text;
             venta.Valor_cuota = (this.Total_articulos / Convert.ToInt32(numericPlazo.Value));
-            venta.Estado_venta = "ACTIVO";
-            
-            agendamiento.Id_venta = 0;
-            agendamiento.Id_turno = main.Turno.Id_turno;
-            agendamiento.Orden_cobro = 0;
 
-            if (this.rdActual.Checked)
-                agendamiento.Fecha_cobro = DateTime.Now;
-            else
-                agendamiento.Fecha_cobro = dateUltimoPago.Value;
+            if (!this.IsEditar)
+            {
+                if (!decimal.TryParse(this.txtValorAbono.Tag.ToString(), out decimal valor_abono))
+                {
+                    Mensajes.MensajeInformacion("Verifique el valor del abono", "Entendido");
+                    return false;
+                }
 
-            agendamiento.Hora_cobro = DateTime.Now.TimeOfDay;
-            agendamiento.Valor_cobro = venta.Valor_cuota;
-            agendamiento.Valor_pagado = valor_abono;
-            agendamiento.Saldo_restante = this.Total_saldo;
-            agendamiento.Tipo_cobro = this.listaFrecuencia.Text;
-            agendamiento.Observaciones_cobro = "";
-            agendamiento.Estado_cobro = "TERMINADO";
+                agendamiento.Id_turno = main.Turno.Id_turno;
+
+                if (this.rdActual.Checked)
+                    agendamiento.Fecha_cobro = dateUltimoPago.Value;
+                else
+                    agendamiento.Fecha_cobro = dateUltimoPago.Value;
+
+                agendamiento.Hora_cobro = DateTime.Now.TimeOfDay;
+                agendamiento.Valor_cobro = venta.Valor_cuota;
+                agendamiento.Valor_pagado = valor_abono;
+                agendamiento.Saldo_restante = this.Total_saldo;
+                agendamiento.Tipo_cobro = this.listaFrecuencia.Text;
+                agendamiento.Observaciones_cobro = "";
+                agendamiento.Estado_cobro = "TERMINADO";
+            }
+
             return true;
         }
 
@@ -210,20 +239,40 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 {
                     MensajeEspera.ShowWait("Guardando...");
                     List<string> errores = new List<string>();
-                    string rpta = NUsuarios.InsertarUsuario(out int id_usuario, usuario);
+                    string rpta = "";
+
+                    if (this.IsEditar)
+                        rpta = NUsuarios.EditarUsuario(usuario.Id_usuario, usuario);
+                    else
+                    {
+                        rpta = NUsuarios.InsertarUsuario(out int id_usuario, usuario);
+                        direccion.Id_usuario = id_usuario;
+                        venta.Id_cliente = id_usuario;
+                    }
+
                     if (rpta.Equals("OK"))
                     {
-                        direccion.Id_usuario = id_usuario;
-                        rpta = NDireccion_clientes.InsertarDireccion(out int id_direccion, direccion);
+                        if (this.IsEditar)
+                            rpta = NDireccion_clientes.EditarDireccion(direccion.Id_direccion, direccion);
+                        else
+                        {
+                            rpta = NDireccion_clientes.InsertarDireccion(out int id_direccion, direccion);
+                            venta.Id_direccion = id_direccion;
+                        }
+
                         if (rpta.Equals("OK"))
                         {
-                            venta.Id_cliente = id_usuario;
-                            venta.Id_direccion = id_direccion;
-                            rpta = NVentas.InsertarVenta(out int id_venta, venta);
+                            if (this.IsEditar)
+                                rpta = NVentas.EditarVenta(venta.Id_venta, venta);
+                            else
+                            {
+                                rpta = NVentas.InsertarVenta(out int id_venta, venta);
+                                venta.Id_venta = id_venta;
+                            }
+
                             if (rpta.Equals("OK"))
                             {
-                                venta.Id_venta = id_venta;
-                                if (this.rdActual.Checked)
+                                if (this.rdActual.Checked && !this.IsEditar)
                                 {
                                     foreach (Articulos art in this.ArticulosSelected)
                                     {
@@ -232,7 +281,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                             Articulo = art,
                                             Id_articulo = art.Id_articulo,
                                             Venta = venta,
-                                            Id_venta = id_venta,
+                                            Id_venta = venta.Id_venta,
                                             Cantidad_articulo = (int)art.Cantidad_articulo,
                                             Valor_articulo = art.Valor_articulo,
                                             Estado_detalle = "ACTIVO",
@@ -246,27 +295,36 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                 }
 
                                 MainController main = MainController.GetInstance();
-                                rpta = NUsuariosVentas.InsertarUsuarioVenta(new Usuarios_ventas
-                                {
-                                    Id_usuario = main.Usuario.Id_usuario,
-                                    Id_venta = id_venta,
-                                });
 
-                                if (rpta.Equals("OK"))
+                                if (!this.IsEditar)
                                 {
-                                    agendamiento.Id_venta = id_venta;
-                                    rpta = NAgendamiento_cobros.InsertarAgendamiento(out int id_agendamiento, agendamiento);
+                                    rpta = NUsuariosVentas.InsertarUsuarioVenta(new Usuarios_ventas
+                                    {
+                                        Id_usuario = main.Usuario.Id_usuario,
+                                        Id_venta = venta.Id_venta,
+                                    });
+
                                     if (rpta.Equals("OK"))
                                     {
-                                        MensajeEspera.CloseForm();
-                                        Mensajes.MensajeInformacion("Se guardó correctamente el cliente, número asignado: " + id_usuario, "Entendido");
-                                        this.Close();
+                                        agendamiento.Id_venta = venta.Id_venta;
+                                        rpta = NAgendamiento_cobros.InsertarAgendamiento(out int id_agendamiento, agendamiento);
+                                        if (rpta.Equals("OK"))
+                                        {
+                                            MensajeEspera.CloseForm();
+                                            Mensajes.MensajeInformacion("Se guardó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            this.Close();
+                                        }
+                                        else
+                                            throw new Exception(rpta);
                                     }
                                     else
                                         throw new Exception(rpta);
                                 }
                                 else
-                                    throw new Exception(rpta);
+                                {
+                                    Mensajes.MensajeInformacion("Se actualizó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
+                                    this.Close();
+                                }
                             }
                         }
                         else
@@ -389,7 +447,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private void ListaCiudades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(this.listaCiudades.SelectedValue.ToString(), out int id_ciudad))
+            if (int.TryParse(Convert.ToString(this.listaCiudades.SelectedValue), out int id_ciudad))
             {
                 this.LoadBarrios("ID CIUDAD", id_ciudad.ToString());
             }
@@ -401,9 +459,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             Response connection = await ConnectionHelper.CheckConnection();
             this.IsConnectedSuccess = connection.IsSuccess;
 
-            this.LoadCiudades("ID PAIS", "2020");
-            await this.LoadArticulos("COMPLETO", "");
-            this.LoadListaFrecuencia();
+            if (!this.IsEditar)
+            {
+                this.LoadCiudades("ID PAIS", "2020");
+                await this.LoadArticulos("COMPLETO", "");
+                this.LoadListaFrecuencia();
+            }
         }
 
         private void LoadBarrios(string tipo_busqueda, string texto_busqueda)
@@ -413,8 +474,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 DataTable dtZonas =
                     NZonas.BuscarZonas(tipo_busqueda, texto_busqueda, out string rpta);
 
-                if (this.listaBarrios.Items.Count > 0)
-                    this.listaBarrios.Items.Clear();
+                if (this.listaBarrios.DataSource != null)
+                    this.listaBarrios.DataSource = null;
 
                 if (dtZonas != null)
                 {
@@ -440,8 +501,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 DataTable dtCiudades =
                     NCiudades.BuscarCiudades(tipo_busqueda, texto_busqueda, out string rpta);
 
-                if (this.listaCiudades.Items.Count > 0)
-                    this.listaCiudades.Items.Clear();
+                if (this.listaCiudades.DataSource != null)
+                    this.listaCiudades.DataSource = null;
 
                 if (dtCiudades != null)
                 {
@@ -617,10 +678,44 @@ namespace CapaPresentacion.Formularios.FormsClientes
             }
         }
 
+        private void AsignarDatos(Ventas venta)
+        {
+            this.IsEditar = true;
+
+            this.gbValorAbono.Visible = false;
+            this.rdActual.Visible = false;
+            this.rdAnterior.Visible = false;
+            this.gbUltimoPago.Visible = false;
+
+            this.txtNombres.Text = venta.Cliente.Nombres;
+            this.txtApellidos.Text = venta.Cliente.Apellidos;
+            this.txtIdentificacion.Text = venta.Cliente.Identificacion;
+            this.txtValorTotalVenta.Tag = venta.Total_venta;
+            this.txtValorTotalVenta.Text = venta.Total_venta.ToString("C");
+
+            this.txtDireccionResidencia.Text = venta.Direccion.Direccion;
+            this.txtTelCliente.Text = venta.Cliente.Celular;
+
+            this.numericPlazo.Value = venta.Numero_cuotas;
+
+            this.dateFechaVenta.Value = venta.Fecha_venta;
+
+            this.LoadListaFrecuencia();
+            this.listaFrecuencia.Text = venta.Frecuencia_cobro;
+
+            this.LoadCiudades("ID PAIS", "2020");
+            this.listaCiudades.SelectedValue = venta.Direccion.Zona.Id_ciudad.ToString();
+
+            this.LoadBarrios("ID CIUDAD", venta.Direccion.Zona.Id_ciudad.ToString());
+            this.listaBarrios.SelectedValue = venta.Direccion.Zona.Id_zona;
+        }
+
         private bool isConnectedSuccess;
 
         private List<Articulos> _articulosList;
         private List<Articulos> _articulosSelected;
+        private Ventas _venta;
+        private bool _isEditar;
 
         public List<Articulos> ArticulosList
         {
@@ -645,6 +740,16 @@ namespace CapaPresentacion.Formularios.FormsClientes
         public decimal Total_articulos { get; set; }
         public decimal Total_abono { get; set; }
         public decimal Total_saldo { get; set; }
+        public Ventas Venta
+        {
+            get => _venta;
+            set
+            {
+                _venta = value;
+                this.AsignarDatos(value);
+            }
+        }
 
+        public bool IsEditar { get => _isEditar; set => _isEditar = value; }
     }
 }

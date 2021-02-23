@@ -224,11 +224,18 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 if (dtClientes != null)
                 {
-                    List<ClienteSmall> controls = (from DataRow dr in dtClientes.Rows
-                                                   select new ClienteSmall { Venta = new Ventas(dr) }).ToList();
-
                     List<UserControl> userControls = new List<UserControl>();
-                    userControls.AddRange(controls);
+
+                    foreach (DataRow row in dtClientes.Rows)
+                    {
+                        Ventas venta = new Ventas(row);
+                        ClienteSmall clienteSmall = new ClienteSmall
+                        {
+                            Venta = venta,
+                        };
+                        clienteSmall.OnRefresh += ClienteSmall_OnRefresh;
+                        userControls.Add(clienteSmall);
+                    }
 
                     this.panelClientes.PageSize = 20;
                     this.panelClientes.OnBsPositionChanged += PaneClientes_OnBsPositionChanged;
@@ -244,6 +251,11 @@ namespace CapaPresentacion.Formularios.FormsClientes
             }
         }
 
+        private async void ClienteSmall_OnRefresh(object sender, EventArgs e)
+        {
+            await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+
         private async Task LoadAgendamientos(string tipo_busqueda, string texto_busqueda)
         {
             try
@@ -256,11 +268,18 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 if (dtAgendamiento != null)
                 {
-                    List<ClienteSmall> controls = (from DataRow dr in dtAgendamiento.Rows
-                                                   select new ClienteSmall { Agendamiento = new Agendamiento_cobros(dr) }).ToList();
-
                     List<UserControl> userControls = new List<UserControl>();
-                    userControls.AddRange(controls);
+
+                    foreach (DataRow row in dtAgendamiento.Rows)
+                    {
+                        Agendamiento_cobros ag = new Agendamiento_cobros(row);
+                        ClienteSmall clienteSmall = new ClienteSmall
+                        {
+                            Agendamiento = ag,
+                        };
+                        clienteSmall.OnRefresh += ClienteSmall_OnRefresh;
+                        userControls.Add(clienteSmall);
+                    }
 
                     this.panelClientes.PageSize = 20;
                     this.panelClientes.OnBsPositionChanged += PaneClientes_OnBsPositionChanged;

@@ -50,6 +50,7 @@ namespace CapaPresentacion.Formularios.FormsVentas
                             Venta = ve,
                         };
                         ventaSmall.OnBtnNext += VentaSmall_OnBtnNext;
+                        ventaSmall.OnBtnEdit += VentaSmall_OnBtnEdit;
                         this.VentasUsuario.Add(ve);
                         controls.Add(ventaSmall);
                     }
@@ -68,6 +69,17 @@ namespace CapaPresentacion.Formularios.FormsVentas
                 Mensajes.MensajeErrorCompleto(this.Name, "LoadVentas",
                     "Hubo un error al cargar las ventas", ex.Message);
             }
+        }
+
+        private void VentaSmall_OnBtnEdit(object sender, EventArgs e)
+        {
+            Ventas ve = (Ventas)sender;
+            FrmNuevoCliente frmNuevoCliente = new FrmNuevoCliente
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                Venta = ve,
+            };
+            frmNuevoCliente.ShowDialog();
         }
 
         private void VentaSmall_OnBtnNext(object sender, EventArgs e)

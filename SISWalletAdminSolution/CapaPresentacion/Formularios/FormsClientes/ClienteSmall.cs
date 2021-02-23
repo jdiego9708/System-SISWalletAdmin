@@ -22,6 +22,59 @@ namespace CapaPresentacion.Formularios.FormsClientes
             InitializeComponent();
             this.btnNext.Click += BtnNext_Click;
             this.btnAbono.Click += BtnAbono_Click;
+            this.btnRemove.Click += BtnRemove_Click;
+        }
+
+        public event EventHandler OnRefresh;
+
+        private async void BtnRemove_Click(object sender, EventArgs e)
+        {
+            Mensajes.MensajePregunta("¿Confirma la inactivación/eliminación del cliente?", "Confirmar", "Cancelar", out DialogResult dialog);
+            if (dialog == DialogResult.Yes)
+            {
+                try
+                {
+                    string rpta = string.Empty;
+                    if (this.Agendamiento != null)
+                    {
+                        rpta = await NUsuarios.InactivarUsuario(this.Agendamiento.Venta.Id_cliente);
+                        if (rpta.Equals("OK"))
+                        {
+                            Mensajes.MensajeInformacion("Se inactivó correctamente el cliente", "Entendido");
+                            this.OnRefresh?.Invoke(sender, e);
+                        }
+                        else
+                        {
+                            throw new Exception(rpta);
+                        }
+
+                        return;
+                    }
+
+                    if (this.Venta != null)
+                    {
+                        rpta = await NUsuarios.InactivarUsuario(this.Venta.Id_cliente);
+                        if (rpta.Equals("OK"))
+                        {
+                            Mensajes.MensajeInformacion("Se inactivó correctamente el cliente", "Entendido");
+                            this.OnRefresh?.Invoke(sender, e);
+                        }
+                        else
+                        {
+                            throw new Exception(rpta);
+                        }
+
+                        return;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Mensajes.MensajeErrorCompleto(this.Name, "BtnRemove_Click",
+                        "Hubo un error al remover el cliente", ex.Message);
+                }
+                
+            }
         }
 
         private void BtnAbono_Click(object sender, EventArgs e)
@@ -46,11 +99,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 this.Agendamiento.Id_turno = main.Turno.Id_turno;
                 this.Agendamiento.Turno = main.Turno;
 
-                string rpta = 
+                string rpta =
                     await NAgendamiento_cobros.EditarAgendamiento(this.Agendamiento.Id_agendamiento, this.Agendamiento);
                 if (rpta.Equals("OK"))
                 {
                     Mensajes.MensajeInformacion("Abono realizado correctamente", "Entendido");
+                    this.OnRefresh?.Invoke(sender, e);
                 }
                 else
                 {
@@ -84,9 +138,9 @@ namespace CapaPresentacion.Formularios.FormsClientes
         }
 
         private void AsignarDatos(Agendamiento_cobros agendamiento)
-        {         
+        {
             StringBuilder infoCliente = new StringBuilder();
-            infoCliente.Append("(" + agendamiento.Venta.Cliente.Id_usuario + ") " +agendamiento.Venta.Cliente.NombreCompleto + " - Celular: " + agendamiento.Venta.Cliente.Celular + " - Cédula: " + agendamiento.Venta.Cliente.Identificacion).Append(Environment.NewLine);
+            infoCliente.Append("(" + agendamiento.Venta.Cliente.Id_usuario + ") " + agendamiento.Venta.Cliente.NombreCompleto + " - Celular: " + agendamiento.Venta.Cliente.Celular + " - Cédula: " + agendamiento.Venta.Cliente.Identificacion).Append(Environment.NewLine);
 
             StringBuilder infoPago = new StringBuilder();
             infoPago.Append("Total de la venta: " + agendamiento.Venta.Total_venta + " - Valor cuota: " + agendamiento.Venta.Valor_cuota.ToString("C")).Append(Environment.NewLine);
@@ -103,7 +157,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
         }
 
         private void AsignarDatos(Ventas venta)
-        {         
+        {
             StringBuilder infoCliente = new StringBuilder();
             infoCliente.Append("(" + venta.Cliente.Id_usuario + ") " + venta.Cliente.NombreCompleto + " - Celular: " + venta.Cliente.Celular + " - Cédula: " + venta.Cliente.Identificacion).Append(Environment.NewLine);
 

@@ -19,6 +19,12 @@
             return DUsuarios.EditarUsuario(id_usuario, usuario);
         }
 
+        public static async Task<string>InactivarUsuario(int id_usuario)
+        {
+            DUsuarios DUsuarios = new DUsuarios();
+            return await DUsuarios.InactivarUsuario(id_usuario);
+        }
+
         public static async Task<(DataTable dtUsuarios, string rpta)>BuscarUsuarios(string tipo_busqueda, string texto_busqueda)
         {
             DUsuarios DUsuarios = new DUsuarios();

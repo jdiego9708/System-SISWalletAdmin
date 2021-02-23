@@ -109,7 +109,7 @@
                     ParameterName = "@Estado_direccion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = direccion.Estado_dirección.Trim()
+                    Value = direccion.Estado_direccion.Trim()
                 };
                 SqlCmd.Parameters.Add(Estado_direccion);
                 contador += 1;
@@ -155,6 +155,7 @@
 
             string consulta = "UPDATE Direccion_clientes SET " +
                 "Id_usuario = @Id_usuario, " +
+                "Id_zona = @Id_zona, " +
                 "Direccion = @Direccion, " +
                 "Estado_direccion = @Estado_direccion " +
                 "WHERE Id_direccion = @Id_direccion ";
@@ -190,6 +191,15 @@
                 SqlCmd.Parameters.Add(Id_usuario);
                 contador += 1;
 
+                SqlParameter Id_zona = new SqlParameter
+                {
+                    ParameterName = "@Id_zona",
+                    SqlDbType = SqlDbType.Int,
+                    Value = direccion.Id_zona
+                };
+                SqlCmd.Parameters.Add(Id_zona);
+                contador += 1;
+
                 SqlParameter Direccion = new SqlParameter
                 {
                     ParameterName = "@Direccion",
@@ -205,7 +215,7 @@
                     ParameterName = "@Estado_direccion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = direccion.Estado_dirección.Trim()
+                    Value = direccion.Estado_direccion.Trim()
                 };
                 SqlCmd.Parameters.Add(Estado_direccion);
                 contador += 1;

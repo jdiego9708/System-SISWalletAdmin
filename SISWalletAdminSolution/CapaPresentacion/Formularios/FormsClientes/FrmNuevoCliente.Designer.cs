@@ -54,13 +54,16 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
             this.gbBusquedaArticulos = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.txtBuscarArticulos = new CapaPresentacion.CustomTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.gbArticulosSelected = new System.Windows.Forms.GroupBox();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.panelArticulosSelected = new CapaPresentacion.Controles.CustomGridPanel();
+            this.gbValorAbono = new System.Windows.Forms.GroupBox();
             this.txtValorAbono = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -77,9 +80,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.rdAnterior = new System.Windows.Forms.RadioButton();
             this.gbUltimoPago = new System.Windows.Forms.GroupBox();
             this.dateUltimoPago = new System.Windows.Forms.DateTimePicker();
-            this.panelArticulosSelected = new CapaPresentacion.Controles.CustomGridPanel();
-            this.txtBuscarArticulos = new CapaPresentacion.CustomTextBox();
-            this.panelArticulos = new CapaPresentacion.Controles.CustomGridPanel();
+            this.gbFechaVenta = new System.Windows.Forms.GroupBox();
+            this.dateFechaVenta = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,7 +93,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigator1.SuspendLayout();
             this.gbBusquedaArticulos.SuspendLayout();
             this.gbArticulosSelected.SuspendLayout();
-            this.groupBox16.SuspendLayout();
+            this.gbValorAbono.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -99,6 +101,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.groupBox10.SuspendLayout();
             this.gbValorVenta.SuspendLayout();
             this.gbUltimoPago.SuspendLayout();
+            this.gbFechaVenta.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -342,6 +345,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Posición";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -369,6 +373,18 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
+            // 
+            // panelArticulos
+            // 
+            this.panelArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelArticulos.AutoScroll = true;
+            this.panelArticulos.Location = new System.Drawing.Point(6, 23);
+            this.panelArticulos.Name = "panelArticulos";
+            this.panelArticulos.PageSize = 10;
+            this.panelArticulos.Size = new System.Drawing.Size(670, 258);
+            this.panelArticulos.TabIndex = 0;
             // 
             // gbBusquedaArticulos
             // 
@@ -410,6 +426,24 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.button2.TabIndex = 32;
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // txtBuscarArticulos
+            // 
+            this.txtBuscarArticulos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtBuscarArticulos.BackColor = System.Drawing.Color.White;
+            this.txtBuscarArticulos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarArticulos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBuscarArticulos.Imagen = null;
+            this.txtBuscarArticulos.Location = new System.Drawing.Point(6, 21);
+            this.txtBuscarArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBuscarArticulos.MaxLenght = 0;
+            this.txtBuscarArticulos.Name = "txtBuscarArticulos";
+            this.txtBuscarArticulos.Size = new System.Drawing.Size(598, 20);
+            this.txtBuscarArticulos.TabIndex = 0;
+            this.txtBuscarArticulos.Texto = "Búsqueda de artículos";
+            this.txtBuscarArticulos.Texto_inicial = "Búsqueda de artículos";
+            this.txtBuscarArticulos.Tipo_txt = null;
+            this.txtBuscarArticulos.Visible_px = true;
+            // 
             // btnSave
             // 
             this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
@@ -435,16 +469,28 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbArticulosSelected.TabStop = false;
             this.gbArticulosSelected.Text = "Artículos seleccionados";
             // 
-            // groupBox16
+            // panelArticulosSelected
             // 
-            this.groupBox16.Controls.Add(this.txtValorAbono);
-            this.groupBox16.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.groupBox16.Location = new System.Drawing.Point(201, 380);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(111, 55);
-            this.groupBox16.TabIndex = 1;
-            this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Valor abono*";
+            this.panelArticulosSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelArticulosSelected.AutoScroll = true;
+            this.panelArticulosSelected.Location = new System.Drawing.Point(6, 23);
+            this.panelArticulosSelected.Name = "panelArticulosSelected";
+            this.panelArticulosSelected.PageSize = 10;
+            this.panelArticulosSelected.Size = new System.Drawing.Size(670, 254);
+            this.panelArticulosSelected.TabIndex = 0;
+            // 
+            // gbValorAbono
+            // 
+            this.gbValorAbono.Controls.Add(this.txtValorAbono);
+            this.gbValorAbono.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.gbValorAbono.Location = new System.Drawing.Point(201, 380);
+            this.gbValorAbono.Name = "gbValorAbono";
+            this.gbValorAbono.Size = new System.Drawing.Size(111, 55);
+            this.gbValorAbono.TabIndex = 1;
+            this.gbValorAbono.TabStop = false;
+            this.gbValorAbono.Text = "Valor abono*";
             // 
             // txtValorAbono
             // 
@@ -628,7 +674,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.gbUltimoPago.Controls.Add(this.dateUltimoPago);
             this.gbUltimoPago.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.gbUltimoPago.Location = new System.Drawing.Point(12, 435);
+            this.gbUltimoPago.Location = new System.Drawing.Point(12, 502);
             this.gbUltimoPago.Name = "gbUltimoPago";
             this.gbUltimoPago.Size = new System.Drawing.Size(300, 55);
             this.gbUltimoPago.TabIndex = 41;
@@ -643,47 +689,24 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.dateUltimoPago.Size = new System.Drawing.Size(286, 25);
             this.dateUltimoPago.TabIndex = 0;
             // 
-            // panelArticulosSelected
+            // gbFechaVenta
             // 
-            this.panelArticulosSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelArticulosSelected.AutoScroll = true;
-            this.panelArticulosSelected.Location = new System.Drawing.Point(6, 23);
-            this.panelArticulosSelected.Name = "panelArticulosSelected";
-            this.panelArticulosSelected.PageSize = 10;
-            this.panelArticulosSelected.Size = new System.Drawing.Size(670, 254);
-            this.panelArticulosSelected.TabIndex = 0;
+            this.gbFechaVenta.Controls.Add(this.dateFechaVenta);
+            this.gbFechaVenta.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.gbFechaVenta.Location = new System.Drawing.Point(12, 441);
+            this.gbFechaVenta.Name = "gbFechaVenta";
+            this.gbFechaVenta.Size = new System.Drawing.Size(300, 55);
+            this.gbFechaVenta.TabIndex = 42;
+            this.gbFechaVenta.TabStop = false;
+            this.gbFechaVenta.Text = "Fecha de venta";
+            this.gbFechaVenta.Visible = false;
             // 
-            // txtBuscarArticulos
+            // dateFechaVenta
             // 
-            this.txtBuscarArticulos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtBuscarArticulos.BackColor = System.Drawing.Color.White;
-            this.txtBuscarArticulos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarArticulos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBuscarArticulos.Imagen = null;
-            this.txtBuscarArticulos.Location = new System.Drawing.Point(6, 21);
-            this.txtBuscarArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBuscarArticulos.MaxLenght = 0;
-            this.txtBuscarArticulos.Name = "txtBuscarArticulos";
-            this.txtBuscarArticulos.Size = new System.Drawing.Size(598, 20);
-            this.txtBuscarArticulos.TabIndex = 0;
-            this.txtBuscarArticulos.Texto = "Búsqueda de artículos";
-            this.txtBuscarArticulos.Texto_inicial = "Búsqueda de artículos";
-            this.txtBuscarArticulos.Tipo_txt = null;
-            this.txtBuscarArticulos.Visible_px = true;
-            // 
-            // panelArticulos
-            // 
-            this.panelArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelArticulos.AutoScroll = true;
-            this.panelArticulos.Location = new System.Drawing.Point(6, 23);
-            this.panelArticulos.Name = "panelArticulos";
-            this.panelArticulos.PageSize = 10;
-            this.panelArticulos.Size = new System.Drawing.Size(670, 258);
-            this.panelArticulos.TabIndex = 0;
+            this.dateFechaVenta.Location = new System.Drawing.Point(8, 23);
+            this.dateFechaVenta.Name = "dateFechaVenta";
+            this.dateFechaVenta.Size = new System.Drawing.Size(286, 25);
+            this.dateFechaVenta.TabIndex = 0;
             // 
             // FrmNuevoCliente
             // 
@@ -691,6 +714,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1084, 675);
+            this.Controls.Add(this.gbFechaVenta);
             this.Controls.Add(this.gbUltimoPago);
             this.Controls.Add(this.rdAnterior);
             this.Controls.Add(this.rdActual);
@@ -702,7 +726,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.gbArticulosSelected);
-            this.Controls.Add(this.groupBox16);
+            this.Controls.Add(this.gbValorAbono);
             this.Controls.Add(this.gbBusquedaArticulos);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.groupBox6);
@@ -734,8 +758,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigator1.PerformLayout();
             this.gbBusquedaArticulos.ResumeLayout(false);
             this.gbArticulosSelected.ResumeLayout(false);
-            this.groupBox16.ResumeLayout(false);
-            this.groupBox16.PerformLayout();
+            this.gbValorAbono.ResumeLayout(false);
+            this.gbValorAbono.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -746,6 +770,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbValorVenta.ResumeLayout(false);
             this.gbValorVenta.PerformLayout();
             this.gbUltimoPago.ResumeLayout(false);
+            this.gbFechaVenta.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -774,7 +799,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox gbArticulosSelected;
         private Controles.CustomGridPanel panelArticulosSelected;
-        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.GroupBox gbValorAbono;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -802,5 +827,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.RadioButton rdAnterior;
         private System.Windows.Forms.GroupBox gbUltimoPago;
         private System.Windows.Forms.DateTimePicker dateUltimoPago;
+        private System.Windows.Forms.GroupBox gbFechaVenta;
+        private System.Windows.Forms.DateTimePicker dateFechaVenta;
     }
 }

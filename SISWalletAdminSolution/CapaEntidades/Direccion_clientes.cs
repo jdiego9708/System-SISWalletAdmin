@@ -20,9 +20,9 @@
                 this.Id_zona = Convert.ToInt32(row["Id_zona"]);
                 this.Zona = new Zonas(row);
                 this.Direccion = Convert.ToString(row["Direccion"]);
-                this.Estado_dirección = Convert.ToString(row["Estado_dirección"]);
+                this.Estado_direccion = Convert.ToString(row["Estado_direccion"]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -35,6 +35,6 @@
         public int Id_zona { get; set; }
         public virtual Zonas Zona { get; set; }
         public string Direccion { get; set; }
-        public string Estado_dirección { get; set; } = "ACTIVO";
+        public string Estado_direccion { get; set; } = "ACTIVO";
     }
 }

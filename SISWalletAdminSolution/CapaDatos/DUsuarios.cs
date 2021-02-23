@@ -325,7 +325,7 @@
                     ParameterName = "@Estado_usuario",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = usuario.Tipo_usuario.Trim().ToUpper()
+                    Value = usuario.Estado_usuario.Trim().ToUpper()
                 };
                 SqlCmd.Parameters.Add(Estado_usuario);
                 contador += 1;
@@ -496,6 +496,62 @@
                 DtResultado = null;
             }
             return (DtResultado, rpta);
+        }
+        #endregion
+
+        #region METODO INACTIVAR CLIENTE
+        public async Task<string> InactivarUsuario(int id_usuario)
+        {
+            string rpta = "";
+
+            SqlConnection SqlCon = new SqlConnection();
+            SqlCon.InfoMessage += new SqlInfoMessageEventHandler(SqlCon_InfoMessage);
+            SqlCon.FireInfoMessageEventOnUserErrors = true;
+            try
+            {
+                SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
+                SqlCommand SqlCmd = new SqlCommand
+                {
+                    Connection = SqlCon,
+                    CommandText = "sp_Inactivar_cliente",
+                    CommandType = CommandType.StoredProcedure,
+                };
+
+                SqlParameter Id_usuario = new SqlParameter
+                {
+                    ParameterName = "@Id_usuario",
+                    SqlDbType = SqlDbType.Int,
+                    Value = id_usuario,
+                };
+                SqlCmd.Parameters.Add(Id_usuario);
+             
+                //Ejecutamos nuestro comando
+                rpta = await SqlCmd.ExecuteNonQueryAsync() >= 1 ? "OK" : "NO SE INGRESÓ";
+                if (!rpta.Equals("OK"))
+                {
+                    if (this.Mensaje_respuesta != null)
+                    {
+                        rpta = this.Mensaje_respuesta;
+                    }
+                }
+            }
+            //Mostramos posible error que tengamos
+            catch (SqlException ex)
+            {
+                rpta = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                rpta = ex.Message;
+            }
+            finally
+            {
+                //Si la cadena SqlCon esta abierta la cerramos
+                if (SqlCon.State == ConnectionState.Open)
+                    SqlCon.Close();
+            }
+            return rpta;
         }
         #endregion
     }

@@ -271,7 +271,7 @@
                 "Frecuencia_cobro = @Frecuencia_cobro, " +
                 "Valor_cuota = @Valor_cuota, " +
                 "Estado_venta = @Estado_venta, " +
-                "Tipo_venta = @Tipo_venta" +
+                "Tipo_venta = @Tipo_venta " +
                 "WHERE Id_venta = @Id_venta ";
 
             SqlConnection SqlCon = new SqlConnection();
@@ -471,16 +471,21 @@
 
             StringBuilder consulta = new StringBuilder();
 
-            consulta.Append("SELECT * FROM Ventas ve " +
-                "INNER JOIN Cobros cb ON ve.Id_cobro = cb.Id_cobro " +
-                "INNER JOIN Turnos tu ON ve.Id_turno = tu.Id_turno " +
-                "INNER JOIN Tipo_productos tppr ON ve.Id_tipo_producto = tppr.Id_tipo_producto " +
+            consulta.Append("SELECT * " +
+                "FROM Ventas ve " +
+                "INNER JOIN Tipo_productos tppr ON ve.Id_tipo_producto = tppr.Id_tipo_producto  " +
                 "INNER JOIN Usuarios us ON ve.Id_cliente = us.Id_usuario " +
-                "INNER JOIN Direccion_clientes dcl ON ve.Id_direccion = dcl.Id_direccion ");
+                "INNER JOIN Direccion_clientes drcl ON ve.Id_direccion = drcl.Id_direccion  " +
+                "INNER JOIN Zonas zo ON drcl.Id_zona = zo.Id_zona " +
+                "INNER JOIN Ciudades ci ON zo.Id_ciudad = ci.Id_ciudad " +
+                "INNER JOIN Paises pa ON ci.Id_pais = pa.Id_pais " +
+                "INNER JOIN Usuarios_ventas usve ON ve.Id_venta = usve.Id_venta " +
+                "INNER JOIN Turnos tu ON ve.Id_turno = tu.Id_turno ");
 
             if (tipo_busqueda.Equals("ID VENTA"))
             {
-                consulta.Append("WHERE ve.Id_venta = @Texto_busqueda ");
+                consulta.Append("WHERE ve.Id_venta = @Texto_busqueda " +
+                    "and us.Estado_usuario = 'ACTIVO' ");
             }
             else if (tipo_busqueda.Equals("ID CLIENTE"))
             {
@@ -488,22 +493,26 @@
             }
             else if (tipo_busqueda.Equals("ID TURNO"))
             {
-                consulta.Append("WHERE ve.Id_turno = @Texto_busqueda ");
+                consulta.Append("WHERE ve.Id_turno = @Texto_busqueda " +
+                    "and us.Estado_usuario = 'ACTIVO' ");
             }
             else if (tipo_busqueda.Equals("ID COBRO"))
             {
-                consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda ");
+                consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda " +
+                    "and us.Estado_usuario = 'ACTIVO' ");
             }
             else if (tipo_busqueda.Equals("ID COBRO ACTIVO"))
             {
                 consulta.Append("WHERE ve.Id_cobro = @Texto_busqueda and " +
-                    "ve.Estado_venta = 'ACTIVO' ");
+                    "ve.Estado_venta = 'ACTIVO' " +
+                    "and us.Estado_usuario = 'ACTIVO' ");
             }
             else if (tipo_busqueda.Equals("FECHA ID COBRO"))
             {
                 MainController main = MainController.GetInstance();
                 consulta.Append("WHERE ve.Id_cobro = " + main.Id_cobro + " and " +
-                    "ve.Fecha_venta = '" + texto_busqueda + "' ");
+                    "ve.Fecha_venta = '" + texto_busqueda + "' " +
+                    "and us.Estado_usuario = 'ACTIVO' ");
             }
 
             consulta.Append("ORDER BY ve.Id_venta DESC ");
