@@ -20,6 +20,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.txtValorAbono.GotFocus += Txt_GotFocus;
             this.txtValorAbono.LostFocus += Txt_LostFocus;
             this.txtValorAbono.TextChanged += TxtValorAbono_TextChanged;
+            this.Load += AbonoSmall_Load;
+        }
+
+        private void AbonoSmall_Load(object sender, EventArgs e)
+        {
+            this.dateFechaProximoAgendamiento.MinDate = DateTime.Now;
         }
 
         private void TxtValorAbono_TextChanged(object sender, EventArgs e)
@@ -84,7 +90,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            this.OnBtnSaveClick?.Invoke(this.Valor_abono, e);
+            object[] objects = new object[] { this.Valor_abono, this.dateFechaProximoAgendamiento.Value };
+            this.OnBtnSaveClick?.Invoke(objects, e);
         }
 
         private void Calcular()

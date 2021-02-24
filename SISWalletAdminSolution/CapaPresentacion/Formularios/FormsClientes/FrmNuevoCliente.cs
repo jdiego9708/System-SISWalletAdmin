@@ -141,6 +141,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 direccion.Estado_direccion = "ACTIVO";
 
+                venta.Fecha_venta = DateTime.Now;
                 venta.Id_cobro = id_cobro;
                 venta.Id_tipo_producto = id_tipo_producto;
                 venta.Id_turno = main.Turno.Id_turno;
@@ -190,6 +191,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 Mensajes.MensajeInformacion("Verifique el barrio seleccionado", "Entendido");
                 return false;
             }
+
+            venta.Fecha_venta = this.dateFechaVenta.Value;
 
             usuario.Alias = this.txtNombres.Text;
             usuario.Nombres = this.txtNombres.Text;
@@ -334,6 +337,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                     {
                                         agendamiento = new Agendamiento_cobros(dt.Rows[0]);
                                         agendamiento.Valor_cobro = venta.Valor_cuota;
+                                        agendamiento.Fecha_cobro = this.dateUltimoPago.Value;
                                         rptaAg = await NAgendamiento_cobros.EditarAgendamiento(agendamiento.Id_agendamiento, agendamiento);
                                         if (rptaAg != "OK")
                                         {
@@ -708,15 +712,28 @@ namespace CapaPresentacion.Formularios.FormsClientes
             }
         }
 
-        private void AsignarDatos(Ventas venta)
+        private async void AsignarDatos(Ventas venta)
         {
             this.IsEditar = true;
 
-            this.gbValorAbono.Visible = false;
+            //Obtener el último agendamiento
+            var (rptaAg, dt) =
+                await NAgendamiento_cobros.BuscarAgendamientos("ID VENTA", venta.Id_venta.ToString());
+            if (dt != null)
+            {
+                Agendamiento_cobros agendamiento = new Agendamiento_cobros(dt.Rows[0]);
+
+                this.txtValorAbono.Text = agendamiento.Valor_pagado.ToString("C");
+                this.txtValorAbono.Tag = agendamiento.Valor_pagado;
+                this.dateUltimoPago.Value = agendamiento.Fecha_cobro;
+            }
+
+            this.gbValorAbono.Visible = true;
             this.rdActual.Visible = false;
             this.rdAnterior.Visible = false;
-            this.gbUltimoPago.Visible = false;
+            this.gbUltimoPago.Visible = true;
 
+            this.dateFechaVenta.Value = venta.Fecha_venta;
             this.txtNombres.Text = venta.Cliente.Nombres;
             this.txtApellidos.Text = venta.Cliente.Apellidos;
             this.txtIdentificacion.Text = venta.Cliente.Identificacion;

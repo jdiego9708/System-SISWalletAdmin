@@ -35,7 +35,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtValorAbono = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dateFechaProximoAgendamiento = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -101,17 +104,40 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(285, 72);
+            this.btnSave.Location = new System.Drawing.Point(283, 131);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(35, 35);
             this.btnSave.TabIndex = 5;
             this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dateFechaProximoAgendamiento);
+            this.groupBox2.Location = new System.Drawing.Point(3, 114);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(274, 52);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Fecha de abono";
+            // 
+            // dateFechaProximoAgendamiento
+            // 
+            this.dateFechaProximoAgendamiento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateFechaProximoAgendamiento.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dateFechaProximoAgendamiento.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dateFechaProximoAgendamiento.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dateFechaProximoAgendamiento.Location = new System.Drawing.Point(3, 21);
+            this.dateFechaProximoAgendamiento.Name = "dateFechaProximoAgendamiento";
+            this.dateFechaProximoAgendamiento.Size = new System.Drawing.Size(265, 25);
+            this.dateFechaProximoAgendamiento.TabIndex = 0;
             // 
             // AbonoSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtInfo);
@@ -120,9 +146,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AbonoSmall";
-            this.Size = new System.Drawing.Size(328, 119);
+            this.Size = new System.Drawing.Size(328, 170);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +162,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtValorAbono;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DateTimePicker dateFechaProximoAgendamiento;
     }
 }
