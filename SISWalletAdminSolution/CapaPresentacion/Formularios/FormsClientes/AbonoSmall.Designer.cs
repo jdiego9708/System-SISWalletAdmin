@@ -37,8 +37,11 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dateFechaProximoAgendamiento = new System.Windows.Forms.DateTimePicker();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dateAbono = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,7 +75,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtValorAbono);
-            this.groupBox1.Location = new System.Drawing.Point(3, 61);
+            this.groupBox1.Location = new System.Drawing.Point(3, 116);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(274, 52);
             this.groupBox1.TabIndex = 2;
@@ -104,7 +107,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(283, 131);
+            this.btnSave.Location = new System.Drawing.Point(283, 186);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(35, 35);
             this.btnSave.TabIndex = 5;
@@ -113,12 +116,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dateFechaProximoAgendamiento);
-            this.groupBox2.Location = new System.Drawing.Point(3, 114);
+            this.groupBox2.Location = new System.Drawing.Point(3, 169);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(274, 52);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fecha de abono";
+            this.groupBox2.Text = "Fecha de próximo abono";
             // 
             // dateFechaProximoAgendamiento
             // 
@@ -132,11 +135,34 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.dateFechaProximoAgendamiento.Size = new System.Drawing.Size(265, 25);
             this.dateFechaProximoAgendamiento.TabIndex = 0;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dateAbono);
+            this.groupBox3.Location = new System.Drawing.Point(3, 61);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(274, 52);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fecha de abono ";
+            // 
+            // dateAbono
+            // 
+            this.dateAbono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateAbono.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dateAbono.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dateAbono.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dateAbono.Location = new System.Drawing.Point(3, 21);
+            this.dateAbono.Name = "dateAbono";
+            this.dateAbono.Size = new System.Drawing.Size(265, 25);
+            this.dateAbono.TabIndex = 0;
+            // 
             // AbonoSmall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
@@ -146,10 +172,11 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AbonoSmall";
-            this.Size = new System.Drawing.Size(328, 170);
+            this.Size = new System.Drawing.Size(328, 225);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,5 +191,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DateTimePicker dateFechaProximoAgendamiento;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DateTimePicker dateAbono;
     }
 }

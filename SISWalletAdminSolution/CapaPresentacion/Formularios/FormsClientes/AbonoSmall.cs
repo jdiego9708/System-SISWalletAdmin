@@ -90,7 +90,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            object[] objects = new object[] { this.Valor_abono, this.dateFechaProximoAgendamiento.Value };
+            object[] objects = new object[] { this.Valor_abono, this.dateFechaProximoAgendamiento.Value, this.dateAbono.Value };
             this.OnBtnSaveClick?.Invoke(objects, e);
         }
 

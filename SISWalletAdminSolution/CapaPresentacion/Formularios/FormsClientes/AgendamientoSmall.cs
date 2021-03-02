@@ -40,10 +40,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             object[] objs = (object[])sender;
             decimal valor_abono = (decimal)objs[0];
             DateTime fecha_proximo_abono = (DateTime)objs[1];
+            DateTime fecha_abono = (DateTime)objs[2];
 
             if (valor_abono != 0)
             {
                 MainController main = MainController.GetInstance();
+                this.Agendamiento.Fecha_cobro = fecha_abono;
                 this.Agendamiento.Valor_pagado = valor_abono;
                 this.Agendamiento.Saldo_restante -= valor_abono;
                 this.Agendamiento.Id_turno = main.Turno.Id_turno;
