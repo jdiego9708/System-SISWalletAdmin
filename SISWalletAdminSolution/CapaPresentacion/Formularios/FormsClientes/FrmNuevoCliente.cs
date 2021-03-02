@@ -101,11 +101,19 @@ namespace CapaPresentacion.Formularios.FormsClientes
             await this.LoadArticulos("COMPLETO", "");
         }
 
-        private bool Comprobaciones(out Usuarios usuario, out Direccion_clientes direccion,
-            out Ventas venta, out Agendamiento_cobros agendamiento)
+        private async Task<(bool result, Usuarios usuario, 
+            Direccion_clientes direccion,
+            Ventas venta,
+            Agendamiento_cobros agendamiento)> Comprobaciones()
         {
+            bool result = true;
             MainController main = MainController.GetInstance();
-            agendamiento = new Agendamiento_cobros();
+
+            Agendamiento_cobros agendamiento = new Agendamiento_cobros();
+            Usuarios usuario = new Usuarios();
+            Direccion_clientes direccion = new Direccion_clientes();
+            Ventas venta = new Ventas();
+
             int id_cobro = 0;
             int id_tipo_producto = 0;
 
@@ -159,50 +167,60 @@ namespace CapaPresentacion.Formularios.FormsClientes
             if (string.IsNullOrEmpty(this.txtNombres.Text))
             {
                 Mensajes.MensajeInformacion("Verifique el nombre del cliente", "Entendido");
-                return false;
+                result = false;
             }
 
             if (string.IsNullOrEmpty(this.txtDireccionResidencia.Text))
             {
                 Mensajes.MensajeInformacion("Verifique la dirección del cliente", "Entendido");
-                return false;
+                result = false;
             }
 
             if (string.IsNullOrEmpty(this.txtTelCliente.Text))
             {
                 Mensajes.MensajeInformacion("Verifique el teléfono del cliente", "Entendido");
-                return false;
+                result = false;
             }
 
             if (string.IsNullOrEmpty(this.listaFrecuencia.Text))
             {
                 Mensajes.MensajeInformacion("Verifique la frecuencia de cobro", "Entendido");
-                return false;
+                result = false;
             }
 
             if (this.numericPlazo.Value == 0)
             {
                 Mensajes.MensajeInformacion("Verifique el plazo de cobro", "Entendido");
-                return false;
+                result = false;
             }
 
             if (!int.TryParse(this.listaBarrios.SelectedValue.ToString(), out int id_barrio))
             {
                 Mensajes.MensajeInformacion("Verifique el barrio seleccionado", "Entendido");
-                return false;
+                result = false;
             }
 
             venta.Fecha_venta = this.dateFechaVenta.Value;
 
-            usuario.Alias = this.txtNombres.Text;
-            usuario.Nombres = this.txtNombres.Text;
-            usuario.Apellidos = this.txtApellidos.Text;
-            usuario.Identificacion = this.txtIdentificacion.Text;
-
-            if (string.IsNullOrEmpty(this.txtTelResidencia.Text))
-                usuario.Celular = this.txtTelCliente.Text;
+            var (dt, rpta) = 
+                await NUsuarios.BuscarClientes("IDENTIFICACION", this.txtIdentificacion.Text, "");
+            if (dt != null)
+            {
+                usuario = new Usuarios(dt.Rows[0]);
+                Mensajes.MensajeInformacion("El cliente ya existe, se realizará una venta nueva", "Entendido");
+            }
             else
-                usuario.Celular = this.txtTelCliente.Text + " - " + this.txtTelResidencia.Text;
+            {
+                usuario.Alias = this.txtNombres.Text;
+                usuario.Nombres = this.txtNombres.Text;
+                usuario.Apellidos = this.txtApellidos.Text;
+                usuario.Identificacion = this.txtIdentificacion.Text;
+
+                if (string.IsNullOrEmpty(this.txtTelResidencia.Text))
+                    usuario.Celular = this.txtTelCliente.Text;
+                else
+                    usuario.Celular = this.txtTelCliente.Text + " - " + this.txtTelResidencia.Text;
+            }
 
             direccion.Id_zona = id_barrio;
             direccion.Direccion = this.txtDireccionResidencia.Text;
@@ -216,7 +234,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 if (!decimal.TryParse(this.txtValorAbono.Tag.ToString(), out decimal valor_abono))
                 {
                     Mensajes.MensajeInformacion("Verifique el valor del abono", "Entendido");
-                    return false;
+                    result = false;
                 }
 
                 agendamiento.Id_turno = main.Turno.Id_turno;
@@ -235,15 +253,16 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 agendamiento.Estado_cobro = "TERMINADO";
             }
 
-            return true;
+            return (result, usuario, direccion, venta, agendamiento);
         }
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.Comprobaciones(out Usuarios usuario, out Direccion_clientes direccion,
-                         out Ventas venta, out Agendamiento_cobros agendamiento))
+                var (result, usuario, direccion, venta, agendamiento) = await this.Comprobaciones();
+
+                if (result)
                 {
                     MensajeEspera.ShowWait("Guardando...");
                     List<string> errores = new List<string>();

@@ -60,12 +60,12 @@ namespace CapaPresentacion.Formularios.FormsVentas
             this.txtInformacion.Enabled = false;
             this.txtInformacion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.txtInformacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtInformacion.Location = new System.Drawing.Point(4, 18);
+            this.txtInformacion.Location = new System.Drawing.Point(6, 18);
             this.txtInformacion.Multiline = true;
             this.txtInformacion.Name = "txtInformacion";
             this.txtInformacion.ReadOnly = true;
             this.txtInformacion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInformacion.Size = new System.Drawing.Size(535, 58);
+            this.txtInformacion.Size = new System.Drawing.Size(533, 58);
             this.txtInformacion.TabIndex = 2;
             this.txtInformacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

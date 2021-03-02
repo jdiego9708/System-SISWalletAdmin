@@ -22,6 +22,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnAbono.Click += BtnAbono_Click;
         }
 
+        public event EventHandler OnRefresh;
+
         private void BtnAbono_Click(object sender, EventArgs e)
         {
             AbonoSmall abonoSmall = new AbonoSmall
@@ -35,7 +37,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private async void AbonoSmall_OnBtnSaveClick(object sender, EventArgs e)
         {
-            decimal valor_abono = (decimal)sender;
+            object[] objs = (object[])sender;
+            decimal valor_abono = (decimal)objs[0];
+            DateTime fecha_proximo_abono = (DateTime)objs[1];
+
             if (valor_abono != 0)
             {
                 MainController main = MainController.GetInstance();
@@ -49,7 +54,20 @@ namespace CapaPresentacion.Formularios.FormsClientes
                     await NAgendamiento_cobros.EditarAgendamiento(this.Agendamiento.Id_agendamiento, this.Agendamiento);
                 if (rpta.Equals("OK"))
                 {
-                    Mensajes.MensajeInformacion("Abono realizado correctamente", "Entendido");
+                    this.Agendamiento.Valor_pagado = 0;
+                    this.Agendamiento.Fecha_cobro = fecha_proximo_abono;
+                    this.Agendamiento.Estado_cobro = "PENDIENTE";
+                    rpta = NAgendamiento_cobros.InsertarAgendamiento(out int id_agendamiento, this.Agendamiento);
+                    if (rpta.Equals("OK"))
+                    {
+                        Mensajes.MensajeInformacion("Abono realizado y proximo cobro agendado con éxito para la fecha " +
+                            fecha_proximo_abono.ToLongDateString(), "Entendido");
+                    }
+                    else
+                    {
+                        Mensajes.MensajeInformacion("Abono realizado correctamente pero no se realizó el agendamiento para el proximo cobro", "Entendido");
+                    }
+                    this.OnRefresh?.Invoke(sender, e);
                 }
                 else
                 {
