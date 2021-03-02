@@ -5,6 +5,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class DDireccion_clientes
     {
@@ -250,9 +251,9 @@
         #endregion
 
         #region METODO BUSCAR DIRECCIONES
-        public DataTable BuscarDirecciones(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public async Task<(string rpta, DataTable dt)>BuscarDirecciones(string tipo_busqueda, string texto_busqueda)
         {
-            rpta = "OK";
+            string rpta = "OK";
 
             StringBuilder consulta = new StringBuilder();
 
@@ -261,10 +262,14 @@
 
             if (tipo_busqueda.Equals("ID USUARIO"))
             {
-                consulta.Append("WHERE us.Id_usuario = @Texto_busqueda ");
+                consulta.Append("WHERE us.Id_usuario = " + texto_busqueda + " ");
+            }
+            else if (tipo_busqueda.Equals("IDENTIFICACION CLIENTE"))
+            {
+                consulta.Append("WHERE us.Identificacion = '" + texto_busqueda + "' ");
             }
 
-            consulta.Append("ORDER BY dlc.Id_direccion DESC");
+            consulta.Append("ORDER BY dcl.Id_direccion DESC");
 
             DataTable DtResultado = new DataTable("Direcciones");
             SqlConnection SqlCon = new SqlConnection();
@@ -273,6 +278,7 @@
             try
             {
                 SqlCon.ConnectionString = DConexion.Cn;
+                await SqlCon.OpenAsync();
                 SqlCommand Sqlcmd = new SqlCommand
                 {
                     Connection = SqlCon,
@@ -307,7 +313,7 @@
                 rpta = ex.Message;
                 DtResultado = null;
             }
-            return DtResultado;
+            return (rpta, DtResultado);
         }
         #endregion
     }

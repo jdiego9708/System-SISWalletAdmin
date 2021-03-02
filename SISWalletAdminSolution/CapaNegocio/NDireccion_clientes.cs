@@ -3,6 +3,7 @@
     using CapaDatos;
     using CapaEntidades;
     using System.Data;
+    using System.Threading.Tasks;
 
     public class NDireccion_clientes
     {
@@ -18,10 +19,10 @@
             return DDireccion_clientes.EditarDireccion(id_direccion, direccion);
         }
 
-        public static DataTable BuscarDirecciones(string tipo_busqueda, string texto_busqueda, out string rpta)
+        public static async Task<(string rpta, DataTable dt)> BuscarDirecciones(string tipo_busqueda, string texto_busqueda)
         {
             DDireccion_clientes DDireccion_clientes = new DDireccion_clientes();
-            return DDireccion_clientes.BuscarDirecciones(tipo_busqueda, texto_busqueda, out rpta);
+            return await DDireccion_clientes.BuscarDirecciones(tipo_busqueda, texto_busqueda);
         }
     }
 }

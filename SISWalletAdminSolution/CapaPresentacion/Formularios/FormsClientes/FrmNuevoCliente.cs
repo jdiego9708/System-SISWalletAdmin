@@ -45,6 +45,52 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.rdAnterior.CheckedChanged += RdAnterior_CheckedChanged;
 
             this.dateFechaVenta.ValueChanged += DateFechaVenta_ValueChanged;
+
+            this.txtIdentificacion.KeyPress += TxtIdentificacion_KeyPress;
+            this.txtIdentificacion.LostFocus += TxtIdentificacion_LostFocus;
+        }
+
+        private async void TxtIdentificacion_LostFocus(object sender, EventArgs e)
+        {
+            //if (!string.IsNullOrEmpty(this.txtIdentificacion.Text))
+            //{
+            //    var (rpta, dt) =
+            //        await NDireccion_clientes.BuscarDirecciones("IDENTIFICACION CLIENTE", this.txtIdentificacion.Text);
+            //    if (dt != null)
+            //    {
+            //        Mensajes.MensajeInformacion("El cliente ya existe, se pondrán los datos automáticamente", "Entendido");
+
+            //        Direccion_clientes direccion = new Direccion_clientes(dt.Rows[0]);
+
+            //        this.txtNombres.Text = direccion.Usuario.Nombres;
+            //        this.txtApellidos.Text = direccion.Usuario.Apellidos;
+            //        this.txtTelCliente.Text = direccion.Usuario.Celular;
+            //        this.txtDireccionResidencia.Text = direccion.Direccion;
+            //    }
+            //}
+        }
+
+        private async void TxtIdentificacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(this.txtIdentificacion.Text))
+                {
+                    var (rpta, dt) =
+                        await NDireccion_clientes.BuscarDirecciones("IDENTIFICACION CLIENTE", this.txtIdentificacion.Text);
+                    if (dt != null)
+                    {
+                        Mensajes.MensajeInformacion("El cliente ya existe, se pondrán los datos automáticamente", "Entendido");
+
+                        Direccion_clientes direccion = new Direccion_clientes(dt.Rows[0]);
+
+                        this.txtNombres.Text = direccion.Usuario.Nombres;
+                        this.txtApellidos.Text = direccion.Usuario.Apellidos;
+                        this.txtTelCliente.Text = direccion.Usuario.Celular;
+                        this.txtDireccionResidencia.Text = direccion.Direccion;
+                    }
+                }
+            }
         }
 
         public event EventHandler OnRefresh;
@@ -101,7 +147,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             await this.LoadArticulos("COMPLETO", "");
         }
 
-        private async Task<(bool result, Usuarios usuario, 
+        private async Task<(bool result, Usuarios usuario,
             Direccion_clientes direccion,
             Ventas venta,
             Agendamiento_cobros agendamiento)> Comprobaciones()
@@ -202,7 +248,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
             venta.Fecha_venta = this.dateFechaVenta.Value;
 
-            var (dt, rpta) = 
+            var (dt, rpta) =
                 await NUsuarios.BuscarClientes("IDENTIFICACION", this.txtIdentificacion.Text, "");
             if (dt != null)
             {
@@ -376,7 +422,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                         Mensajes.MensajeInformacion("Se actualizó correctamente el cliente pero no se encontraron sus agendamientos, número asignado: " + usuario.Id_usuario, "Entendido");
                                         this.OnRefresh?.Invoke(sender, e);
                                         this.Close();
-                                    }                               
+                                    }
                                 }
                             }
                         }
