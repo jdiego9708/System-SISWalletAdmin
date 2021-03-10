@@ -207,8 +207,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private async void RdTerminados_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox chk = (CheckBox)sender;
-            if (chk.Checked)
+            RadioButton rd = (RadioButton)sender;
+            if (rd.Checked)
             {
                 await this.LoadAgendamientos("FECHA TERMINADO", DateTime.Now.ToString("yyyy-MM-dd"));
             }
@@ -216,8 +216,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private async void RdPendientes_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox chk = (CheckBox)sender;
-            if (chk.Checked)
+            RadioButton rd = (RadioButton)sender;
+            if (rd.Checked)
             {
                 await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
             }
