@@ -33,12 +33,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClientes));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnReporte = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnAddCliente = new System.Windows.Forms.Button();
             this.gbResultados = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.rdTerminados = new System.Windows.Forms.RadioButton();
             this.rdPendientes = new System.Windows.Forms.RadioButton();
             this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -51,7 +51,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.panelClientes = new CapaPresentacion.Controles.CustomGridPanel();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -62,7 +61,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.panelClientes = new CapaPresentacion.Controles.CustomGridPanel();
+            this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbResultados.SuspendLayout();
@@ -93,26 +93,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "Código";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // txtBusqueda
-            // 
-            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBusqueda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtBusqueda.BackColor = System.Drawing.Color.White;
-            this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBusqueda.Imagen = null;
-            this.txtBusqueda.Location = new System.Drawing.Point(82, 25);
-            this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBusqueda.MaxLenght = 0;
-            this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(678, 20);
-            this.txtBusqueda.TabIndex = 3;
-            this.txtBusqueda.Texto = "Búsqueda";
-            this.txtBusqueda.Texto_inicial = "Búsqueda";
-            this.txtBusqueda.Tipo_txt = null;
-            this.txtBusqueda.Visible_px = true;
             // 
             // groupBox2
             // 
@@ -186,6 +166,21 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbResultados.TabIndex = 2;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPrint.BackgroundImage")));
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Location = new System.Drawing.Point(295, 13);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(35, 35);
+            this.btnPrint.TabIndex = 34;
+            this.toolTip1.SetToolTip(this.btnPrint, "Agregar un cliente");
+            this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // rdTerminados
             // 
@@ -271,7 +266,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.bindingNavigatorPositionItem1.AccessibleName = "Posición";
             this.bindingNavigatorPositionItem1.AutoSize = false;
-            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
             this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem1.Text = "0";
@@ -304,18 +298,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
             this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // panelClientes
-            // 
-            this.panelClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelClientes.AutoScroll = true;
-            this.panelClientes.Location = new System.Drawing.Point(12, 51);
-            this.panelClientes.Name = "panelClientes";
-            this.panelClientes.PageSize = 10;
-            this.panelClientes.Size = new System.Drawing.Size(899, 363);
-            this.panelClientes.TabIndex = 3;
             // 
             // bindingNavigatorCountItem
             // 
@@ -351,7 +333,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Posición";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -385,20 +366,37 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnPrint
+            // panelClientes
             // 
-            this.btnPrint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPrint.BackgroundImage")));
-            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnPrint.FlatAppearance.BorderSize = 0;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Location = new System.Drawing.Point(657, 13);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(35, 35);
-            this.btnPrint.TabIndex = 34;
-            this.toolTip1.SetToolTip(this.btnPrint, "Agregar un cliente");
-            this.btnPrint.UseVisualStyleBackColor = true;
+            this.panelClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelClientes.AutoScroll = true;
+            this.panelClientes.Location = new System.Drawing.Point(12, 51);
+            this.panelClientes.Name = "panelClientes";
+            this.panelClientes.PageSize = 10;
+            this.panelClientes.Size = new System.Drawing.Size(899, 363);
+            this.panelClientes.TabIndex = 3;
+            // 
+            // txtBusqueda
+            // 
+            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBusqueda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtBusqueda.BackColor = System.Drawing.Color.White;
+            this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBusqueda.Imagen = null;
+            this.txtBusqueda.Location = new System.Drawing.Point(82, 25);
+            this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBusqueda.MaxLenght = 0;
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.Size = new System.Drawing.Size(678, 20);
+            this.txtBusqueda.TabIndex = 3;
+            this.txtBusqueda.Texto = "Búsqueda";
+            this.txtBusqueda.Texto_inicial = "Búsqueda";
+            this.txtBusqueda.Tipo_txt = null;
+            this.txtBusqueda.Visible_px = true;
             // 
             // FrmClientes
             // 

@@ -33,7 +33,67 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                MensajeEspera.ShowWait("Cargando...");
+
+                DataTable dtAgendamiento = new DataTable();
+                dtAgendamiento.Columns.Add("Id_agendamiento", typeof(int));
+                dtAgendamiento.Columns.Add("Fecha_agendamiento", typeof(string));
+                dtAgendamiento.Columns.Add("Nombre_cliente", typeof(string));
+                dtAgendamiento.Columns.Add("Celular_cliente", typeof(string));
+                dtAgendamiento.Columns.Add("Saldo_restante", typeof(string));
+                dtAgendamiento.Columns.Add("Valor_cuota", typeof(string));
+                dtAgendamiento.Columns.Add("Valor_pagado", typeof(string));
+                dtAgendamiento.Columns.Add("Tipo_cobro", typeof(string));
+
+
+                if (this.DtAgendamientos != null)
+                {
+                    decimal total_recaudo = 0;
+
+                    foreach (DataRow row in this.DtAgendamientos.Rows)
+                    {
+                        Agendamiento_cobros ag = new Agendamiento_cobros(row);
+
+                        int id_agendamiento = ag.Id_agendamiento;
+                        DateTime fecha_agendamiento = ag.Fecha_cobro;
+                        string nombre_cliente = ag.Venta.Cliente.NombreCompleto;
+                        string celular_cliente = ag.Venta.Cliente.Celular;
+                        decimal saldo_restante = ag.Saldo_restante;
+                        decimal valor_cuota = ag.Valor_cobro;
+                        decimal valor_pagado = 0;
+                        string tipo_cobro = ag.Tipo_cobro;
+
+                        total_recaudo += valor_cuota;
+
+                        DataRow newRow = dtAgendamiento.NewRow();
+                        newRow["Id_agendamiento"] = id_agendamiento;
+                        newRow["Fecha_agendamiento"] = fecha_agendamiento.ToString("yyyy-MM-dd");
+                        newRow["Nombre_cliente"] = nombre_cliente;
+                        newRow["Celular_cliente"] = celular_cliente;
+                        newRow["Saldo_restante"] = saldo_restante.ToString("C");
+                        newRow["Valor_cuota"] = valor_cuota.ToString("C");
+                        newRow["Valor_pagado"] = valor_pagado.ToString("C");
+                        newRow["Tipo_cobro"] = tipo_cobro;
+                        dtAgendamiento.Rows.Add(newRow);
+                    }
+                    MensajeEspera.CloseForm();
+                    FrmReporteAgendamientos frmReporteAgendamientos = new FrmReporteAgendamientos
+                    {
+                        DtAgendamientos = dtAgendamiento,
+                        Total_recaudo = "Total a recaudar: " + total_recaudo.ToString("C"),
+                    };
+                    frmReporteAgendamientos.ShowDialog();
+                }
+                MensajeEspera.CloseForm();
+            }
+            catch (Exception ex)
+            {
+                MensajeEspera.CloseForm();
+                Mensajes.MensajeErrorCompleto(this.Name, "",
+                   "Hubo un error al cargar el reporte", ex.Message);
+            }
         }
 
         private async void BtnClientes_Click(object sender, EventArgs e)
