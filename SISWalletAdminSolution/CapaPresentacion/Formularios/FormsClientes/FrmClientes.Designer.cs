@@ -35,13 +35,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnReporte = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnAddCliente = new System.Windows.Forms.Button();
             this.gbResultados = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.rdTerminados = new System.Windows.Forms.RadioButton();
             this.rdPendientes = new System.Windows.Forms.RadioButton();
             this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -65,7 +62,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnReporte = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbResultados.SuspendLayout();
@@ -129,6 +126,20 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opciones";
             // 
+            // btnReporte
+            // 
+            this.btnReporte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnReporte.BackgroundImage")));
+            this.btnReporte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReporte.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnReporte.FlatAppearance.BorderSize = 0;
+            this.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporte.Location = new System.Drawing.Point(94, 20);
+            this.btnReporte.Name = "btnReporte";
+            this.btnReporte.Size = new System.Drawing.Size(35, 35);
+            this.btnReporte.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.btnReporte, "Lista de clientes");
+            this.btnReporte.UseVisualStyleBackColor = true;
+            // 
             // btnRefresh
             // 
             this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
@@ -164,10 +175,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbResultados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbResultados.Controls.Add(this.radioButton5);
-            this.gbResultados.Controls.Add(this.radioButton4);
-            this.gbResultados.Controls.Add(this.radioButton3);
-            this.gbResultados.Controls.Add(this.radioButton2);
+            this.gbResultados.Controls.Add(this.btnPrint);
             this.gbResultados.Controls.Add(this.rdTerminados);
             this.gbResultados.Controls.Add(this.rdPendientes);
             this.gbResultados.Controls.Add(this.bindingNavigator2);
@@ -178,46 +186,6 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbResultados.TabIndex = 2;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(462, 25);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(96, 21);
-            this.radioButton5.TabIndex = 8;
-            this.radioButton5.Text = "Quincenales";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(564, 25);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(88, 21);
-            this.radioButton4.TabIndex = 7;
-            this.radioButton4.Text = "Mensuales";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(368, 25);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(88, 21);
-            this.radioButton3.TabIndex = 6;
-            this.radioButton3.Text = "Semanales";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(295, 25);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(67, 21);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.Text = "Diarios";
-            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // rdTerminados
             // 
@@ -417,19 +385,20 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnReporte
+            // btnPrint
             // 
-            this.btnReporte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnReporte.BackgroundImage")));
-            this.btnReporte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReporte.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnReporte.FlatAppearance.BorderSize = 0;
-            this.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporte.Location = new System.Drawing.Point(94, 20);
-            this.btnReporte.Name = "btnReporte";
-            this.btnReporte.Size = new System.Drawing.Size(35, 35);
-            this.btnReporte.TabIndex = 35;
-            this.toolTip1.SetToolTip(this.btnReporte, "Lista de clientes");
-            this.btnReporte.UseVisualStyleBackColor = true;
+            this.btnPrint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPrint.BackgroundImage")));
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Location = new System.Drawing.Point(657, 13);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(35, 35);
+            this.btnPrint.TabIndex = 34;
+            this.toolTip1.SetToolTip(this.btnPrint, "Agregar un cliente");
+            this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // FrmClientes
             // 
@@ -490,11 +459,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator5;
         private System.Windows.Forms.RadioButton rdPendientes;
         private System.Windows.Forms.RadioButton rdTerminados;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnReporte;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

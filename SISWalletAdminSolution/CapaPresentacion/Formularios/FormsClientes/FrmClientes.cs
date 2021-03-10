@@ -28,6 +28,12 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.rdTerminados.CheckedChanged += RdTerminados_CheckedChanged;
 
             this.btnReporte.Click += BtnClientes_Click;
+            this.btnPrint.Click += BtnPrint_Click;
+        }
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private async void BtnClientes_Click(object sender, EventArgs e)
@@ -265,6 +271,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 this.panelClientes.clearDataSource();
                 this.positionChanged = 1;
+                this.DtAgendamientos = dtAgendamiento;
 
                 if (dtAgendamiento != null)
                 {
@@ -307,5 +314,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                 this.panelClientes.AddArrayControl(controls);
             }
         }
+
+        public DataTable DtAgendamientos { get; set; }
     }
 }
