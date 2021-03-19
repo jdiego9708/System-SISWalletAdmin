@@ -277,7 +277,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
             if (!this.IsEditar)
             {
-                if (!decimal.TryParse(this.txtValorAbono.Tag.ToString(), out decimal valor_abono))
+                if (!decimal.TryParse(Convert.ToString(this.txtValorAbono.Tag), out decimal valor_abono))
                 {
                     Mensajes.MensajeInformacion("Verifique el valor del abono", "Entendido");
                     result = false;
@@ -321,6 +321,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                         rpta = NUsuarios.InsertarUsuario(out int id_usuario, usuario);
                         direccion.Id_usuario = id_usuario;
                         venta.Id_cliente = id_usuario;
+                        usuario.Id_usuario = id_usuario;
                     }
 
                     if (rpta.Equals("OK"))
@@ -345,7 +346,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                             if (rpta.Equals("OK"))
                             {
-                                if (this.rdActual.Checked && !this.IsEditar && this.Total_articulos == 0)
+                                if (this.rdActual.Checked && !this.IsEditar && this.chkDescontar.Checked)
                                 {
                                     foreach (Articulos art in this.ArticulosSelected)
                                     {
@@ -384,7 +385,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                         if (rpta.Equals("OK"))
                                         {
                                             MensajeEspera.CloseForm();
-                                            Mensajes.MensajeInformacion("Se guardó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            Mensajes.MensajeInformacion("Se guardó correctamente el cliente, " +
+                                                "número cliente: " + usuario.Id_usuario + " Número venta: " + venta.Id_venta, "Entendido");
                                             this.Close();
                                         }
                                         else
@@ -406,13 +408,15 @@ namespace CapaPresentacion.Formularios.FormsClientes
                                         rptaAg = await NAgendamiento_cobros.EditarAgendamiento(agendamiento.Id_agendamiento, agendamiento);
                                         if (rptaAg != "OK")
                                         {
-                                            Mensajes.MensajeInformacion("Se actualizó el cliente pero no su último pago, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            Mensajes.MensajeInformacion("Se actualizó el cliente pero no su último pago," +
+                                                "número cliente: " + usuario.Id_usuario + " Número venta: " + venta.Id_venta, "Entendido");
                                             this.OnRefresh?.Invoke(sender, e);
                                             this.Close();
                                         }
                                         else
                                         {
-                                            Mensajes.MensajeInformacion("Se actualizó correctamente el cliente, número asignado: " + usuario.Id_usuario, "Entendido");
+                                            Mensajes.MensajeInformacion("Se actualizó correctamente el cliente, " +
+                                                "número cliente: " + usuario.Id_usuario + " Número venta: " + venta.Id_venta, "Entendido");
                                             this.OnRefresh?.Invoke(sender, e);
                                             this.Close();
                                         }

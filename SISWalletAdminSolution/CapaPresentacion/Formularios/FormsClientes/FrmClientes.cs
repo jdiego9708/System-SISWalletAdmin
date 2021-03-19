@@ -245,11 +245,20 @@ namespace CapaPresentacion.Formularios.FormsClientes
                     await this.LoadAgendamientos("FECHA PENDIENTE", DateTime.Now.ToString("yyyy-MM-dd"));
                 else
                 {
-                    if (this.checkBox1.Checked)
+                    if (this.rdCliente.Checked)
                     {
                         if (int.TryParse(txt.Texto, out int id_usuario))
                         {
                             await this.LoadClientes("ID CLIENTE", id_usuario.ToString(), "");
+                        }
+                        else
+                            Mensajes.MensajeInformacion("Debe digitar un código de solo números", "Entendido");
+                    }
+                    else if (this.rdVenta.Checked)
+                    {
+                        if (int.TryParse(txt.Texto, out int id_venta))
+                        {
+                            await this.LoadClientes("ID VENTA", id_venta.ToString(), "");
                         }
                         else
                             Mensajes.MensajeInformacion("Debe digitar un código de solo números", "Entendido");

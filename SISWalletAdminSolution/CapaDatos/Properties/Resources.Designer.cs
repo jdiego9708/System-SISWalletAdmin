@@ -68,5 +68,14 @@ namespace CapaDatos.Properties {
                 return ResourceManager.GetString("Cn", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SISWalletBD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False.
+        /// </summary>
+        internal static string Cn1 {
+            get {
+                return ResourceManager.GetString("Cn1", resourceCulture);
+            }
+        }
     }
 }

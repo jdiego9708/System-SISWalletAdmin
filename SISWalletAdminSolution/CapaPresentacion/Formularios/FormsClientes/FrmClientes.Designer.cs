@@ -32,7 +32,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClientes));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtBusqueda = new CapaPresentacion.CustomTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnReporte = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -51,6 +51,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.panelClientes = new CapaPresentacion.Controles.CustomGridPanel();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -61,8 +62,9 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panelClientes = new CapaPresentacion.Controles.CustomGridPanel();
-            this.txtBusqueda = new CapaPresentacion.CustomTextBox();
+            this.rdCliente = new System.Windows.Forms.RadioButton();
+            this.rdVenta = new System.Windows.Forms.RadioButton();
+            this.rdOtros = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbResultados.SuspendLayout();
@@ -74,25 +76,36 @@ namespace CapaPresentacion.Formularios.FormsClientes
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.rdOtros);
+            this.groupBox1.Controls.Add(this.rdVenta);
+            this.groupBox1.Controls.Add(this.rdCliente);
             this.groupBox1.Controls.Add(this.txtBusqueda);
             this.groupBox1.Location = new System.Drawing.Point(163, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(766, 64);
+            this.groupBox1.Size = new System.Drawing.Size(766, 79);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda";
             // 
-            // checkBox1
+            // txtBusqueda
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox1.Location = new System.Drawing.Point(6, 28);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(70, 21);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Código";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBusqueda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtBusqueda.BackColor = System.Drawing.Color.White;
+            this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBusqueda.Imagen = null;
+            this.txtBusqueda.Location = new System.Drawing.Point(6, 52);
+            this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBusqueda.MaxLenght = 0;
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.Size = new System.Drawing.Size(740, 20);
+            this.txtBusqueda.TabIndex = 3;
+            this.txtBusqueda.Texto = "Búsqueda";
+            this.txtBusqueda.Texto_inicial = "Búsqueda";
+            this.txtBusqueda.Tipo_txt = null;
+            this.txtBusqueda.Visible_px = true;
             // 
             // groupBox2
             // 
@@ -101,7 +114,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.groupBox2.Controls.Add(this.btnAddCliente);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(145, 64);
+            this.groupBox2.Size = new System.Drawing.Size(145, 79);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opciones";
@@ -113,7 +126,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnReporte.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnReporte.FlatAppearance.BorderSize = 0;
             this.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporte.Location = new System.Drawing.Point(94, 20);
+            this.btnReporte.Location = new System.Drawing.Point(94, 27);
             this.btnReporte.Name = "btnReporte";
             this.btnReporte.Size = new System.Drawing.Size(35, 35);
             this.btnReporte.TabIndex = 35;
@@ -128,7 +141,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Location = new System.Drawing.Point(53, 20);
+            this.btnRefresh.Location = new System.Drawing.Point(53, 27);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(35, 35);
             this.btnRefresh.TabIndex = 34;
@@ -143,7 +156,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.btnAddCliente.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
             this.btnAddCliente.FlatAppearance.BorderSize = 0;
             this.btnAddCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCliente.Location = new System.Drawing.Point(12, 20);
+            this.btnAddCliente.Location = new System.Drawing.Point(12, 27);
             this.btnAddCliente.Name = "btnAddCliente";
             this.btnAddCliente.Size = new System.Drawing.Size(35, 35);
             this.btnAddCliente.TabIndex = 33;
@@ -160,9 +173,9 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.gbResultados.Controls.Add(this.rdPendientes);
             this.gbResultados.Controls.Add(this.bindingNavigator2);
             this.gbResultados.Controls.Add(this.panelClientes);
-            this.gbResultados.Location = new System.Drawing.Point(12, 82);
+            this.gbResultados.Location = new System.Drawing.Point(12, 97);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(917, 420);
+            this.gbResultados.Size = new System.Drawing.Size(917, 405);
             this.gbResultados.TabIndex = 2;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
@@ -299,6 +312,18 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
             this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
+            // panelClientes
+            // 
+            this.panelClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelClientes.AutoScroll = true;
+            this.panelClientes.Location = new System.Drawing.Point(12, 51);
+            this.panelClientes.Name = "panelClientes";
+            this.panelClientes.PageSize = 10;
+            this.panelClientes.Size = new System.Drawing.Size(899, 348);
+            this.panelClientes.TabIndex = 3;
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -366,37 +391,39 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // panelClientes
+            // rdCliente
             // 
-            this.panelClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelClientes.AutoScroll = true;
-            this.panelClientes.Location = new System.Drawing.Point(12, 51);
-            this.panelClientes.Name = "panelClientes";
-            this.panelClientes.PageSize = 10;
-            this.panelClientes.Size = new System.Drawing.Size(899, 363);
-            this.panelClientes.TabIndex = 3;
+            this.rdCliente.AutoSize = true;
+            this.rdCliente.Location = new System.Drawing.Point(6, 24);
+            this.rdCliente.Name = "rdCliente";
+            this.rdCliente.Size = new System.Drawing.Size(110, 21);
+            this.rdCliente.TabIndex = 3;
+            this.rdCliente.TabStop = true;
+            this.rdCliente.Text = "Código cliente";
+            this.rdCliente.UseVisualStyleBackColor = true;
             // 
-            // txtBusqueda
+            // rdVenta
             // 
-            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBusqueda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtBusqueda.BackColor = System.Drawing.Color.White;
-            this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBusqueda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBusqueda.Imagen = null;
-            this.txtBusqueda.Location = new System.Drawing.Point(82, 25);
-            this.txtBusqueda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBusqueda.MaxLenght = 0;
-            this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(678, 20);
-            this.txtBusqueda.TabIndex = 3;
-            this.txtBusqueda.Texto = "Búsqueda";
-            this.txtBusqueda.Texto_inicial = "Búsqueda";
-            this.txtBusqueda.Tipo_txt = null;
-            this.txtBusqueda.Visible_px = true;
+            this.rdVenta.AutoSize = true;
+            this.rdVenta.Location = new System.Drawing.Point(122, 24);
+            this.rdVenta.Name = "rdVenta";
+            this.rdVenta.Size = new System.Drawing.Size(104, 21);
+            this.rdVenta.TabIndex = 4;
+            this.rdVenta.TabStop = true;
+            this.rdVenta.Text = "Código venta";
+            this.rdVenta.UseVisualStyleBackColor = true;
+            // 
+            // rdOtros
+            // 
+            this.rdOtros.AutoSize = true;
+            this.rdOtros.Checked = true;
+            this.rdOtros.Location = new System.Drawing.Point(232, 24);
+            this.rdOtros.Name = "rdOtros";
+            this.rdOtros.Size = new System.Drawing.Size(248, 21);
+            this.rdOtros.TabIndex = 5;
+            this.rdOtros.TabStop = true;
+            this.rdOtros.Text = "Otros (Nombre, identificación, celular)";
+            this.rdOtros.UseVisualStyleBackColor = true;
             // 
             // FrmClientes
             // 
@@ -457,8 +484,10 @@ namespace CapaPresentacion.Formularios.FormsClientes
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator5;
         private System.Windows.Forms.RadioButton rdPendientes;
         private System.Windows.Forms.RadioButton rdTerminados;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnReporte;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.RadioButton rdCliente;
+        private System.Windows.Forms.RadioButton rdVenta;
+        private System.Windows.Forms.RadioButton rdOtros;
     }
 }
