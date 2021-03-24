@@ -51,11 +51,11 @@
             int contador = 0;
             string rpta = "";
 
-            string consulta = "INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Orden_cobro, Fecha_cobro, Hora_cobro, " +
-                "Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
-                "VALUES(@Id_venta, @Id_turno, @Orden_cobro, @Fecha_cobro, @Hora_cobro, " +
-                "@Valor_cobro, @Valor_pagado, @Saldo_restante, @Tipo_cobro, @Observaciones_cobro, @Estado_cobro) " +
-                "SET @Id_agendamiento = SCOPE_IDENTITY() ";
+            //string consulta = "INSERT INTO Agendamiento_cobros (Id_venta, Id_turno, Orden_cobro, Fecha_cobro, Hora_cobro, " +
+            //    "Valor_cobro, Valor_pagado, Saldo_restante, Tipo_cobro, Observaciones_cobro, Estado_cobro) " +
+            //    "VALUES(@Id_venta, @Id_turno, @Orden_cobro, @Fecha_cobro, @Hora_cobro, " +
+            //    "@Valor_cobro, @Valor_pagado, @Saldo_restante, @Tipo_cobro, @Observaciones_cobro, @Estado_cobro) " +
+            //    "SET @Id_agendamiento = SCOPE_IDENTITY() ";
 
             SqlConnection SqlCon = new SqlConnection();
             SqlCon.InfoMessage += new SqlInfoMessageEventHandler(SqlCon_InfoMessage);
@@ -67,8 +67,8 @@
                 SqlCommand SqlCmd = new SqlCommand
                 {
                     Connection = SqlCon,
-                    CommandText = consulta,
-                    CommandType = CommandType.Text
+                    CommandText = "sp_Insertar_agendamiento",
+                    CommandType = CommandType.StoredProcedure,
                 };
 
                 SqlParameter Id_agendamiento = new SqlParameter

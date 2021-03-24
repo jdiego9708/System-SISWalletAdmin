@@ -15,6 +15,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
     public partial class FrmAgendamientoVentas : Form
     {
         PoperContainer container;
+        AbonoSmall abonoSmall;
 
         public FrmAgendamientoVentas()
         {
@@ -24,7 +25,8 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
         private void BtnAbono_Click(object sender, EventArgs e)
         {
-            AbonoSmall abonoSmall = new AbonoSmall();
+            if (this.abonoSmall == null)
+                this.abonoSmall = new AbonoSmall();
 
             if (this.UltimoAgendamiento == null)
             {
@@ -34,7 +36,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             {
                 abonoSmall.Saldo_actual = this.UltimoAgendamiento.Saldo_restante;
             }
-
+            abonoSmall.OnBtnSaveClick -= AbonoSmall_OnBtnSaveClick;
             abonoSmall.OnBtnSaveClick += AbonoSmall_OnBtnSaveClick;
             this.container = new PoperContainer(abonoSmall);
             this.container.Show(this.btnAbono);
@@ -54,29 +56,52 @@ namespace CapaPresentacion.Formularios.FormsClientes
 
                 if (this.UltimoAgendamiento != null)
                 {
-                    this.UltimoAgendamiento.Fecha_cobro = fecha_abono;
-                    this.UltimoAgendamiento.Valor_pagado = valor_abono;
-                    this.UltimoAgendamiento.Saldo_restante -= valor_abono;
-                    this.UltimoAgendamiento.Id_turno = main.Turno.Id_turno;
-                    this.UltimoAgendamiento.Turno = main.Turno;
-                    this.UltimoAgendamiento.Estado_cobro = "TERMINADO";
+                    if (this.UltimoAgendamiento.Estado_cobro.Equals("PENDIENTE"))
+                    {
+                        this.UltimoAgendamiento.Fecha_cobro = fecha_abono;
+                        this.UltimoAgendamiento.Valor_pagado = valor_abono;
+                        this.UltimoAgendamiento.Saldo_restante -= valor_abono;
+                        this.UltimoAgendamiento.Id_turno = main.Turno.Id_turno;
+                        this.UltimoAgendamiento.Turno = main.Turno;
+                        this.UltimoAgendamiento.Estado_cobro = "TERMINADO";
 
-                    rpta =
-                        await NAgendamiento_cobros.EditarAgendamiento(this.UltimoAgendamiento.Id_agendamiento, this.UltimoAgendamiento);
+                        rpta =
+                            await NAgendamiento_cobros.EditarAgendamiento(this.UltimoAgendamiento.Id_agendamiento, this.UltimoAgendamiento);
+                    }
+                    else
+                    {
+                        this.UltimoAgendamiento.Fecha_cobro = fecha_abono;
+                        this.UltimoAgendamiento.Valor_pagado = valor_abono;
+                        this.UltimoAgendamiento.Saldo_restante -= valor_abono;
+                        this.UltimoAgendamiento.Id_turno = main.Turno.Id_turno;
+                        this.UltimoAgendamiento.Turno = main.Turno;
+                        this.UltimoAgendamiento.Estado_cobro = "TERMINADO";
+
+                        rpta =
+                            NAgendamiento_cobros.InsertarAgendamiento(out int id, this.UltimoAgendamiento);
+                    }
                 }
                 else
                 {
                     this.UltimoAgendamiento = new Agendamiento_cobros();
+                    this.UltimoAgendamiento.Orden_cobro = 0;
+                    this.UltimoAgendamiento.Id_venta = this.Venta.Id_venta;
+                    this.UltimoAgendamiento.Venta = this.Venta;
                     this.UltimoAgendamiento.Fecha_cobro = fecha_abono;
+                    this.UltimoAgendamiento.Valor_cobro = this.Venta.Valor_cuota;
                     this.UltimoAgendamiento.Valor_pagado = valor_abono;
                     this.UltimoAgendamiento.Saldo_restante -= valor_abono;
                     this.UltimoAgendamiento.Id_turno = main.Turno.Id_turno;
                     this.UltimoAgendamiento.Turno = main.Turno;
                     this.UltimoAgendamiento.Estado_cobro = "TERMINADO";
+                    this.UltimoAgendamiento.Tipo_cobro = this.Venta.Frecuencia_cobro;
+                    this.UltimoAgendamiento.Observaciones_cobro = string.Empty;
                 }
-           
+
                 if (rpta.Equals("OK"))
                 {
+                    this.abonoSmall.Clear();
+
                     this.UltimoAgendamiento.Valor_pagado = 0;
                     this.UltimoAgendamiento.Fecha_cobro = fecha_proximo_abono;
                     this.UltimoAgendamiento.Estado_cobro = "PENDIENTE";

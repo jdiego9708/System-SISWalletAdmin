@@ -108,6 +108,11 @@ namespace CapaPresentacion.Formularios.FormsClientes
             this.Informacion = info.ToString();
         }
 
+        internal void Clear()
+        {
+            
+        }
+
         private string _informacion;
         private decimal _valor_abono;
         private decimal _saldo_actual;

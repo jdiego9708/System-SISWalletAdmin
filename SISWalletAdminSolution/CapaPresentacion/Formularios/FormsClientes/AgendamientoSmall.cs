@@ -30,6 +30,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
             {
                 Saldo_actual = this.Agendamiento.Saldo_restante,
             };
+            abonoSmall.OnBtnSaveClick -= AbonoSmall_OnBtnSaveClick;
             abonoSmall.OnBtnSaveClick += AbonoSmall_OnBtnSaveClick;
             this.container = new PoperContainer(abonoSmall);
             this.container.Show(this.btnAbono);
