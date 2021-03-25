@@ -90,7 +90,7 @@ namespace CapaPresentacion.Formularios.FormsClientes
                     this.UltimoAgendamiento.Fecha_cobro = fecha_abono;
                     this.UltimoAgendamiento.Valor_cobro = this.Venta.Valor_cuota;
                     this.UltimoAgendamiento.Valor_pagado = valor_abono;
-                    this.UltimoAgendamiento.Saldo_restante -= valor_abono;
+                    this.UltimoAgendamiento.Saldo_restante = this.Venta.Total_venta - valor_abono;
                     this.UltimoAgendamiento.Id_turno = main.Turno.Id_turno;
                     this.UltimoAgendamiento.Turno = main.Turno;
                     this.UltimoAgendamiento.Estado_cobro = "TERMINADO";
