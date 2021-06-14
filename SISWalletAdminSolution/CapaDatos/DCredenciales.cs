@@ -418,18 +418,27 @@
                     if (tipo_usuario.Equals("ADMINISTRADOR"))
                     {
                         DataTable dtCredencial = ds.Tables[1];
-
+                        DataTable dtSolicitudes = ds.Tables[2];
+                        DataTable dtCobros = ds.Tables[3];
+                        DataTable dtTurno = ds.Tables[4];
+                        DataTable dtReglasUs = ds.Tables[5];
+                        DataTable dtReglasCo = ds.Tables[6];
+                        DataTable dtAgendamientoCobro = ds.Tables[7];
                         //Obtener la credencial
                         if (dtCredencial.Rows.Count > 0)
                             credencial = new Credenciales(dtCredencial.Rows[0]);
 
-                        DataTable dtSolicitudes = ds.Tables[2];
-
-                        DataTable dtCobros = ds.Tables[3];
+                        //Obtener el turno
+                        if (dtTurno.Rows.Count > 0)
+                            turno = new Turnos(dtTurno.Rows[0]);
 
                         objects.Add(credencial);
                         objects.Add(dtSolicitudes);
                         objects.Add(dtCobros);
+                        objects.Add(turno);
+                        objects.Add(dtReglasUs);
+                        objects.Add(dtReglasCo);
+                        objects.Add(dtAgendamientoCobro);
                     }
                     else if (tipo_usuario.Equals("TRABAJADOR CARTERAS"))
                     {

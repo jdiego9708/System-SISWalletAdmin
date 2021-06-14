@@ -89,14 +89,15 @@ namespace CapaPresentacion.Formularios.FormsPrincipales
                     this.txtPass.Texto, DateTime.Now.ToString());
                 if (rpta.Equals("OK"))
                 {
-                    Credenciales credencial = (Credenciales)objects[0];
-                    Turnos turno = (Turnos)objects[1];
                     MainController main = MainController.GetInstance();
+                    Credenciales credencial = (Credenciales)objects[0];
                     main.Usuario = credencial.Usuario;
-                    main.Turno = turno;
 
-                    if(credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
-                    {                    
+                    if (credencial.Usuario.Tipo_usuario.Equals("TRABAJADOR CARTERAS"))
+                    {
+                        Turnos turno = (Turnos)objects[1];                                          
+                        main.Turno = turno;
+
                         FrmObservarArticulos frmArticulos = new FrmObservarArticulos
                         {
                             StartPosition = FormStartPosition.CenterScreen,
